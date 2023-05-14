@@ -124,7 +124,6 @@ button:hover {
 		</div>
 		
 	 <h3 class="heading-gap">Staff List</h3>	
-   <h3 class="heading-gap">Staff List 2</h3>	
 
 	<div class="button-container">
         <a href="#" class="btn btn-primary">Add new customer</a>
