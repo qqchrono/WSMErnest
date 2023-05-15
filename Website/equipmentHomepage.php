@@ -25,8 +25,8 @@
     </div>
 
     <div>
-        <a href="#" class="btn btn-primary">Add Equipment</a>
-        <a href="#" class="btn btn-primary">Edit Equipment</a>
+        <a href="Chemicals/addChemicals.php" class="btn btn-primary">Add Equipment</a>
+        <a href="Chemicals/editChemicals.php" class="btn btn-primary">Edit Equipment</a>
         <a href="#" class="btn btn-primary">Delete Equipment</a>
     </div>
     <div>
