@@ -16,7 +16,9 @@ import {
   View,
 } from 'react-native';
 
-import Signin from './src/screen/SignIn';
+import Signin from './src/screens/SignIn';
+import Navigation from './src/nevigation';
+import ForgotPassword from './src/screens/ForgotPassword';
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -24,11 +26,18 @@ function App(): JSX.Element {
  
 
   return (
-    <SafeAreaView >
-     <Signin/>
+    <SafeAreaView style={{flex: 1}}>
+      <Navigation/>
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  root:{
+    flex: 1,
+    backgroundColor : '#F9FBFC',
+  }
+})
 
 
 export default App;
