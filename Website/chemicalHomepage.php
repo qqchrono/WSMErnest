@@ -25,7 +25,7 @@
     </div>
 
     <div>
-        //HELLO CAN U SEE THIS 
+        // TEST TEST
         <a href="#" class="btn btn-primary">Add Chemical</a>
         <a href="#" class="btn btn-primary">Edit Chemical</a>
         <a href="#" class="btn btn-primary">Delete Chemical</a>
