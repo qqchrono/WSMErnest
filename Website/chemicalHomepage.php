@@ -25,7 +25,7 @@
     </div>
 
     <div>
-        //HELLO 
+        //HELLO CAN U SEE THIS 
         <a href="#" class="btn btn-primary">Add Chemical</a>
         <a href="#" class="btn btn-primary">Edit Chemical</a>
         <a href="#" class="btn btn-primary">Delete Chemical</a>
