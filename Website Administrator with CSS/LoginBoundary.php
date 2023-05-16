@@ -37,39 +37,14 @@
 <html>
 <head>
 <title>Water Supply Management</title>
-<link rel ="stylesheet" href = "LoginBoundary.css">
+
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-.rectangle-box {
-  width: 400px;
-  height: 390px;
-  background-color: #f2f2f2;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.profile-photo {
-  width: 70px; 
-  height: 70px; 
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 10px;
-}
-</style>
+<link rel="stylesheet" href="LoginBoundary.css">
 </head>
 <body>
 <form action="loginBoundary.php" method="post">
