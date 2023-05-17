@@ -48,6 +48,5 @@
 		  <td><a href="#"><button class="arrow-button"></button></td>
 		</tr>
 	</table>
-	
 </body>
 </html>
