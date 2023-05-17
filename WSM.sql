@@ -93,13 +93,13 @@ INSERT INTO `Equipments` (`equipmentName`, `quantity`, `expiryDate`, `warrantyDa
 ('Equipment1', '2', now(),  2024-05-21); #YYYY-MM-DD
 
 #INSERT INTO `Chemicals` (`chemicalName`, `useTime`, `quantity`, `expiryDate`) VALUES
-#('Ernest', 'Admin', 'password');
+#('Chemical1', '123', '3', now());
 
 #INSERT INTO `StaffAccount` (`name`, `email`, `password`, `role`, `status`, `ticketID`) VALUES
-#('Ernest', 'Admin', 'password');
+#('Ernest', 'abc@gmail.com', 'password', `admin`, 0);
 
 #INSERT INTO `CustomerAccount` (`name`, `email`, `password`, `role`, `ticketID`) VALUES
-#('Ernest', 'Admin', 'password');
+#('Bob', 'c@gmail.com', 'password', `customer`);
 
 ALTER TABLE CustomersAccount 
   AUTO_INCREMENT=1;
