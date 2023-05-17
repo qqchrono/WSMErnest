@@ -1,6 +1,5 @@
 <?php
-
-    
+    require_once 'classes.php'; #Equipment controllers here
 ?>
 
 <!DOCTYPE html>
@@ -35,24 +34,39 @@
     </div>
 
 
-	 <!-- Table of equipment go here -->
-	<table>
-		<tr>
-		  <th>Equipment ID</th>
-		  <th>Equipment Name</th>
-		  <th>Quantity</th>
-		  <th>Date installed</th>
-		  <th>Warranty Date</th>
-		  <th></th>
-		</tr>
-		<tr>
-		  <td>Data</td>
-		  <td>Data</td>
-		  <td>Data</td>
-		  <td>Data</td>
-		  <td>Data</td>
-		  <td><a href="#"><button class="arrow-button"></button></td>
-		</tr>
-	</table>
+	<!-- Table of equipment go here -->
+    <div class = "tableScroll">
+      <table>
+        <tr>
+          <th>Equipment ID</th>
+          <th>Equipment Name</th>
+          <th>Quantity</th>
+          <th>Date installed</th>
+          <th>Warranty Date</th>
+          <th></th>
+        </tr>
+  <?php 
+    $equipment = new equipmentView;
+    $result = $equipment -> getData();
+    if($result)
+    {
+        foreach($result as $row)
+        {
+    ?>
+        <tr>
+          <td><?php echo $row['equipmentID'] ?></td>
+          <td><?=$row['equipmentName'] ?></td>
+          <td><?=$row['quantity'] ?></td>
+          <td><?=$row['expiryDate'] ?></td>
+          <td><?=$row['warrantyDate'] ?></td>
+          <td><a href="#"><button class="arrow-button"></button></td>
+        </tr>
+  <?php
+        }
+    }
+  ?>
+       </table>
+    </div>
+
 </body>
 </html>

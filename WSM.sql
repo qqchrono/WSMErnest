@@ -89,19 +89,20 @@ CREATE TABLE IF NOT EXISTS ComplaintTicket (
   PRIMARY KEY (complaintTicketID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+#YYYY-MM-DD
 INSERT INTO `Equipments` (`equipmentName`, `quantity`, `expiryDate`, `warrantyDate`) VALUES
-('Equipment1', '2', now(),  2024-05-21); #YYYY-MM-DD
+('Equipment1', '2', now(),  2024-05-21); 
 
-#INSERT INTO `Chemicals` (`chemicalName`, `useTime`, `quantity`, `expiryDate`) VALUES
-#('Chemical1', '123', '3', now());
+INSERT INTO `Chemicals` (`chemicalName`, `useTime`, `quantity`, `expiryDate`) VALUES
+('Chemical1', '123', '3', now());
 
-#INSERT INTO `StaffAccount` (`name`, `email`, `password`, `role`, `status`, `ticketID`) VALUES
-#('Ernest', 'abc@gmail.com', 'password', `admin`, 0);
+INSERT INTO `StaffAccount` (`name`, `email`, `password`, `role`, `status`) VALUES
+('Ernest', 'abc@gmail.com', 'password', 'admin', 0);
 
-#INSERT INTO `CustomerAccount` (`name`, `email`, `password`, `role`, `ticketID`) VALUES
-#('Bob', 'c@gmail.com', 'password', `customer`);
+INSERT INTO `CustomerAccount` (`name`, `email`, `password`, `role`) VALUES
+('Bob', 'c@gmail.com', 'password', 'customer');
 
-ALTER TABLE CustomersAccount 
+ALTER TABLE CustomerAccount 
   AUTO_INCREMENT=1;
 
 ALTER TABLE StaffAccount 
@@ -110,7 +111,7 @@ ALTER TABLE StaffAccount
 ALTER TABLE Chemicals 
   AUTO_INCREMENT=1;
 
-ALTER TABLE Equipment 
+ALTER TABLE Equipments 
   AUTO_INCREMENT=1;
 
 ALTER TABLE WaterUsage 
