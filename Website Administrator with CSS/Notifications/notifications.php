@@ -19,7 +19,6 @@
 
 </head>
 <body>
-	<div class="w3-top">
 	<?php include 'notificationsNavbar.html';?>
 	<h3 class="heading-gap">Customer's Request to Reset Password</h3>	
 	
@@ -38,9 +37,6 @@
 		  <td class="right-align"><a href="#"><button>Reset</button></a></td>
 		</tr>
 	</table>
-    </div>
-
-
 
 </body>
 </html> 

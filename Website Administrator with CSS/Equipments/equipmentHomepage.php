@@ -18,7 +18,6 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="w3-top">
 	<?php include 'equipmentNavbar.html';?>
     <h3 class="heading-gap">Equipment List</h3>
 
@@ -55,8 +54,5 @@
 		  <td><a href="#"><button class="arrow-button"></button></td>
 		</tr>
 	</table>
-
-    </div>
-
 </body>
 </html>

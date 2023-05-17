@@ -19,7 +19,6 @@
 </head>
 <body>
 
-    <div class="w3-top">
 	<?php include 'equipmentNavbar.html';?>
 	
 	<form action="/action_page.php"><!-- php file placeholder for now -->

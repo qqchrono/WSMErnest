@@ -18,7 +18,6 @@
 
 </head>
 <body>
-    <div class="w3-top">
 	<?php include 'adminHomePageNavBar.html';?>
 	 <h3 class="heading-gap">Staff List</h3>	
 
@@ -50,7 +49,5 @@
 		</tr>
 	</table>
 	
-	</div>
- 
 </body>
 </html>

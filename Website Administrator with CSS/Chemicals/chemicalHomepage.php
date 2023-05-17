@@ -19,7 +19,6 @@
 </head>
 
 <body>
-    <div class="w3-top">
 	<?php include 'chemicalNavbar.html';?>
 	<h3 class="heading-gap">Chemical List</h3>
 
@@ -56,8 +55,6 @@
 		  <td><a href="#"><button class="arrow-button"></button></td>
 		</tr>
 	</table>
-	
-	</div>
 
 </body>
 </html>

@@ -18,8 +18,6 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
 </head>
 <body>
-
-    <div class="w3-top">
 	<?php include 'chemicalNavbar.html';?>
 	
 	<form action="/action_page.php"><!-- php file placeholder for now -->
