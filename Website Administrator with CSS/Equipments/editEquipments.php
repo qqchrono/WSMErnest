@@ -21,33 +21,36 @@
 
 	<?php include 'equipmentNavbar.html';?>
 	
-	 <form action="/action_page.php"><!-- php file placeholder for now -->
+	<form action="/action_page.php"><!-- php file placeholder for now -->
 	<h3 class="heading-gap">Edit Equipment</h3>
 
-	<div class="container">
-		<div class="rectangle-box">
-				<table align="center">
-				<tr>
-					<td><input type="text" placeholder="Name" name="name"></td>
-				</tr>
-				<tr>
-					<td><input type="text" placeholder="Quantity" name="quantity"></td>
-				</tr>
-				<tr>
-					<td><input type="text" placeholder="Installation date" name="installationDate"></td>
-				</tr>
-				<tr>
-					<td><input type="text" placeholder="Warranty Date" name="warranty"></td>
-				</tr>
-				<tr>
-					<td><button type="submit" style="border-radius: 5px;">Edit Equipment</button></td>
-				</tr>
-				<tr>
-					<td><div style="margin-top: 10px"><a href="equipmentHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a></div></td>
-				</tr>
-				</table>
+		<div class="container">
+			<div class="rectangle-box">
+					<table align="center">
+					<tr>
+						<td><input type="text" placeholder="Name" name="equipmentName" value="<?php echo $_POST["equipmentName"]; ?>"></td>
+					</tr>
+					<tr>
+						<td><input type="text" placeholder="Quantity" name="quantity" value="<?php echo $_POST["quantity"]; ?>"></td>
+					</tr>
+					<tr>
+						<td><input type="text" placeholder="Installation date" name="installationDate" value="<?php echo $_POST["installationDate"]; ?>"></td>
+					</tr>
+					<tr>
+						<td><input type="text" placeholder="Expiry Date" name="expiryDate" value="<?php echo $_POST["expiryDate"]; ?>"></td>
+					</tr>
+					<tr>
+						<td><input type="text" placeholder="Warranty Date" name="warrantyDate" value="<?php echo $_POST["warrantyDate"]; ?>"></td>
+					</tr>
+					<tr>
+						<td><button type="submit" style="border-radius: 5px;">Edit Equipment</button></td>
+					</tr>
+					<tr>
+						<td><div style="margin-top: 10px"><a href="equipmentHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a></div></td>
+					</tr>
+					</table>
+			</div>
 		</div>
-	</div>
 	</form>
 
 </body>

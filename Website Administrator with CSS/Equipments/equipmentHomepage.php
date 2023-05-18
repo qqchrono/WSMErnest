@@ -29,7 +29,10 @@
 
     <div class="button-container">
         <a href="addEquipments.php" class="btn btn-primary">Add Equipment</a>
-        <a href="editEquipments.php" class="btn btn-primary">Edit Equipment</a>
+        <!-- edit form submission here -->
+        <form action='editEquipments.php' method="POST" id="editForm">
+            <input type="submit" class="btn btn-primary" name="editEquipment" value="Edit Equipment"></input>
+        </form>
         <a href="#" class="btn btn-primary">Delete Equipment</a>
     </div>
 
@@ -38,12 +41,13 @@
     <div class = "tableScroll">
       <table>
         <tr>
-          <th>Equipment ID</th>
-          <th>Equipment Name</th>
-          <th>Quantity</th>
-          <th>Date installed</th>
-          <th>Warranty Date</th>
-          <th></th>
+            <th>Equipment ID</th>
+            <th>Equipment Name</th>
+            <th>Quantity</th>
+            <th>Date installed</th>
+            <th>Expiry Date</th>
+            <th>Warranty Date</th>
+            <th></th>
         </tr>
   <?php 
     $equipment = new equipmentView;
@@ -54,17 +58,27 @@
         {
     ?>
         <tr>
-          <td><?php echo $row['equipmentID'] ?></td>
-          <td><?=$row['equipmentName'] ?></td>
-          <td><?=$row['quantity'] ?></td>
-          <td><?=$row['expiryDate'] ?></td>
-          <td><?=$row['warrantyDate'] ?></td>
-          <td><a href="#"><button class="arrow-button"></button></td>
+            <td><?php echo $row['equipmentID'] ?></td>
+            <td><?=$row['equipmentName'] ?></td>
+            <td><?=$row['quantity'] ?></td>
+            <td><?=$row['installationDate'] ?></td>
+            <td><?=$row['expiryDate'] ?></td>
+            <td><?=$row['warrantyDate'] ?></td>
+            <!-- input for editing equipment form -->
+            <td>
+                <input form="editForm" type='radio' name='equipmentName' value='<?php echo $row['equipmentName']?>'>
+                <input form="editForm" type='hidden' name='quantity' value='<?php echo $row['quantity']?>'>
+                <input form="editForm" type='hidden' name='installationDate' value='<?php echo $row['installationDate']?>'>
+                <input form="editForm" type='hidden' name='expiryDate' value='<?php echo $row['expiryDate']?>'>
+                <input form="editForm" type='hidden' name='warrantyDate' value='<?php echo $row['warrantyDate']?>'>
+            </td>
+            <!-- input for deleting equipment form -->
         </tr>
   <?php
         }
     }
   ?>
+  
        </table>
     </div>
 

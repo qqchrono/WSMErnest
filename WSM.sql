@@ -45,6 +45,7 @@ CREATE TABLE IF NOT EXISTS Equipments (
   equipmentID int(50) NOT NULL AUTO_INCREMENT,
   equipmentName varchar(100) DEFAULT NULL,
   quantity int(50) NOT NULL,
+  installationDate DATE DEFAULT NULL,
   expiryDate DATE DEFAULT NULL,
   warrantyDate DATE DEFAULT NULL,
   PRIMARY KEY (equipmentID)
@@ -90,8 +91,8 @@ CREATE TABLE IF NOT EXISTS ComplaintTicket (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 #YYYY-MM-DD
-INSERT INTO `Equipments` (`equipmentName`, `quantity`, `expiryDate`, `warrantyDate`) VALUES
-('Equipment1', '2', now(),  2024-05-21); 
+INSERT INTO `Equipments` (`equipmentName`, `quantity`, `installationDate`, `expiryDate`, `warrantyDate`) VALUES
+('Equipment1', '2', now(),  now(), 2024-05-21); 
 
 INSERT INTO `Chemicals` (`chemicalName`, `useTime`, `quantity`, `expiryDate`) VALUES
 ('Chemical1', '123', '3', now());
