@@ -19,32 +19,68 @@
 </head>
 <body>
 
+<?php
+	include 'addEquipmentController.php';
+
+	if(isset($_POST["submit"]))
+	{
+		$inputdata = 
+		[
+		$equipmentName = $_POST["equipmentName"],
+		$quantity= $_POST["quantity"],
+		$installationDate = $_POST["installationDate"],
+		$expiryDate = $_POST["expiryDate"],
+		$warrantyDate = $_POST["warrantyDate"]
+		];
+		
+		$equipment = new addEquipment;
+		$result = $equipment -> addEquipment($inputdata);
+		
+		if($result)
+		{
+			print_r("success");
+			header("Location: equipmentHomepage.php");
+		}else{
+			print_r("failed");
+		}
+	}
+    
+?>
+
 	<?php include 'equipmentNavbar.html';?>
 	
-	<form action="/action_page.php"><!-- php file placeholder for now -->
+	<form action="addEquipments.php" method="POST"><!-- php file placeholder for now -->
     <h3 class="heading-gap">Add Equipment</h3>
 
 	<div class="container">
 		<div class="rectangle-box">
 				<table align="center">
-				<tr>
-					<td><input type="text" placeholder="Name" name="name"></td>
-				</tr>
-				<tr>
-					<td><input type="text" placeholder="Quantity" name="quantity"></td>
-				</tr>
-				<tr>
-					<td><input type="text" placeholder="Installation date" name="installationDate"></td>
-				</tr>
-				<tr>
-					<td><input type="text" placeholder="Warranty Date" name="warranty"></td>
-				</tr>
-				<tr>
-					<td><button type="submit" style="border-radius: 5px">Add Equipment</button></td>
-				</tr>
-				<tr>
-					<td><div style="margin-top: 10px"><a href="equipmentHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a></div></td>
-				</tr>
+					<tr>
+						<td><label for="equipmentName">Equipment Name : </label>
+						<input type="text" id="equipmentName" placeholder="Equipment Name" name="equipmentName" value=""></td>
+					</tr>
+					<tr>
+						<td><label for="quantity">Quantity : </label>
+						<input type="text" id="quantity" placeholder="Quantity" name="quantity" value=""></td>
+					</tr>
+					<tr>
+						<td><label for="installationDate">Installation Date : </label>
+						<input type="date" id="installationDate" placeholder="Installation date" name="installationDate" value=""></td>
+					</tr>
+					<tr>
+						<td><label for="expiryDate">Expiry Date : </label>
+						<input type="date" id="expiryDate" placeholder="Expiry Date" name="expiryDate" value=""></td>
+					</tr>
+					<tr>
+						<td><label for="warrantyDate">Warranty Date : </label>
+						<input type="date" id="warrantyDate" placeholder="Warranty Date" name="warrantyDate" value=""></td>
+					</tr>
+					<tr>
+						<td><input type="submit" name="submit" value="Add Equipment" style="border-radius: 5px;"></td>
+					</tr>
+					<tr>
+						<td><div style="margin-top: 10px"><a href="equipmentHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a></div></td>
+					</tr>
 				</table>
 		</div>
 	</div>

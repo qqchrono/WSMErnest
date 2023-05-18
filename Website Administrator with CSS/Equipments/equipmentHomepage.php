@@ -27,6 +27,25 @@
         </form>
     </div>
 
+    <!-- Calling the delete function -->
+    <?php
+
+        if(isset($_POST["deleteEquipment"]))
+        {
+            $equipmentID = $_POST['equipmentID'];
+
+            $equipment2 = new deleteEquipment;
+            $result = $equipment2 -> deleteEquipment($equipmentID);
+                
+            if($result)
+            {
+                header("Location: equipmentHomepage.php");
+            }else{
+                print_r("failed");
+            }
+        }
+    ?>
+
     <div class="button-container">
         <a href="addEquipments.php" class="btn btn-primary">Add Equipment</a>
         <!-- edit form submission here -->

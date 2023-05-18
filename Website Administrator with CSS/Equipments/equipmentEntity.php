@@ -38,6 +38,31 @@
             }
         }
 
+        public function addEquipment($inputdata)
+        {   
+            $data = "'" .implode ("','",$inputdata) . "'";
+            
+            $equipmentName = $inputdata[0];
+            $quantity = $inputdata[1];
+            $installationDate = $inputdata[2];
+            $expiryDate = $inputdata[3];
+            $warrantyDate = $inputdata[4];
+
+            $equipmentQuery = "INSERT INTO `equipments` (equipmentName, quantity, installationDate, expiryDate, warrantyDate)
+            VALUES ($data)";
+            
+            $result = $this->conn->query($equipmentQuery);
+            
+            if($result)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public function editEquipment($inputdata)
         {   
             $equipmentID = $inputdata[0];
@@ -59,6 +84,19 @@
             }
             else
             {
+                return false;
+            }
+        }
+
+        public function deleteEquipment($inputdata)
+        {
+            $equipmentID = $inputdata;
+
+            $equipmentQuery = "DELETE FROM equipments WHERE `equipmentID` = $equipmentID";
+            $result = $this->conn->query($equipmentQuery);
+            if($result){
+                return true;
+            }else{
                 return false;
             }
         }
