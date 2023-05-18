@@ -66,7 +66,8 @@
             <td><?=$row['warrantyDate'] ?></td>
             <!-- input for editing equipment form -->
             <td>
-                <input form="editForm" type='radio' name='equipmentName' value='<?php echo $row['equipmentName']?>'>
+                <input form="editForm" type='radio' name='equipmentID' value='<?php echo $row['equipmentID']?>'>
+                <input form="editForm" type='hidden' name='equipmentName' value='<?php echo $row['equipmentName']?>'>
                 <input form="editForm" type='hidden' name='quantity' value='<?php echo $row['quantity']?>'>
                 <input form="editForm" type='hidden' name='installationDate' value='<?php echo $row['installationDate']?>'>
                 <input form="editForm" type='hidden' name='expiryDate' value='<?php echo $row['expiryDate']?>'>

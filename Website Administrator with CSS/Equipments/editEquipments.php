@@ -1,8 +1,3 @@
-<?php
-
-    
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,16 +14,49 @@
 </head>
 <body>
 
-	<?php include 'equipmentNavbar.html';?>
-	
-	<form action="/action_page.php"><!-- php file placeholder for now -->
-	<h3 class="heading-gap">Edit Equipment</h3>
+<?php
+	include 'editEquipmentController.php';
 
+	$equipmentID = '';
+	$equipmentName = '';
+	$quantity = '';
+	$installationDate = '';
+	$expiryDate = '';
+	$warrantyDate = '';
+
+	if(isset($_POST["submit"]))
+	{
+		$inputdata = [
+			$equipmentID = $_POST['equipmentID'],
+			$equipmentName = $_POST['equipmentName'],
+			$quantity = $_POST['quantity'],
+			$installationDate = $_POST['installationDate'],
+			$expiryDate = $_POST['expiryDate'],
+			$warrantyDate = $_POST['warrantyDate']
+		];
+
+		$equipment = new editEquipment;
+		$result = $equipment -> editEquipment($inputdata);
+			
+		if($result)
+		{
+			header("Location: equipmentHomepage.php");
+		}else{
+			print_r("failed");
+		}
+	}
+    
+?>
+
+	<?php include 'equipmentNavbar.html';?>
+	<h3 class="heading-gap">Edit Equipment</h3>
+	<form action="editEquipments.php" method="POST">
 		<div class="container">
 			<div class="rectangle-box">
 					<table align="center">
+					<input type='hidden' name='equipmentID' value='<?php echo $_POST['equipmentID']?>'>
 					<tr>
-						<td><input type="text" placeholder="Name" name="equipmentName" value="<?php echo $_POST["equipmentName"]; ?>"></td>
+						<td><input type="text" placeholder="Equipment Name" name="equipmentName" value="<?php echo $_POST["equipmentName"]; ?>"></td>
 					</tr>
 					<tr>
 						<td><input type="text" placeholder="Quantity" name="quantity" value="<?php echo $_POST["quantity"]; ?>"></td>
@@ -43,7 +71,7 @@
 						<td><input type="text" placeholder="Warranty Date" name="warrantyDate" value="<?php echo $_POST["warrantyDate"]; ?>"></td>
 					</tr>
 					<tr>
-						<td><button type="submit" style="border-radius: 5px;">Edit Equipment</button></td>
+						<td><input type="submit" name="submit" value="Edit Equipment" style="border-radius: 5px;"></td>
 					</tr>
 					<tr>
 						<td><div style="margin-top: 10px"><a href="equipmentHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a></div></td>

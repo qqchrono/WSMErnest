@@ -24,6 +24,31 @@
                 return false;
             }
         }
+
+        public function editEquipment($inputdata)
+        {   
+            $equipmentID = $inputdata[0];
+            $equipmentName = $inputdata[1];
+            $quantity = $inputdata[2];
+            $installationDate = $inputdata[3];
+            $expiryDate = $inputdata[4];
+            $warrantyDate = $inputdata[5];
+
+            $equipmentQuery = "UPDATE `equipments` SET `equipmentName` = '$equipmentName', `quantity` = '$quantity',
+            `installationDate` = '$installationDate', `expiryDate` = '$expiryDate', `warrantyDate` = '$warrantyDate'
+            WHERE `equipmentID` = '$equipmentID'";
+            
+            $result = $this->conn->query($equipmentQuery);
+            
+            if($result)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 
 ?>
