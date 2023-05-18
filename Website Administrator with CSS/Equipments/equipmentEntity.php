@@ -25,6 +25,19 @@
             }
         }
 
+        public function getDataForEditForm($inputdata)
+        {
+            $equipmentID = $inputdata;
+
+            $userQuery = "SELECT * FROM equipments WHERE `equipmentID` = $equipmentID";
+            $result = $this->conn->query($userQuery);
+            if($result->num_rows > 0){
+                return $result;
+            }else{
+                return false;
+            }
+        }
+
         public function editEquipment($inputdata)
         {   
             $equipmentID = $inputdata[0];

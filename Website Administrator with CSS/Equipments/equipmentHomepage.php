@@ -31,11 +31,13 @@
         <a href="addEquipments.php" class="btn btn-primary">Add Equipment</a>
         <!-- edit form submission here -->
         <form action='editEquipments.php' method="POST" id="editForm">
-            <input type="submit" class="btn btn-primary" name="editEquipment" value="Edit Equipment"></input>
+            <input type="submit" class="btn btn-primary" name="editAccountForm" value="Edit Equipment"></input>
         </form>
-        <a href="#" class="btn btn-primary">Delete Equipment</a>
+        <!-- delete form submission here -->
+        <form action='equipmentHomepage.php' method="POST" id="deleteForm">
+            <input type="submit" class="btn btn-primary" name="deleteEquipment" value="Delete Equipment"></input>
+        </form>
     </div>
-
 
 	<!-- Table of equipment go here -->
     <div class = "tableScroll">
@@ -67,11 +69,6 @@
             <!-- input for editing equipment form -->
             <td>
                 <input form="editForm" type='radio' name='equipmentID' value='<?php echo $row['equipmentID']?>'>
-                <input form="editForm" type='hidden' name='equipmentName' value='<?php echo $row['equipmentName']?>'>
-                <input form="editForm" type='hidden' name='quantity' value='<?php echo $row['quantity']?>'>
-                <input form="editForm" type='hidden' name='installationDate' value='<?php echo $row['installationDate']?>'>
-                <input form="editForm" type='hidden' name='expiryDate' value='<?php echo $row['expiryDate']?>'>
-                <input form="editForm" type='hidden' name='warrantyDate' value='<?php echo $row['warrantyDate']?>'>
             </td>
             <!-- input for deleting equipment form -->
         </tr>

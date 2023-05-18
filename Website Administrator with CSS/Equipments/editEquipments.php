@@ -23,6 +23,26 @@
 	$installationDate = '';
 	$expiryDate = '';
 	$warrantyDate = '';
+	
+	if(isset($_POST["editAccountForm"]))
+	{
+		$equipmentID = $_POST['equipmentID'];
+	
+		$equipment = new editEquipment;
+		$result = $equipment -> getDataForEditForm($equipmentID);
+
+		if($result)
+		{
+			foreach($result as $row)
+        	{
+				$equipmentName = $row['equipmentName'];
+				$quantity = $row['quantity'];
+				$installationDate = $row['installationDate'];
+				$expiryDate = $row['expiryDate'];
+				$warrantyDate = $row['warrantyDate'];
+			}
+		}
+	}
 
 	if(isset($_POST["submit"]))
 	{
@@ -54,21 +74,29 @@
 		<div class="container">
 			<div class="rectangle-box">
 					<table align="center">
-					<input type='hidden' name='equipmentID' value='<?php echo $_POST['equipmentID']?>'>
 					<tr>
-						<td><input type="text" placeholder="Equipment Name" name="equipmentName" value="<?php echo $_POST["equipmentName"]; ?>"></td>
+						<td><label for="equipmentID">Equipment ID : </label>
+						<input type='text' id="equipmentID" name='equipmentID' value='<?php echo $equipmentID ?>' readonly></td>
 					</tr>
 					<tr>
-						<td><input type="text" placeholder="Quantity" name="quantity" value="<?php echo $_POST["quantity"]; ?>"></td>
+						<td><label for="equipmentName">Equipment Name : </label>
+						<input type="text" id="equipmentName" placeholder="Equipment Name" name="equipmentName" value="<?php echo $equipmentName ?>"></td>
 					</tr>
 					<tr>
-						<td><input type="text" placeholder="Installation date" name="installationDate" value="<?php echo $_POST["installationDate"]; ?>"></td>
+						<td><label for="quantity">Quantity : </label>
+						<input type="text" id="quantity" placeholder="Quantity" name="quantity" value="<?php echo $quantity ?>"></td>
 					</tr>
 					<tr>
-						<td><input type="text" placeholder="Expiry Date" name="expiryDate" value="<?php echo $_POST["expiryDate"]; ?>"></td>
+						<td><label for="installationDate">Installation Date : </label>
+						<input type="date" id="installationDate" placeholder="Installation date" name="installationDate" value="<?php echo $installationDate ?>"></td>
 					</tr>
 					<tr>
-						<td><input type="text" placeholder="Warranty Date" name="warrantyDate" value="<?php echo $_POST["warrantyDate"]; ?>"></td>
+						<td><label for="expiryDate">Expiry Date : </label>
+						<input type="date" id="expiryDate" placeholder="Expiry Date" name="expiryDate" value="<?php echo $expiryDate ?>"></td>
+					</tr>
+					<tr>
+						<td><label for="warrantyDate">Warranty Date : </label>
+						<input type="date" id="warrantyDate" placeholder="Warranty Date" name="warrantyDate" value="<?php echo $warrantyDate ?>"></td>
 					</tr>
 					<tr>
 						<td><input type="submit" name="submit" value="Edit Equipment" style="border-radius: 5px;"></td>
