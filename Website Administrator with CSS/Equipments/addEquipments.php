@@ -71,7 +71,7 @@
 						<input type="date" id="warrantyDate" placeholder="Warranty Date" name="warrantyDate" value=""></td>
 					</tr>
 					<tr>
-						<td><input type="submit" name="submit" value="Add Equipment" style="border-radius: 5px;"></td>
+						<td><div style="margin-top: 10px"><input type="submit" name="submit" value="Add Equipment" style="border-radius: 5px;"></div></td>
 					</tr>
 					<tr>
 						<td><div style="margin-top: 10px"><a href="chemicalHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a></div></td>
