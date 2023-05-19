@@ -46,7 +46,7 @@
         }
     ?>
 
-    <div class="button-container">
+    <div class="button-row">
         <a href="addEquipments.php" class="btn btn-primary">Add Equipment</a>
         <!-- edit form submission here -->
         <form action='editEquipments.php' method="POST" id="editDeleteForm">

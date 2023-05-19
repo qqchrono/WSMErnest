@@ -52,9 +52,14 @@ body {
     margin-bottom: 10px;
 }
 
-.button-container {
-    margin-left: 10px;
+.button-row {
+    display: flex;
+    justify-content: flex-start;
     margin-bottom: 10px;
+}
+
+.button-row .btn {
+    margin-left: 10px;
 }
 
 table {
@@ -95,5 +100,5 @@ td {
 }
 
 .tableScroll {
-    overflow-x:auto;
+    overflow-x: auto;
 }
