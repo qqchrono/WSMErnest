@@ -1,5 +1,5 @@
 <?php
-    require_once 'classes.php'; #Equipment controllers here
+    require_once 'classes.php';
 ?>
 
 <!DOCTYPE html>
@@ -34,8 +34,8 @@
         {
             $equipmentID = $_POST['equipmentID'];
 
-            $equipment2 = new deleteEquipment;
-            $result = $equipment2 -> deleteEquipment($equipmentID);
+            $equipment = new deleteEquipment;
+            $result = $equipment -> deleteEquipment($equipmentID);
                 
             if($result)
             {
@@ -49,12 +49,10 @@
     <div class="button-container">
         <a href="addEquipments.php" class="btn btn-primary">Add Equipment</a>
         <!-- edit form submission here -->
-        <form action='editEquipments.php' method="POST" id="editForm">
-            <input type="submit" class="btn btn-primary" name="editAccountForm" value="Edit Equipment"></input>
-        </form>
+        <form action='editEquipments.php' method="POST" id="editDeleteForm">
+            <button type="submit" class="btn btn-primary" name="editEquipmentForm">Edit Equipment</button>
         <!-- delete form submission here -->
-        <form action='equipmentHomepage.php' method="POST" id="deleteForm">
-            <input type="submit" class="btn btn-primary" name="deleteEquipment" value="Delete Equipment"></input>
+            <button type="submit" class="btn btn-primary" formaction="equipmentHomepage.php" name="deleteEquipment">Delete Equipment</button>
         </form>
     </div>
 
@@ -85,11 +83,10 @@
             <td><?=$row['installationDate'] ?></td>
             <td><?=$row['expiryDate'] ?></td>
             <td><?=$row['warrantyDate'] ?></td>
-            <!-- input for editing equipment form -->
+            <!-- input for editing and deleting equipment form -->
             <td>
-                <input form="editForm" type='radio' name='equipmentID' value='<?php echo $row['equipmentID']?>'>
+                <input form="editDeleteForm" type='radio' name='equipmentID' value='<?php echo $row['equipmentID']?>'>
             </td>
-            <!-- input for deleting equipment form -->
         </tr>
   <?php
         }

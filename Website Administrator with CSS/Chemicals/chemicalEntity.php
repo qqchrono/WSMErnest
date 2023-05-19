@@ -1,7 +1,7 @@
 <?php
     require_once '../DatabaseConnection.php';
 
-    class equipmentEntity
+    class chemicalEntity
     {
         public function __construct()
         {
@@ -16,7 +16,7 @@
 
         public function getData()
         {
-            $userQuery = "SELECT * FROM equipments";
+            $userQuery = "SELECT * FROM chemicals";
             $result = $this->conn->query($userQuery);
             if($result->num_rows > 0){
                 return $result;
@@ -27,9 +27,9 @@
 
         public function getDataForEditForm($inputdata)
         {
-            $equipmentID = $inputdata;
+            $chemicalID = $inputdata;
 
-            $userQuery = "SELECT * FROM equipments WHERE `equipmentID` = $equipmentID";
+            $userQuery = "SELECT * FROM chemicals WHERE `chemicalID` = $chemicalID";
             $result = $this->conn->query($userQuery);
             if($result->num_rows > 0){
                 return $result;
@@ -38,14 +38,14 @@
             }
         }
 
-        public function addEquipment($inputdata)
+        public function addChemical($inputdata)
         {   
             $data = "'" .implode ("','",$inputdata) . "'";
 
-            $equipmentQuery = "INSERT INTO `equipments` (equipmentName, quantity, installationDate, expiryDate, warrantyDate)
+            $chemicalQuery = "INSERT INTO `chemicals` (chemicalName, useTime, quantity, expiryDate)
             VALUES ($data)";
             
-            $result = $this->conn->query($equipmentQuery);
+            $result = $this->conn->query($chemicalQuery);
             
             if($result)
             {
@@ -57,20 +57,19 @@
             }
         }
 
-        public function editEquipment($inputdata)
+        public function editChemical($inputdata)
         {   
-            $equipmentID = $inputdata[0];
-            $equipmentName = $inputdata[1];
-            $quantity = $inputdata[2];
-            $installationDate = $inputdata[3];
+            $chemicalID = $inputdata[0];
+            $chemicalName = $inputdata[1];
+            $useTime = $inputdata[2];
+            $quantity = $inputdata[3];
             $expiryDate = $inputdata[4];
-            $warrantyDate = $inputdata[5];
 
-            $equipmentQuery = "UPDATE `equipments` SET `equipmentName` = '$equipmentName', `quantity` = '$quantity',
-            `installationDate` = '$installationDate', `expiryDate` = '$expiryDate', `warrantyDate` = '$warrantyDate'
-            WHERE `equipmentID` = '$equipmentID'";
+            $chemicalQuery = "UPDATE `chemicals` SET `chemicalName` = '$chemicalName', `useTime` = '$useTime',
+            `quantity` = '$quantity', `expiryDate` = '$expiryDate'
+            WHERE `chemicalID` = '$chemicalID'";
             
-            $result = $this->conn->query($equipmentQuery);
+            $result = $this->conn->query($chemicalQuery);
             
             if($result)
             {
@@ -82,12 +81,12 @@
             }
         }
 
-        public function deleteEquipment($inputdata)
+        public function deleteChemical($inputdata)
         {
-            $equipmentID = $inputdata;
+            $chemicalID = $inputdata;
 
-            $equipmentQuery = "DELETE FROM equipments WHERE `equipmentID` = $equipmentID";
-            $result = $this->conn->query($equipmentQuery);
+            $chemicalQuery = "DELETE FROM chemicals WHERE `chemicalID` = $chemicalID";
+            $result = $this->conn->query($chemicalQuery);
             if($result){
                 return true;
             }else{

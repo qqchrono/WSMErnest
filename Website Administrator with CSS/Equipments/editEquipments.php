@@ -24,7 +24,7 @@
 	$expiryDate = '';
 	$warrantyDate = '';
 	
-	if(isset($_POST["editAccountForm"]))
+	if(isset($_POST["editEquipmentForm"]))
 	{
 		$equipmentID = $_POST['equipmentID'];
 	

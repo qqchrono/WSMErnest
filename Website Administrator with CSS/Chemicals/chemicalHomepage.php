@@ -1,6 +1,5 @@
 <?php
-
-    
+    require_once 'classes.php';
 ?>
 
 <!DOCTYPE html>
@@ -29,32 +28,72 @@
         </form>
     </div>
 
+  <!-- Calling the delete function -->
+  <?php
+
+    if(isset($_POST["deleteChemical"]))
+    {
+        $chemicalID = $_POST['chemicalID'];
+
+        $chemical = new deleteChemical;
+        $result = $chemical -> deleteChemical($chemicalID);
+            
+        if($result)
+        {
+            header("Location: chemicalHomepage.php");
+        }else{
+            print_r("failed");
+        }
+    }
+    ?>
+
     <div class="button-container">
-        <a href="addChemicals.php" class="btn btn-primary">Add Chemical</a>
-        <a href="editChemicals.php" class="btn btn-primary">Edit Chemical</a>
-        <a href="#" class="btn btn-primary">Delete Chemical</a>
+    <a href="addChemicals.php" class="btn btn-primary">Add Chemical</a>
+    <!-- edit form submission here -->
+    <form action='editChemicals.php' method="POST" id="editDeleteForm">
+        <button type="submit" class="btn btn-primary" name="editChemicalForm">Edit Chemical</button>
+    <!-- delete form submission here -->
+        <button type="submit" class="btn btn-primary" formaction="chemicalHomepage.php" name="deleteChemical">Delete Chemical</button>
+    </form>
     </div>
     
     <!-- Table of chemicals go here -->
-		
-	<table>
-		<tr>
-		  <th>Chemical ID</th>
-		  <th>Chemical Name</th>
-		  <th>Use Time</th>
-		  <th>Quantity</th>
-		  <th>Expiry Date</th>
-		  <th></th>
-		</tr>
-		<tr>
-		  <td>Data</td>
-		  <td>Data</td>
-		  <td>Data</td>
-		  <td>Data</td>
-		  <td>Data</td>
-		  <td><a href="#"><button class="arrow-button"></button></td>
-		</tr>
-	</table>
+    <div class = "tableScroll">
+        <table>
+            <tr>
+                <th>Chemical ID</th>
+                <th>Chemical Name</th>
+                <th>Use Time</th>
+                <th>Quantity</th>
+                <th>Expiry Date</th>
+                <th></th>
+            </tr>
+
+        <?php 
+    $chemical = new chemicalView;
+    $result = $chemical -> getData();
+    if($result)
+    {
+        foreach($result as $row)
+        {
+    ?>
+        <tr>
+            <td><?php echo $row['chemicalID'] ?></td>
+            <td><?=$row['chemicalName'] ?></td>
+            <td><?=$row['useTime'] ?></td>
+            <td><?=$row['quantity'] ?></td>
+            <td><?=$row['expiryDate'] ?></td>
+            <!-- input for editing and deleting equipment form -->
+            <td>
+                <input form="editDeleteForm" type='radio' name='chemicalID' value='<?php echo $row['chemicalID']?>'>
+            </td>
+        </tr>
+  <?php
+        }
+    }
+  ?>
+        </table>
+    </div>
 
 </body>
 </html>

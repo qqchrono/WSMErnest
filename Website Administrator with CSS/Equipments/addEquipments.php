@@ -1,8 +1,3 @@
-<?php
-
-    
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,7 +74,7 @@
 						<td><input type="submit" name="submit" value="Add Equipment" style="border-radius: 5px;"></td>
 					</tr>
 					<tr>
-						<td><div style="margin-top: 10px"><a href="equipmentHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a></div></td>
+						<td><div style="margin-top: 10px"><a href="chemicalHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a></div></td>
 					</tr>
 				</table>
 		</div>

@@ -1,8 +1,3 @@
-<?php
-
-    
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,28 +13,60 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
 </head>
 <body>
+
+	<?php
+		include 'addChemicalController.php';
+
+		if(isset($_POST["submit"]))
+		{
+			$inputdata = 
+			[
+			$chemicalName = $_POST["chemicalName"],
+			$useTime= $_POST["useTime"],
+			$quantity = $_POST["quantity"],
+			$expiryDate = $_POST["expiryDate"],
+			];
+			
+			$chemical = new addChemical;
+			$result = $chemical -> addChemical($inputdata);
+			
+			if($result)
+			{
+				print_r("success");
+				header("Location: chemicalHomepage.php");
+			}else{
+				print_r("failed");
+			}
+		}
+		
+	?>
+
 	<?php include 'chemicalNavbar.html';?>
 	
-	<form action="/action_page.php"><!-- php file placeholder for now -->
+	<form action="addChemicals.php" method="POST">
     <h3 class="heading-gap">Add Chemical</h3>
 
 	<div class="container">
 		<div class="rectangle-box">
 				<table align="center">
 				<tr>
-					<td><input type="text" placeholder="Name" name="name"></td>
+					<td><label for="chemicalName">Chemical Name : </label>
+					<input type="text" id="chemicalName" placeholder="Chemical Name" name="chemicalName" value=""></td>
 				</tr>
 				<tr>
-					<td><input type="text" placeholder="Use Time" name="useTime"></td>
+					<td><label for="useTime">Use Time : </label>
+					<input type="text" id="useTime" placeholder="Use Time" name="useTime" value=""></td>
 				</tr>
 				<tr>
-					<td><input type="text" placeholder="Quantity" name="quantity"></td>
+					<td><label for="quantity">Quantity : </label>
+					<input type="text" id="quantity" placeholder="Quantity" name="quantity" value=""></td>
 				</tr>
 				<tr>
-					<td><input type="text" placeholder="Expiry Date" name="expiryDate"></td>
+					<td><label for="expiryDate">Expiry Date : </label>
+					<input type="date" id="expiryDate" placeholder="Expiry Date" name="expiryDate" value=""></td>
 				</tr>
 				<tr>
-					<td><button type="submit" style="border-radius: 5px">Add Chemicals</button></td>
+					<td><input type="submit" name="submit" value="Add Equipment" style="border-radius: 5px;"></td>
 				</tr>
 				<tr>
 					<td><div style="margin-top: 10px"><a href="chemicalHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a></div></td>

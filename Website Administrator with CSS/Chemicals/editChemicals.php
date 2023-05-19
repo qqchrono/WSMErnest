@@ -1,8 +1,3 @@
-<?php
-
-    
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,35 +14,92 @@
 </head>
 
 <body>
-	<?php include 'chemicalNavbar.html';?>
-	
-	<form action="/action_page.php"><!-- php file placeholder for now -->
-	<h3 class="heading-gap">Edit Chemical</h3>
 
-	<div class="container">
-		<div class="rectangle-box">
-				<table align="center">
-				<tr>
-					<td><input type="text" placeholder="Name" name="name"></td>
-				</tr>
-				<tr>
-					<td><input type="text" placeholder="Use Time" name="useTime"></td>
-				</tr>
-				<tr>
-					<td><input type="text" placeholder="Quantity" name="quantity"></td>
-				</tr>
-				<tr>
-					<td><input type="text" placeholder="Expiry Date" name="expiryDate"></td>
-				</tr>
-				<tr>
-					<td><button type="submit" style="border-radius: 5px;">Edit Chemicals</button></td>
-				</tr>
-				<tr>
-					<td><div style="margin-top: 10px"><a href="chemicalHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a></div></td>
-				</tr>
-				</table>
+<?php
+	include 'editChemicalController.php';
+
+	$chemicalID = '';
+	$chemicalName = '';
+	$useTime = '';
+	$quantity = '';
+	$expiryDate = '';
+	
+	if(isset($_POST["editChemicalForm"]))
+	{
+		$chemicalID = $_POST['chemicalID'];
+	
+		$chemical = new editChemical;
+		$result = $chemical -> getDataForEditForm($chemicalID);
+
+		if($result)
+		{
+			foreach($result as $row)
+        	{
+				$chemicalName = $row['chemicalName'];
+				$useTime = $row['useTime'];
+				$quantity = $row['quantity'];
+				$expiryDate = $row['expiryDate'];
+			}
+		}
+	}
+
+	if(isset($_POST["submit"]))
+	{
+		$inputdata = [
+			$chemicalID = $_POST['chemicalID'],
+			$chemicalName = $_POST['chemicalName'],
+			$useTime = $_POST['useTime'],
+			$quantity = $_POST['quantity'],
+			$expiryDate = $_POST['expiryDate'],
+		];
+
+		$chemical = new editChemical;
+		$result = $chemical -> editChemical($inputdata);
+			
+		if($result)
+		{
+			header("Location: chemicalHomepage.php");
+		}else{
+			print_r("failed");
+		}
+	}
+?>
+
+	<?php include 'chemicalNavbar.html';?>
+	<form action="editChemicals.php" method="POST">
+	<h3 class="heading-gap">Edit Chemical</h3>
+		<div class="container">
+			<div class="rectangle-box">
+					<table align="center">
+					<tr>
+						<td><label for="chemicalID">Chemical ID : </label>
+						<input type='text' id="chemicalID" name='chemicalID' value='<?php echo $chemicalID ?>' readonly></td>
+					</tr>
+					<tr>
+						<td><label for="chemicalName">Chemical Name : </label>
+						<input type="text" id="chemicalName" placeholder="Chemical Name" name="chemicalName" value="<?php echo $chemicalName ?>"></td>
+					</tr>
+					<tr>
+						<td><label for="useTime">Use Time : </label>
+						<input type="text" id="useTime" placeholder="Use Time" name="useTime" value="<?php echo $useTime ?>"></td>
+					</tr>
+					<tr>
+						<td><label for="quantity">Quantity : </label>
+						<input type="text" id="quantity" placeholder="Quantity" name="quantity" value="<?php echo $quantity ?>"></td>
+					</tr>
+					<tr>
+						<td><label for="expiryDate">Expiry Date : </label>
+						<input type="date" id="expiryDate" placeholder="Expiry Date" name="expiryDate" value="<?php echo $expiryDate ?>"></td>
+					</tr>
+					<tr>
+						<td><input type="submit" name="submit" value="Edit Chemical" style="border-radius: 5px;"></td>
+					</tr>
+					<tr>
+						<td><div style="margin-top: 10px"><a href="chemicalHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a></div></td>
+					</tr>
+					</table>
+			</div>
 		</div>
-	</div>
 	</form>
 </body>
 </html>
