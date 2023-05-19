@@ -47,7 +47,7 @@
     }
     ?>
 
-    <div class="button-container">
+    <div class="button-row">
     <a href="addChemicals.php" class="btn btn-primary">Add Chemical</a>
     <!-- edit form submission here -->
     <form action='editChemicals.php' method="POST" id="editDeleteForm">
