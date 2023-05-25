@@ -10,7 +10,7 @@ USE `watersupplymanagement`;
 #Table structure for customers
 CREATE TABLE IF NOT EXISTS CustomerAccount (
   customerID int(50) NOT NULL AUTO_INCREMENT,
-  name varchar(100) DEFAULT NULL,
+  customerName varchar(100) DEFAULT NULL,
   email varchar(100) DEFAULT NULL, 
   password varchar(100) NOT NULL,
   role varchar (10) DEFAULT NULL,
@@ -21,11 +21,11 @@ CREATE TABLE IF NOT EXISTS CustomerAccount (
 #Table structure for staff
 CREATE TABLE IF NOT EXISTS StaffAccount (
   staffID int(50) NOT NULL AUTO_INCREMENT,
-  name varchar(100) DEFAULT NULL,
+  staffName varchar(100) DEFAULT NULL,
   email varchar(100) DEFAULT NULL,
   password varchar(100) NOT NULL,
   role varchar (10) DEFAULT NULL,
-  status bit(1) DEFAULT NULL,
+  status bit(1) DEFAULT 0,
   ticketID int(50) DEFAULT NULL,
   PRIMARY KEY (staffID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -97,10 +97,10 @@ INSERT INTO `Equipments` (`equipmentName`, `quantity`, `installationDate`, `expi
 INSERT INTO `Chemicals` (`chemicalName`, `useTime`, `quantity`, `expiryDate`) VALUES
 ('Chemical1', '123', '3', now());
 
-INSERT INTO `StaffAccount` (`name`, `email`, `password`, `role`, `status`) VALUES
+INSERT INTO `StaffAccount` (`staffName`, `email`, `password`, `role`, `status`) VALUES
 ('Ernest', 'abc@gmail.com', 'password', 'admin', 0);
 
-INSERT INTO `CustomerAccount` (`name`, `email`, `password`, `role`) VALUES
+INSERT INTO `CustomerAccount` (`customerName`, `email`, `password`, `role`) VALUES
 ('Bob', 'c@gmail.com', 'password', 'customer');
 
 ALTER TABLE CustomerAccount 

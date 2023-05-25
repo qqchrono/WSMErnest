@@ -44,7 +44,7 @@
 
 	<?php include 'equipmentNavbar.html';?>
 	
-	<form action="addEquipments.php" method="POST"><!-- php file placeholder for now -->
+	<form action="addEquipments.php" method="POST">
     <h3 class="heading-gap">Add Equipment</h3>
 
 	<div class="container">

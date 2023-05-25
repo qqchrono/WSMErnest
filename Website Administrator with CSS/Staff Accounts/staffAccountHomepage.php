@@ -1,6 +1,5 @@
 <?php
-
-    
+	require_once 'classes.php';
 ?>
 
 <!DOCTYPE html>
@@ -20,31 +19,100 @@
 <body>
 	<?php include 'staffAccountHomepageNavbar.html';?>
 	<h3 class="heading-gap">Staff List</h3>
+
+	<div class="search-container">
+        <form action="/action_page.php"><!-- php file placeholder for now -->
+            <input type="text" placeholder="Search..." name="search">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <!-- Calling the delete function -->
+    <?php
+
+        if(isset($_POST["deleteStaff"]))
+        {
+            $staffID = $_POST['staffID'];
+
+            $staff = new deleteStaff;
+            $result = $staff -> deleteStaff($staffID);
+                
+            if($result)
+            {
+                header("Location: staffAccountHomepage.php");
+            }else{
+                print_r("failed");
+            }
+        }
+
+		#Reset password function here         NOT DONE
+		if(isset($_POST["resetStaffPassword"]))
+		{
+
+		}
+    ?>
+
 	
-    <div class="button-container">
+    <div class="button-row">
         <a href="addStaff.php" class="btn btn-primary">Add Staff</a>
-        <a href="#" class="btn btn-primary">Edit Staff</a>
-        <a href="#" class="btn btn-primary">Delete Staff</a>
-        <a href="#" class="btn btn-primary">Reset Password</a>        
+		<!-- edit form submission here -->
+		<form action='editStaff.php' method="POST" id="editDeleteForm">
+            <button type="submit" class="btn btn-primary" name="editStaffForm">Edit Staff</button>
+        <!-- delete form submission here -->
+            <button type="submit" class="btn btn-primary" formaction="staffAccountHomepage.php" name="deleteStaff">Delete Staff</button>
+		<!-- Reset password form submission here -->
+			<button type="submit" class="btn btn-primary" formaction="staffAccountHomepage.php" name="resetStaffPassword">Reset Password</button>
+        </form>    
     </div>
     
     <!-- Table of staffs go here -->
-	<table>
-		<tr>
-		  <th colspan="6"></th>
-		</tr>
-		<tr>
-		  <td>
-		  <div style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden;">
-			<img src="profilephoto.png" alt="profilephoto" style="width: 100%; height: 100%; object-fit: cover;">
-		  </div></td>
-		  <td>Data</td>
-		  <td>Data</td>
-		  <td>Data</td>
-		  <td>Data</td>
-		  <td><a href="#"><button class="arrow-button"></button></td>
-		</tr>
-	</table>
+    <div class = "tableScroll">
+        <table>
+            <tr>
+            <th></th>
+            <th>Staff ID</th>
+            <th>Staff Name</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Ticket ID</th>
+            <th></th>
+        </tr>
+
+        <?php 
+            $staff = new staffView;
+            $result = $staff -> getData();
+            if($result)
+            {
+                foreach($result as $row)
+                {
+        ?>
+
+        <tr>
+            <td>
+                <div style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden;">
+                    <img src="profilephoto.png" alt="profilephoto" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </td>
+            <td><?php echo $row['staffID'] ?></td>
+            <td><?php echo $row['staffName'] ?></td>
+            <td><?php echo $row['email'] ?></td>
+            <td><?php echo $row['password'] ?></td>
+            <td><?php echo $row['role'] ?></td>
+            <td><?php echo $row['status'] ?></td>
+            <td><?php echo $row['ticketID'] ?></td>
+            <!-- input for editing and deleting equipment form -->
+            <td>
+                <input form="editDeleteForm" type='radio' name='staffID' value='<?php echo $row['staffID']?>'>
+            </td>
+        </tr>
+        <?php
+                }
+            }
+        ?>
+      </table>
+    </div>
 
 </body>
 </html>

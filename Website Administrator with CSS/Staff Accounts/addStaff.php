@@ -1,8 +1,3 @@
-<?php
-
-    
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,23 +13,63 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
 </head>
 <body>
+	<?php
+		include 'addStaffController.php';
+
+		if(isset($_POST["submit"]))
+		{
+			$inputdata = 
+			[
+			$staffName = $_POST["staffName"],
+			$email= $_POST["email"],
+			$password = $_POST["password"],
+			$role = $_POST["role"]
+			];
+			
+			$staff = new addStaff;
+			$result = $staff -> addStaff($inputdata);
+			
+			if($result)
+			{
+				print_r("success");
+				header("Location: staffAccountHomepage.php");
+			}else{
+				print_r("failed");
+			}
+		}
+		
+	?>
+
 	<?php include 'staffAccountHomepageNavbar.html';?>
 	
-	<form action="/action_page.php"><!-- php file placeholder for now -->
+	<form action="addStaff.php" method="POST">
 	<h3 class="heading-gap">Add Staff</h3>
 
 	<div class="container">
 		<div class="rectangle-box">
 				<table align="center">
 				<tr>
-					<td><input type="text" placeholder="Name" name="name"></td>
-				</tr>
-				<tr>
-					<td><input type="text" placeholder="Email" name="email"></td>
-				</tr>
-				<tr>
-					<td><button type="submit" style="border-radius: 5px">Add Staff</button></td>
-				</tr>
+						<td><label for="staffName">Staff Name : </label>
+						<input type="text" id="staffName" placeholder="Staff Name" name="staffName" value=""></td>
+					</tr>
+					<tr>
+						<td><label for="email">Email : </label>
+						<input type="text" id="email" placeholder="email" name="email" value=""></td>
+					</tr>
+					<tr>
+						<td><label for="password">Password : </label>
+						<input type="text" id="password" placeholder="password" name="password" value=""></td>
+					</tr>
+					<tr>
+						<td><label for="role">Role : </label>
+							<select id="role" name="role">
+								<option value="Admin">Admin</option>
+								<option value="Staff">Staff</option>
+							</select>
+					</tr>
+					<tr>
+						<td><div style="margin-top: 10px"><input type="submit" name="submit" value="Add Staff" style="border-radius: 5px;"></div></td>
+					</tr>
 				<tr>
 					<td><div style="margin-top: 10px"><a href="staffAccountHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a></div></td>
 				</tr>
