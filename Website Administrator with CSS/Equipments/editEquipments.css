@@ -32,8 +32,8 @@ body {
 }
 
 .rectangle-box {
-    width: 420px;
-    height: 420px;
+    width: 430px;
+    height: 460px;
     background-color: #f2f2f2;
     border: 1px solid #ddd;
     border-radius: 5px;
