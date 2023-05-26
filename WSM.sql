@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS CustomerAccount (
   customerID int(50) NOT NULL AUTO_INCREMENT,
   customerName varchar(100) DEFAULT NULL,
   email varchar(100) DEFAULT NULL, 
+  address varchar(100) DEFAULT NULL,
   password varchar(100) NOT NULL,
   role varchar (10) DEFAULT NULL,
   ticketID int(50) DEFAULT NULL,
