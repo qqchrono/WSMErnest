@@ -4,6 +4,6 @@
     #include 'Controllers/editEquipmentController.php';
     include 'viewCustomerController.php';
     include 'addCustomerController.php';
-    include 'editStaffController.php';
-    include 'deleteStaffController.php';
+    include 'editCustomerController.php';
+    include 'deleteCustomerController.php';
 ?>
