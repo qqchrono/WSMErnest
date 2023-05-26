@@ -68,11 +68,11 @@
 							</select>
 					</tr>
 					<tr>
-						<td><div style="margin-top: 10px"><input type="submit" name="submit" value="Add Staff" style="border-radius: 5px;"></div></td>
+						<td class="button-container">
+							<input type="submit" name="submit" value="Add Staff" style="border-radius: 5px;">
+							<a href="staffAccountHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a>
+						</td>
 					</tr>
-				<tr>
-					<td><div style="margin-top: 10px"><a href="staffAccountHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a></div></td>
-				</tr>
 				</table>
 		</div>
 	</div>
