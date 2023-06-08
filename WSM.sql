@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS StaffAccount (
   role varchar (10) DEFAULT NULL,
   status bit(1) DEFAULT 0,
   ticketID int(50) DEFAULT NULL,
+  imageName varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (staffID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -103,6 +104,12 @@ INSERT INTO `StaffAccount` (`staffName`, `email`, `password`, `role`, `status`) 
 
 INSERT INTO `CustomerAccount` (`customerName`, `email`, `password`, `role`) VALUES
 ('Bob', 'c@gmail.com', 'password', 'customer');
+
+INSERT INTO `SupportTicket` (`customerID`, `status`, `details`, `time_of_issue`, `type`) VALUES
+('1', 0, 'asdasdasdasd', now(), 'Support Ticket');
+
+INSERT INTO `ComplaintTicket` (`customerID`, `status`, `details`, `time_of_issue`, `type`, `time_of_resolution`) VALUES
+('1', 0, 'dasddd', now(), 'Complaint Ticket', now());
 
 ALTER TABLE CustomerAccount 
   AUTO_INCREMENT=1;
