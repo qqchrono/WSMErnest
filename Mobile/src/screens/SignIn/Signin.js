@@ -4,7 +4,6 @@ import Logo from '../../../asset/water.jpg';
 import CustomInput from '../comp/CustomInput/CustomInput';
 import CustomButton from '../comp/CustomButton/CustomButton';
 import { useNavigation } from "@react-navigation/native";
-
 const Signin =() =>{
     const [username, setUsername]=useState('');
     const [password, setPassword]=useState('');
@@ -34,6 +33,7 @@ const Signin =() =>{
             alert(Response[0].Message)
             if (Response[0].Message == "Success") {
               console.log("true")
+              module.exports = Email;
               navigation.navigate("Home");
             }
             console.log(Data);
