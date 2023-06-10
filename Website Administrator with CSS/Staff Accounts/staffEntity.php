@@ -14,6 +14,21 @@
     
         }
 
+        public function checkAccount($inputdata)
+        {  
+            $username = $inputdata[0];
+            $password = $inputdata[1];
+    
+            $selectAccount = "SELECT * FROM `useraccount` WHERE (`name` = '$username' AND `password` = '$password')";
+            $result = $this->conn->query($selectAccount);
+    
+            while($row = mysqli_fetch_array($result))
+            {
+                return $row['role'];
+            }
+    
+        }
+
         public function getData()
         {
             $userQuery = "SELECT * FROM StaffAccount";
