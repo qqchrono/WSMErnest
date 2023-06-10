@@ -73,6 +73,7 @@ CREATE TABLE IF NOT EXISTS priceRate (
 CREATE TABLE IF NOT EXISTS SupportTicket (
 	supportTicketID int(50) NOT NULL AUTO_INCREMENT,
   customerID int(50),
+  staffID int(50),
   status bit(1),
   details varchar(200),
   time_of_issue DateTime,
@@ -83,6 +84,7 @@ CREATE TABLE IF NOT EXISTS SupportTicket (
 CREATE TABLE IF NOT EXISTS ComplaintTicket (
 	complaintTicketID int(50) NOT NULL AUTO_INCREMENT,
   customerID int(50),
+  staffID int(50),
   status bit(1),
   details varchar(200),
   time_of_issue DateTime,
@@ -133,5 +135,9 @@ ALTER TABLE SupportTicket
 
 ALTER TABLE ComplaintTicket 
   AUTO_INCREMENT=1;
+
+ALTER TABLE `supportticket` CHANGE `time_of_issue` `time_of_issue` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
+ALTER TABLE `complaintticket` CHANGE `time_of_issue` `time_of_issue` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
 
 COMMIT;
