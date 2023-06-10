@@ -15,7 +15,8 @@ CREATE TABLE IF NOT EXISTS CustomerAccount (
   address varchar(100) DEFAULT NULL,
   password varchar(100) NOT NULL,
   role varchar (10) DEFAULT NULL,
-  ticketID int(50) DEFAULT NULL,
+  phone int(11) DEFAULT NULL,
+  bankAccount int(20) DEFAULT NULL,
   PRIMARY KEY (customerID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -27,7 +28,6 @@ CREATE TABLE IF NOT EXISTS StaffAccount (
   password varchar(100) NOT NULL,
   role varchar (10) DEFAULT NULL,
   status bit(1) DEFAULT 0,
-  ticketID int(50) DEFAULT NULL,
   imageName varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (staffID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -53,27 +53,27 @@ CREATE TABLE IF NOT EXISTS Equipments (
   PRIMARY KEY (equipmentID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS WaterUsage (
+CREATE TABLE IF NOT EXISTS WaterUsageBill (
   waterUsageID int(50) NOT NULL AUTO_INCREMENT,
   waterUsage double(10, 2),
   Date DateTime,
   customerID int(50),
+  billStatus bit(1) NOT NULL DEFAULT 0,
+  paymentStatus bit(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (waterUsageID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS Bill (
-	billID int(50) NOT NULL AUTO_INCREMENT,
-  customerID int(50),
-  amountPaid double(10, 2),
+CREATE TABLE IF NOT EXISTS priceRate (
+	priceID int(50) NOT NULL AUTO_INCREMENT,
   Date DateTime,
-  billStatus bit(1),
   price_rate double(10, 2),
-  PRIMARY KEY (billID)
+  PRIMARY KEY (priceID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS SupportTicket (
 	supportTicketID int(50) NOT NULL AUTO_INCREMENT,
   customerID int(50),
+  staffID int(50),
   status bit(1),
   details varchar(200),
   time_of_issue DateTime,
@@ -84,6 +84,7 @@ CREATE TABLE IF NOT EXISTS SupportTicket (
 CREATE TABLE IF NOT EXISTS ComplaintTicket (
 	complaintTicketID int(50) NOT NULL AUTO_INCREMENT,
   customerID int(50),
+  staffID int(50),
   status bit(1),
   details varchar(200),
   time_of_issue DateTime,
@@ -123,10 +124,10 @@ ALTER TABLE Chemicals
 ALTER TABLE Equipments 
   AUTO_INCREMENT=1;
 
-ALTER TABLE WaterUsage 
+ALTER TABLE WaterUsageBill 
   AUTO_INCREMENT=1;
 
-ALTER TABLE Bill 
+ALTER TABLE priceRate 
   AUTO_INCREMENT=1;
 
 ALTER TABLE SupportTicket 
@@ -134,5 +135,9 @@ ALTER TABLE SupportTicket
 
 ALTER TABLE ComplaintTicket 
   AUTO_INCREMENT=1;
+
+ALTER TABLE `supportticket` CHANGE `time_of_issue` `time_of_issue` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
+ALTER TABLE `complaintticket` CHANGE `time_of_issue` `time_of_issue` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
 
 COMMIT;
