@@ -1,5 +1,5 @@
 <?php
-
+	include 'viewComplaintTicketController.php'	
     
 ?>
 
@@ -13,37 +13,62 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="ticketHomepage.css">
+  <link rel="stylesheet" href="../ticketHomepage.css">
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
 </head>
 <body>
-	<?php include 'ticketHomepageNavbar.html';?>
+	<?php include 'complaintTicketNavbar.html';?>
 	
-    <h3 class="heading-gap">Current Tickets</h3>
+    <h3 class="heading-gap">Complaint Tickets</h3>
+
+	<div class="search-container">
+        <form action="/action_page.php"><!-- php file placeholder for now -->
+            <input type="text" placeholder="Search..." name="search">
+            <button type="submit">Search</button>
+        </form>
+    </div>
     
     <!-- Table of tickets go here -->
-		<table>
-		<tr>
-		  <th>Ticket ID</th>
-		  <th>Customer Name</th>
-		  <th>Status</th>
-		  <th>Details</th>
-		  <th>Time of Issue</th>
-		  <th>Type</th>
-		  <th colspan="2"></th>
-		</tr>
-		<tr>
-		  <td>Data</td>
-		  <td>Data</td>
-		  <td>Data</td>
-		  <td>Data</td>
-		  <td>Data</td>
-		  <td>Data</td>
-		  <td><button>Assign</button></td>
-		  <td><a href="#"><button class="arrow-button"></button></td>
-		</tr>
-	</table>
+	<div class = "tableScroll">
+        <table>
+            <tr>
+				<th>Ticket ID</th>
+				<th>Customer Name</th>
+				<th>Staff Name</th>
+				<th>Status</th>
+				<th>Details</th>
+				<th>Time of Issue</th>
+				<th>Time of Resolution</th>
+				<th colspan="2"></th>
+        	</tr>
+
+        <?php 
+            $ticket = new complaintTicketView;
+            $result = $ticket -> getData();
+            if($result)
+            {
+                foreach($result as $row)
+                {
+        ?>
+
+        <tr>
+            <td><?php echo $row['complaintTicketID'] ?></td>
+            <td><?php echo $row['customerName'] ?></td>
+            <td><?php echo $row['staffName'] ?></td>
+            <td><?php echo $row['ticketStatus'] ?></td>
+            <td><?php echo $row['details'] ?></td>
+            <td><?php echo $row['time_of_issue'] ?></td>
+            <td><?php echo $row['time_of_resolution'] ?></td>
+			<td><button>Assign</button></td>
+		 	<td><a href="#"><button class="arrow-button"></button></td>
+        </tr>
+        <?php
+                }
+            }
+        ?>
+      </table>
+    </div>
 
 </body>
 </html>

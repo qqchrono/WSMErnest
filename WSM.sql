@@ -73,22 +73,20 @@ CREATE TABLE IF NOT EXISTS priceRate (
 CREATE TABLE IF NOT EXISTS SupportTicket (
 	supportTicketID int(50) NOT NULL AUTO_INCREMENT,
   customerID int(50),
-  staffID int(50),
-  status bit(1),
+  staffID int(50) DEFAULT NULL,
+  ticketStatus bit(1) DEFAULT 0,
   details varchar(200),
   time_of_issue DateTime,
-  type varchar(10),
   PRIMARY KEY (supportTicketID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS ComplaintTicket (
 	complaintTicketID int(50) NOT NULL AUTO_INCREMENT,
   customerID int(50),
-  staffID int(50),
-  status bit(1),
+  staffID int(50) DEFAULT NULL,
+  ticketStatus bit(1) DEFAULT 0,
   details varchar(200),
   time_of_issue DateTime,
-  type varchar(10),
   time_of_resolution DateTime,
   PRIMARY KEY (complaintTicketID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -106,11 +104,11 @@ INSERT INTO `StaffAccount` (`staffName`, `email`, `password`, `role`, `status`) 
 INSERT INTO `CustomerAccount` (`customerName`, `email`, `password`, `role`) VALUES
 ('Bob', 'c@gmail.com', 'password', 'customer');
 
-INSERT INTO `SupportTicket` (`customerID`, `status`, `details`, `time_of_issue`, `type`) VALUES
-('1', 0, 'asdasdasdasd', now(), 'Support Ticket');
+INSERT INTO `SupportTicket` (`customerID`, `ticketStatus`, `details`, `time_of_issue`) VALUES
+('1', 0, 'asdasdasdasd', now());
 
-INSERT INTO `ComplaintTicket` (`customerID`, `status`, `details`, `time_of_issue`, `type`, `time_of_resolution`) VALUES
-('1', 0, 'dasddd', now(), 'Complaint Ticket', now());
+INSERT INTO `ComplaintTicket` (`customerID`, `ticketStatus`, `details`, `time_of_issue`, `time_of_resolution`) VALUES
+('1', 0, 'dasddd', now(), now());
 
 ALTER TABLE CustomerAccount 
   AUTO_INCREMENT=1;

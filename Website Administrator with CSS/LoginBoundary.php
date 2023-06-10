@@ -1,8 +1,4 @@
 <?php
-	echo $_SERVER['DOCUMENT_ROOT'];
-	#$path = $_SERVER['DOCUMENT_ROOT'];
-	#$path .= "/Water-Supply-Management/Website Administrator with CSS/LoginController.php";
-	#include($path);
 	include 'LoginController.php';
 
 	if(isset($_POST["submit"]))
@@ -21,10 +17,10 @@
 			echo "success admin";
 			header("Location: Admin homepage/adminHomePage.php");
 		}
-		#else if ($result == "Staff")
-		#{
-		#	header("Location: Technical Staff Homepage/technicalStaffHomePage.php");
-		#}
+		else if ($result == "Staff")
+		{
+			header("Location: Technical Staff Homepage/technicalStaffHomePage.php");
+		}
 		else
 		{
 			echo $result;
