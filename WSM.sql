@@ -15,7 +15,6 @@ CREATE TABLE IF NOT EXISTS CustomerAccount (
   address varchar(100) DEFAULT NULL,
   password varchar(100) NOT NULL,
   role varchar (10) DEFAULT NULL,
-  ticketID int(50) DEFAULT NULL,
   PRIMARY KEY (customerID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -27,7 +26,6 @@ CREATE TABLE IF NOT EXISTS StaffAccount (
   password varchar(100) NOT NULL,
   role varchar (10) DEFAULT NULL,
   status bit(1) DEFAULT 0,
-  ticketID int(50) DEFAULT NULL,
   imageName varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (staffID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
