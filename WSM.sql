@@ -15,6 +15,8 @@ CREATE TABLE IF NOT EXISTS CustomerAccount (
   address varchar(100) DEFAULT NULL,
   password varchar(100) NOT NULL,
   role varchar (10) DEFAULT NULL,
+  phone int(11) DEFAULT NULL,
+  bankAccount int(20) DEFAULT NULL,
   PRIMARY KEY (customerID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -51,11 +53,13 @@ CREATE TABLE IF NOT EXISTS Equipments (
   PRIMARY KEY (equipmentID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS WaterUsage (
+CREATE TABLE IF NOT EXISTS WaterUsageBill (
   waterUsageID int(50) NOT NULL AUTO_INCREMENT,
   waterUsage double(10, 2),
   Date DateTime,
   customerID int(50),
+  billStatus bit(1) NOT NULL DEFAULT 0,
+  paymentStatus bit(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (waterUsageID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
