@@ -1,4 +1,8 @@
 <?php
+	echo $_SERVER['DOCUMENT_ROOT'];
+	#$path = $_SERVER['DOCUMENT_ROOT'];
+	#$path .= "/Water-Supply-Management/Website Administrator with CSS/LoginController.php";
+	#include($path);
 	include 'LoginController.php';
 
 	if(isset($_POST["submit"]))
@@ -6,7 +10,7 @@
 		$inputdata = [
 		//Grab data from user
 		$user = $_POST["user"],
-		$pass = $_POST["pass"],
+		$pass = $_POST["pass"]
 		];
 		
 		$testlogin = new Login($inputdata);
@@ -14,18 +18,16 @@
 
 		if($result == "Admin")
 		{
-			header("Location: AdminPage.html");
+			echo "success admin";
+			header("Location: Admin homepage/adminHomePage.php");
 		}
-		else if ($result == "Customer")
-		{
-			header("Location: CustomerPage.html");
-		}
-		else if ($result == "Staff")
-		{
-			header("Location: StaffPage.html");
-		}
+		#else if ($result == "Staff")
+		#{
+		#	header("Location: Technical Staff Homepage/technicalStaffHomePage.php");
+		#}
 		else
 		{
+			echo $result;
 			print_r("failed");
 		}
 
@@ -67,7 +69,6 @@
   <td><input type="submit" class="btn btn-primary btn-block" name="submit" value="Login"></td>
  </tr>
   <tr>
-<!-- <td><button><a href="register.php">Click here to register</a></button></td>  -->
  </tr>
  </table>
  </div>

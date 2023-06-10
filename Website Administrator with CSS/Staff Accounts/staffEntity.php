@@ -1,5 +1,7 @@
 <?php
-    require_once '../DatabaseConnection.php';
+    $path = $_SERVER['DOCUMENT_ROOT'];
+	$path .= "/Water-Supply-Management/Website Administrator with CSS/DatabaseConnection.php";
+	require_once($path);
 
     class staffEntity
     {
@@ -16,16 +18,16 @@
 
         public function checkAccount($inputdata)
         {  
-            $username = $inputdata[0];
+            $staffName = $inputdata[0];
             $password = $inputdata[1];
     
-            $selectAccount = "SELECT * FROM `useraccount` WHERE (`name` = '$username' AND `password` = '$password')";
-            $result = $this->conn->query($selectAccount);
-    
-            while($row = mysqli_fetch_array($result))
-            {
-                return $row['role'];
-            }
+            $userQuery = "SELECT * FROM staffAccount WHERE `staffName` = '$staffName' AND `password` = '$password'";
+            $result = $this->conn->query($userQuery);
+        
+           while($row = mysqli_fetch_array($result))
+           {
+               return $row['role'];
+           }
     
         }
 
