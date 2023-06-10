@@ -63,14 +63,11 @@ CREATE TABLE IF NOT EXISTS WaterUsageBill (
   PRIMARY KEY (waterUsageID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS Bill (
-	billID int(50) NOT NULL AUTO_INCREMENT,
-  customerID int(50),
-  amountPaid double(10, 2),
+CREATE TABLE IF NOT EXISTS priceRate (
+	priceID int(50) NOT NULL AUTO_INCREMENT,
   Date DateTime,
-  billStatus bit(1),
   price_rate double(10, 2),
-  PRIMARY KEY (billID)
+  PRIMARY KEY (priceID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS SupportTicket (
