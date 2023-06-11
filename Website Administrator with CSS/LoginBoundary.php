@@ -3,6 +3,23 @@
 
 	if(isset($_POST["submit"]))
 	{
+		$user = $_POST["user"];
+ 	 	$pass = $_POST["pass"];
+
+		// Validate username as an email
+		if(!filter_var($user, FILTER_VALIDATE_EMAIL))
+		{
+		echo "Invalid email format";
+		exit;
+		}
+
+		// Validate password to contain uppercase, lowercase, and special characters
+		if(!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()\-_=+{};:,<.>]).+$/", $pass))
+		{
+		echo "Password should contain at least one uppercase letter, one lowercase letter, and one special character";
+		exit;
+		}
+
 		$inputdata = [
 		//Grab data from user
 		$user = $_POST["user"],
@@ -44,8 +61,7 @@
 <link rel="stylesheet" href="LoginBoundary.css">
 </head>
 <body>
-// <form action="loginBoundary.php" method="post">
-<form name = "RegForm" onsubmit = "return validate()" form action="loginBoundary.php" method="post">
+<form action="loginBoundary.php" method="post">
 <h2>Welcome to<br>Water Supply Management System</h2>
 
 
