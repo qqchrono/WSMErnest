@@ -96,3 +96,25 @@ function test_input($data) {
 				<tr>
 					<td><input type="text" placeholder="Address" name="address"></td>
 				</tr>
+				<tr>
+					<td><input type="text" placeholder="Email" name="email"></td>
+				</tr>
+				<tr>
+					<td><input type="text" placeholder="Phone Number" name="phonenumber"></td>
+				</tr>
+				<tr>
+					<td><input type="text" placeholder="Bank Number" name="banknumber"></td>
+				</tr>
+				<tr>
+					<td><button type="submit" style="border-radius: 5px;">Submit</button></td>
+				</tr>
+				<tr>
+					<td><div style="margin-top: 10px"><a href="adminHomePage.php"><button type="button" style="border-radius: 5px">Back</button></a></div></td>
+				</tr>
+				</table>
+		</div>
+	</div>
+	</form>
+	
+</body>
+</html>
