@@ -105,6 +105,11 @@ function test_input($data) {
 				<tr>
 					<td><input type="text" placeholder="Bank Number" name="banknumber"></td>
 				</tr>
+                <?php if (!empty($error)) { ?>
+				  <tr>
+				    <td><span class="error"><?php echo $error; ?></span></td>
+				  </tr>
+				<?php } ?>
 				<tr>
 					<td><button type="submit" style="border-radius: 5px;">Submit</button></td>
 				</tr>
