@@ -1,5 +1,11 @@
 <?php
 	require_once 'classes.php';
+    session_start();
+	include '../Account setting/AccountSettingController.php';
+	$staffController = new AccountSettingController;
+	$staffID = $_SESSION['staffID'] ?? null;
+	$dbData = $staffController->retrieveDataFromDatabase($staffID);
+	$img_name = $dbData['imageName'];
 ?>
 
 <!DOCTYPE html>
@@ -91,7 +97,12 @@
         <tr>
             <td>
                 <div style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden;">
-                    <img src="profilephoto.png" alt="profilephoto" style="width: 100%; height: 100%; object-fit: cover;">
+                <?php
+                    $staffID = $row['staffID'];
+                    $dbData = $staffController->retrieveDataFromDatabase($staffID);
+                    $img_name = $dbData['imageName'];
+                ?>
+                    <img src="../Account setting/upload/<?php echo $img_name; ?>" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
             </td>
             <td><?php echo $row['staffID'] ?></td>
