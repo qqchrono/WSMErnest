@@ -60,8 +60,14 @@
             <td><?php echo $row['details'] ?></td>
             <td><?php echo $row['time_of_issue'] ?></td>
             <td><?php echo $row['time_of_resolution'] ?></td>
-			<td><button>Assign</button></td>
-		 	<td><a href="#"><button class="arrow-button"></button></td>
+			<td><button>Assign</button></td> <!-- Assign not done yet -->
+            <td>
+                <form action='viewComplaintTicketDetails.php' method="POST">
+                    <input type='hidden' name='complaintTicketID' value='<?php echo $row['complaintTicketID']?>'>
+                    <input type='submit' name='viewDetails' value='View Details'>
+                </form> 
+            </td>
+    
         </tr>
         <?php
                 }

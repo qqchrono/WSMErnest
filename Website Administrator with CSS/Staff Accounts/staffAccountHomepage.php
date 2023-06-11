@@ -76,7 +76,6 @@
             <th>Password</th>
             <th>Role</th>
             <th>Status</th>
-            <th>Ticket ID</th>
             <th></th>
         </tr>
 
@@ -101,7 +100,6 @@
             <td><?php echo $row['password'] ?></td>
             <td><?php echo $row['role'] ?></td>
             <td><?php echo $row['status'] ?></td>
-            <td><?php echo $row['ticketID'] ?></td>
             <!-- input for editing and deleting equipment form -->
             <td>
                 <input form="editDeleteForm" type='radio' name='staffID' value='<?php echo $row['staffID']?>'>

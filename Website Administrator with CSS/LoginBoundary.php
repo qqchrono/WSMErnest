@@ -14,7 +14,6 @@
 
 		if($result == "Admin")
 		{
-			echo "success admin";
 			header("Location: Admin homepage/adminHomePage.php");
 		}
 		else if ($result == "Staff")
