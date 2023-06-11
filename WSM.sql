@@ -144,4 +144,6 @@ ALTER TABLE `supportticket` CHANGE `status` `status` BIT(1) NOT NULL DEFAULT b'0
 
 ALTER TABLE `complaintticket` CHANGE `status` `status` BIT(1) NOT NULL DEFAULT b'0';
 
+ALTER TABLE `waterusagebill` ADD FOREIGN KEY (`customerID`) REFERENCES `customeraccount`(`customerID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 COMMIT;
