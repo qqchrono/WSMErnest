@@ -44,7 +44,8 @@
 <link rel="stylesheet" href="LoginBoundary.css">
 </head>
 <body>
-<form action="loginBoundary.php" method="post">
+// <form action="loginBoundary.php" method="post">
+<form name = "RegForm" onsubmit = "return validate()" form action="loginBoundary.php" method="post">
 <h2>Welcome to<br>Water Supply Management System</h2>
 
 
