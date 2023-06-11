@@ -4,7 +4,10 @@ $error = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $name = test_input($_POST["name"]);
   $password = test_input($_POST["password"]);
+  $address = test_input($_POST["address"]);
   $email = test_input($_POST["email"]);
+  $phoneNumber = test_input($_POST["phonenumber"]);
+  $bankNumber = test_input($_POST["banknumber"]);
 
   // Validate name
   if (empty($name)) {
@@ -18,6 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $error = "Password should contain at least one uppercase letter, one lowercase letter, one digit, and one special character";
   }
 
+  // Validate address
+  if (empty($address)) {
+    $error = "Address is required";
+  }
+
   // Validate email
   if (empty($email)) {
     $error = "Email is required";
@@ -25,11 +33,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $error = "Invalid email format";
   }
 
+  // Validate phone number
+  if (empty($phoneNumber)) {
+    $error = "Phone number is required";
+  } elseif (!preg_match("/^\d{8}$/", $phoneNumber)) {
+    $error = "Phone number should have exactly 8 digits";
+  }
+
+  // Validate bank number
+  if (empty($bankNumber)) {
+    $error = "Bank number is required";
+  } elseif (!preg_match("/^\d{7,11}$/", $bankNumber)) {
+    $error = "Bank number should have between 7 to 11 digits";
+  }
+
   // If no errors, process the form
   if (empty($error)) {
-    // Perform the necessary actions for creating a new administrator staff account
+    // Perform the necessary actions for creating a new customer account
     // Redirect to success page or perform further actions
-    header("Location: process_new_admin.php");
+    header("Location: process_new_customer.php");
     exit;
   }
 }
@@ -52,7 +74,7 @@ function test_input($data) {
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="createnewadminacc.css">
+  <link rel="stylesheet" href="createnewcusacc.css">
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
   <!-- CSS and JavaScript links removed for brevity -->
@@ -63,7 +85,7 @@ function test_input($data) {
 	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 	<div class="container">
 		<div class="rectangle-box">
-			<h3 class="heading-gap">Create new Administrator staff account</h3>
+			<h3 class="heading-gap">Create new Customer account</h3>
 				<table align="center">
 				<tr>
 					<td><input type="text" placeholder="Name" name="name"></td>
@@ -72,22 +94,5 @@ function test_input($data) {
 					<td><input type="password" placeholder="Password" name="password"></td>
 				</tr>
 				<tr>
-					<td><input type="text" placeholder="Email" name="email"></td>
+					<td><input type="text" placeholder="Address" name="address"></td>
 				</tr>
-				<?php if (!empty($error)) { ?>
-				  <tr>
-				    <td><span class="error"><?php echo $error; ?></span></td>
-				  </tr>
-				<?php } ?>
-				<tr>
-					<td><button type="submit" style="border-radius: 5px;">Submit</button></td>
-				</tr>
-				<tr>
-					<td><div style="margin-top: 10px"><a href="adminHomePage.php"><button type="button" style="border-radius: 5px">Back</button></a></div></td>
-				</tr>
-				</table>
-		</div>
-	</div>
-	</form>
-</body>
-</html>
