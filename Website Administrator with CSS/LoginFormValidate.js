@@ -63,7 +63,7 @@ function validate(){
     return true;
 } {
     var name =
-        document.forms.RegForm.Name.value;
+        document.forms.RegForm.user.value;
     var email =
         document.forms.RegForm.EMail.value;
     var phone =
@@ -71,7 +71,7 @@ function validate(){
     var what =
         document.forms.RegForm.Subject.value;
     var password =
-        document.forms.RegForm.Password.value;
+        document.forms.RegForm.pass.value;
     var address =
         document.forms.RegForm.Address.value;
     //Javascript reGex for Email Validation.
