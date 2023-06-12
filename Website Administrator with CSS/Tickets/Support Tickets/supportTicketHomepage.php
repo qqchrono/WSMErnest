@@ -37,7 +37,7 @@
 		  <td>Data</td>
 		  <td>Data</td>
 		  <td>Data</td>
-		  <td>Data</td>
+		  <td><div class="details">Data</div></td>
 		  <td>Data</td>
 		  <td>Data</td>
 		  <td><button>Assign</button></td>

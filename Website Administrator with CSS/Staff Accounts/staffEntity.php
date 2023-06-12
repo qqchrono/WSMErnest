@@ -5,6 +5,7 @@
 
     class staffEntity
     {
+        private $conn;
         public function __construct()
         {
             $db = new DatabaseConnection;
@@ -16,20 +17,20 @@
     
         }
 
-        public function checkAccount($inputdata)
-        {  
-            $staffName = $inputdata[0];
-            $password = $inputdata[1];
-    
-            $userQuery = "SELECT * FROM staffAccount WHERE `staffName` = '$staffName' AND `password` = '$password'";
-            $result = $this->conn->query($userQuery);
-        
-           while($row = mysqli_fetch_array($result))
-           {
-               return $row['role'];
-           }
-    
-        }
+		public function checkAccount($inputdata)
+		{
+			$staffName = $inputdata["user"];
+			$password = $inputdata["pass"];
+
+			$userQuery = "SELECT * FROM staffAccount WHERE `staffName` = '$staffName' AND `password` = '$password'";
+			$result = $this->conn->query($userQuery);
+
+			if ($result && $result->num_rows > 0) {
+				return $result; 
+			}
+
+			return null; 
+		}
 
         public function getData()
         {
@@ -110,6 +111,37 @@
                 return false;
             }
         }
+
+        public function editOwnAccount($inputdata)
+		{
+			$staffID = $inputdata["staffID"];
+			$staffName = $inputdata["staffName"];
+			$email = $inputdata["email"];
+			$password = $inputdata["password"];
+			$role = $inputdata["role"];
+			$new_img_name = $inputdata["new_img_name"];
+
+			$staffQuery = "UPDATE `staffAccount` SET `staffName` = '$staffName', `email` = '$email', `password` = '$password', `role` = '$role', `imageName` = '$new_img_name' WHERE `staffID` = '$staffID'";
+
+			$result = $this->conn->query($staffQuery);
+
+			if ($result) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+        function retrieveDataFromDatabase($staffID) {    
+            $stmt = $this->conn->prepare("SELECT staffID, staffName, email, password, role, imageName FROM staffAccount WHERE staffID = ?");
+            $stmt->bind_param("i", $staffID);
+            $stmt->execute();
+            $result = $stmt->get_result()->fetch_assoc();
+            $stmt->close();
+    
+            return $result;
+        }
+        
     }
 
 ?>

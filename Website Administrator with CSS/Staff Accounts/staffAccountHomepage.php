@@ -1,5 +1,11 @@
 <?php
 	require_once 'classes.php';
+    session_start();
+	include '../Account setting/AccountSettingController.php';
+	$staffController = new AccountSettingController;
+	$staffID = $_SESSION['staffID'] ?? null;
+	$dbData = $staffController->retrieveDataFromDatabase($staffID);
+	$img_name = $dbData['imageName'];
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +45,7 @@
                 
             if($result)
             {
-                header("Location: staffAccountHomepage.php");
+                header("Location: staffAccountHomepage.php?id=" . $_SESSION['staffID']);
             }else{
                 print_r("failed");
             }
@@ -54,9 +60,9 @@
 
 	
     <div class="button-row">
-        <a href="addStaff.php" class="btn btn-primary">Add Staff</a>
+        <a href="addStaff.php?id=<?php echo $staffID; ?>" class="btn btn-primary">Add Staff</a>
 		<!-- edit form submission here -->
-		<form action='editStaff.php' method="POST" id="editDeleteForm">
+		<form action='editStaff.php?id=<?php echo $staffID; ?>' method="POST" id="editDeleteForm">
             <button type="submit" class="btn btn-primary" name="editStaffForm">Edit Staff</button>
         <!-- delete form submission here -->
             <button type="submit" class="btn btn-primary" formaction="staffAccountHomepage.php" name="deleteStaff">Delete Staff</button>
@@ -91,7 +97,12 @@
         <tr>
             <td>
                 <div style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden;">
-                    <img src="profilephoto.png" alt="profilephoto" style="width: 100%; height: 100%; object-fit: cover;">
+                <?php
+                    $staffID = $row['staffID'];
+                    $dbData = $staffController->retrieveDataFromDatabase($staffID);
+                    $img_name = $dbData['imageName'];
+                ?>
+                    <img src="../Account setting/upload/<?php echo $img_name; ?>" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
             </td>
             <td><?php echo $row['staffID'] ?></td>
