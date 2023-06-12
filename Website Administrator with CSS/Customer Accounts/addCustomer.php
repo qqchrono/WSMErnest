@@ -1,12 +1,3 @@
-<?php
-    session_start();
-	include '../Account setting/AccountSettingController.php';
-	$staffController = new AccountSettingController;
-	$staffID = $_SESSION['staffID'] ?? null;
-	$dbData = $staffController->retrieveDataFromDatabase($staffID);
-	$img_name = $dbData['imageName'];
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,7 +33,7 @@
 			if($result)
 			{
 				print_r("success");
-				header("Location: customerAccountHomepage.php?id=" . $staffID);
+				header("Location: customerAccountHomepage.php");
 			}else{
 				print_r("failed");
 			}
@@ -83,7 +74,7 @@
 					<tr>
 						<td class="button-container">
 							<input type="submit" name="submit" value="Add Customer" style="border-radius: 5px;">
-							<a href="customerAccountHomepage.php?id=<?php echo $staffID; ?>"><button type="button" style="border-radius: 5px">Back</button></a>
+							<a href="customerAccountHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a>
 						</td>
 					</tr>
 				</table>
