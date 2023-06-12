@@ -1,3 +1,6 @@
+<?php
+	include 'viewComplaintTicketDetailsController.php'	 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,57 +21,72 @@
 
     <?php
         #View details of the ticket 
+        $complaintTicketID = '';
+        $customerName = '';
+        $staffName = '';
+        $ticketStatus = '';
+        $details = '';
+        $timeOfIssue = '';
+        $timeOfResolution = '';
+
         if(isset($_POST["viewDetails"]))
         {
             $complaintTicketID = $_POST['complaintTicketID'];
 
-            $ticket = new deleteStaff;
-            $result = $ticket -> deleteStaff($complaintTicketID);
+            $ticket = new complaintTicketDetailView;
+            $result = $ticket -> viewTicketDetails($complaintTicketID);
                 
             if($result)
             {
-                header("Location: staffAccountHomepage.php");
+                foreach($result as $row)
+                {
+                    $complaintTicketID = $row['complaintTicketID'];
+                    $customerName = $row['customerName'];
+                    $staffName = $row['staffName'];
+                    $ticketStatus = $row['ticketStatus'];
+                    $details = $row['details'];
+                    $timeOfIssue = $row['time_of_issue'];
+                    $timeOfResolution = $row['time_of_resolution'];
+                }
             }else{
                 print_r("failed");
             }
         }
-
-		#Assign ticket to staff
-		if(isset($_POST["assignTicket"]))
-		{
-
-		}
     ?>
     <form action="assignTicketForm.php" method="POST">
-        <table align="center">
+        <table>
             <tr>
-                <td><label for="staffID">Ticket ID : </label>
-                <input type='text' id="staffID" name='staffID' value='<?php echo $staffID ?>' readonly></td>
+                <td><label for="complaintTicketID">Ticket ID : </label>
+                <input type='text' id="complaintTicketID" name='complaintTicketID' value='<?php echo $complaintTicketID ?>' readonly></td>
+            </tr>
+            <tr>
+                <td><label for="customerName">Customer Name : </label>
+                <input type="text" id="customerName" value="<?php echo $customerName ?>" readonly></td>
             </tr>
             <tr>
                 <td><label for="staffName">Staff Name : </label>
-                <input type="text" id="staffName" placeholder="Staff Name" name="staffName" value="<?php echo $staffName ?>" readonly></td>
+                <input type="text" id="staffName" value="<?php echo $staffName ?>" readonly></td>
             </tr>
             <tr>
-                <td><label for="email">Email : </label>
-                <input type="text" id="email" placeholder="Email" name="email" value="<?php echo $email ?>" readonly></td>
+                <td><label for="ticketStatus">Ticket Status : </label>
+                <input type="text" id="ticketStatus" value="<?php echo $ticketStatus ?>" readonly></td>
             </tr>
             <tr>
-                <td><label for="password">Password : </label>
-                <input type="text" id="password" placeholder="Password" name="password" value="<?php echo $password ?>" readonly></td>
+                <td><label for="details">Details : </label>
+                <input type="text" id="details" value="<?php echo $details ?>" readonly></td>
             </tr>
             <tr>
-                <td><label for="role">Role : </label>
-                    <select id="role" name="role">
-                        <option value="Admin">Admin</option>
-                        <option value="Admin">Staff</option>
-                    </select>
-                </td>
+                <td><label for="time_of_issue">Time of issue : </label>
+                <input type="text" id="time_of_issue" value="<?php echo $timeOfIssue ?>" readonly></td>
+            </tr>
+            <tr>
+                <td><label for="time_of_resolution">Time of resolution : </label>
+                <input type="text" id="time_of_resolution" value="<?php echo $timeOfResolution ?>" readonly></td>
             </tr>
             <tr>
                 <td class="button-container">
-                    <input type="submit" name="submit" value="Edit Staff" style="border-radius: 5px;">
-                    <a href="staffAccountHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a>
+                    <input type="submit" name="assignTicket" value="Assign Ticket" style="border-radius: 5px;">
+                    <a href="complaintTicketHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a>
                 </td>
             </tr>
         </table>

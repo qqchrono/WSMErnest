@@ -1,16 +1,16 @@
 <?php
 require_once 'complaintTicketEntity.php';
 
-class complaintTicketView
+class assignTicket
 	{
-		public function getData()
+		public function assignTicket($inputdata)
 		{	
 			$complaintTicketEntity = new complaintTicketEntity;
-			$result = $complaintTicketEntity -> getData();	
+			$result = $complaintTicketEntity -> assignTicket($inputdata);	
 			
 			if($result)
             {
-				return $result;
+				return true;
 			}
 			else
             {

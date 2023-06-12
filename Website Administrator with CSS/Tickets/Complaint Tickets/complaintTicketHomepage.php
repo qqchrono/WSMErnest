@@ -1,6 +1,5 @@
 <?php
-	include 'viewComplaintTicketController.php'	
-    
+	include 'viewComplaintTicketController.php'	 
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +35,7 @@
 				<th>Ticket ID</th>
 				<th>Customer Name</th>
 				<th>Staff Name</th>
-				<th>Status</th>
+				<th>Ticket Status</th>
 				<th>Details</th>
 				<th>Time of Issue</th>
 				<th>Time of Resolution</th>
@@ -60,7 +59,6 @@
             <td><?php echo $row['details'] ?></td>
             <td><?php echo $row['time_of_issue'] ?></td>
             <td><?php echo $row['time_of_resolution'] ?></td>
-			<td><button>Assign</button></td> <!-- Assign not done yet -->
             <td>
                 <form action='viewComplaintTicketDetails.php' method="POST">
                     <input type='hidden' name='complaintTicketID' value='<?php echo $row['complaintTicketID']?>'>

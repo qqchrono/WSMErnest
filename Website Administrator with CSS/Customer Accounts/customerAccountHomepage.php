@@ -50,6 +50,12 @@
 		{
 
 		}
+
+        #View bills function here         NOT DONE
+        if(isset($_POST["viewBills"]))
+		{
+
+		}
     ?>
 
 <div class="button-row">
@@ -74,7 +80,7 @@
             <th>Email</th>
             <th>Password</th>
             <th>Role</th>
-            <th>Ticket ID</th> <!-- might remove this and change to view tickets  KIV!!-->
+            <th></th> 
             <th></th>
         </tr>
 
@@ -98,7 +104,13 @@
             <td><?php echo $row['email'] ?></td>
             <td><?php echo $row['password'] ?></td>
             <td><?php echo $row['role'] ?></td>
-            <td><?php echo $row['ticketID'] ?></td>
+            <td>
+                <form action='viewBills.php' method="POST">
+                    <input type='hidden' name='customerID' value='<?php echo $row['customerID']?>'>
+                    <input type='submit' name='viewBills' value='View Bills'>
+                </form> 
+            </td>
+
             <!-- input for editing and deleting equipment form -->
             <td>
                 <input form="editDeleteForm" type='radio' name='customerID' value='<?php echo $row['customerID']?>'>
