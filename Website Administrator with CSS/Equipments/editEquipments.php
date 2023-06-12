@@ -1,3 +1,13 @@
+<?php
+    session_start();
+	include '../Account setting/AccountSettingController.php';
+	$staffController = new AccountSettingController;
+	$staffID = $_SESSION['staffID'] ?? null;
+	$dbData = $staffController->retrieveDataFromDatabase($staffID);
+	$img_name = $dbData['imageName'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,7 +70,7 @@
 			
 		if($result)
 		{
-			header("Location: equipmentHomepage.php");
+			header("Location: equipmentHomepage.php?id=" . $staffID);
 		}else{
 			print_r("failed");
 		}
@@ -101,7 +111,7 @@
 					<tr>
 						<td class="button-container">
 							<input type="submit" name="submit" value="Edit Equipment" style="border-radius: 5px;">
-							<a href="equipmentHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a>
+							<a href="equipmentHomepage.php?id=<?php echo $staffID; ?>"><button type="button" style="border-radius: 5px">Back</button></a>
 						</td>
 					</tr>
 					</table>

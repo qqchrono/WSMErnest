@@ -29,14 +29,11 @@
             }
         }
 
-        public function viewTicketDetails($inputdata)
+        public function getDataForEditForm($inputdata)
         {
-            $complaintTicketID = $inputdata;
+            $staffID = $inputdata;
 
-            $userQuery = "SELECT * FROM ComplaintTicket
-            INNER JOIN CustomerAccount ON ComplaintTicket.customerID=CustomerAccount.customerID
-            LEFT JOIN StaffAccount ON ComplaintTicket.staffID=StaffAccount.staffID
-            WHERE `complaintTicketID` = $complaintTicketID";
+            $userQuery = "SELECT * FROM staffAccount WHERE `staffID` = $staffID";
             $result = $this->conn->query($userQuery);
             if($result->num_rows > 0){
                 return $result;
@@ -45,20 +42,55 @@
             }
         }
 
-        public function assignTicket($inputdata)
-        {
-            $complaintTicketID = $inputdata[0];
-            $staffID = $inputdata[1];
-            echo 'complaint ticket ' , $complaintTicketID;
-            echo 'staff id ' , $staffID;
+        public function addStaff($inputdata)
+        {   
+            $data = "'" .implode ("','",$inputdata) . "'";
 
-            $query = "UPDATE `staffAccount` SET `status` = '1'
-            WHERE `staffID` = '$staffID';
+            $staffQuery = "INSERT INTO `staffAccount` (staffName, email, password, role)
+            VALUES ($data)";
             
-            UPDATE `complaintTicket` SET `staffID` = '$staffID'
-            WHERE `complaintTicketID` = '$complaintTicketID'";     
+            $result = $this->conn->query($staffQuery);
             
-            $result = $this->conn->multi_query($query);
+            if($result)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public function editStaff($inputdata)
+        {   
+            $staffID = $inputdata[0];
+            $staffName = $inputdata[1];
+            $email = $inputdata[2];
+            $password = $inputdata[3];
+            $role = $inputdata[4];
+
+            $staffQuery = "UPDATE `staffAccount` SET `staffName` = '$staffName', `email` = '$email',
+            `password` = '$password', `role` = '$role'
+            WHERE `staffID` = '$staffID'";
+            
+            $result = $this->conn->query($staffQuery);
+            
+            if($result)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public function deleteStaff($inputdata)
+        {
+            $staffID = $inputdata;
+
+            $staffQuery = "DELETE FROM staffAccount WHERE `staffID` = $staffID";
+            $result = $this->conn->query($staffQuery);
             if($result){
                 return true;
             }else{

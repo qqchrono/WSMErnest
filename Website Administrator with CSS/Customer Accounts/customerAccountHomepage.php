@@ -45,7 +45,7 @@
                 
             if($result)
             {
-                header("Location: customerAccountHomepage.php");
+                header("Location: customerAccountHomepage.php?id=" . $staffID);
             }else{
                 print_r("failed");
             }
@@ -56,18 +56,12 @@
 		{
 
 		}
-
-        #View bills function here         NOT DONE
-        if(isset($_POST["viewBills"]))
-		{
-
-		}
     ?>
 
 <div class="button-row">
-        <a href="addCustomer.php" class="btn btn-primary">Add Customer</a>
+        <a href="addCustomer.php?id=<?php echo $staffID; ?>" class="btn btn-primary">Add Customer</a>
 		<!-- edit form submission here -->
-		<form action='editCustomer.php' method="POST" id="editDeleteForm">
+		<form action='editCustomer.php?id=<?php echo $staffID; ?>' method="POST" id="editDeleteForm">
             <button type="submit" class="btn btn-primary" name="editStaffForm">Edit Customer</button>
         <!-- delete form submission here -->
             <button type="submit" class="btn btn-primary" formaction="customerAccountHomepage.php" name="deleteStaff">Delete Customer</button>
@@ -86,7 +80,7 @@
             <th>Email</th>
             <th>Password</th>
             <th>Role</th>
-            <th></th> 
+            <th>Ticket ID</th> <!-- might remove this and change to view tickets  KIV!!-->
             <th></th>
         </tr>
 
@@ -110,13 +104,7 @@
             <td><?php echo $row['email'] ?></td>
             <td><?php echo $row['password'] ?></td>
             <td><?php echo $row['role'] ?></td>
-            <td>
-                <form action='viewBills.php' method="POST">
-                    <input type='hidden' name='customerID' value='<?php echo $row['customerID']?>'>
-                    <input type='submit' name='viewBills' value='View Bills'>
-                </form> 
-            </td>
-
+            <td><?php echo $row['ticketID'] ?></td>
             <!-- input for editing and deleting equipment form -->
             <td>
                 <input form="editDeleteForm" type='radio' name='customerID' value='<?php echo $row['customerID']?>'>

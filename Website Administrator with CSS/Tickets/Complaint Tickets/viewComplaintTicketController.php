@@ -3,10 +3,10 @@ require_once 'complaintTicketEntity.php';
 
 class complaintTicketView
 	{
-		public function getData()
+		public function viewTicketDetails($complaintTicketID)
 		{	
 			$complaintTicketEntity = new complaintTicketEntity;
-			$result = $complaintTicketEntity -> getData();	
+			$result = $complaintTicketEntity -> viewTicketDetails($complaintTicketID);	
 			
 			if($result)
             {
