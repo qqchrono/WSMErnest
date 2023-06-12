@@ -45,7 +45,7 @@
                 
             if($result)
             {
-                header("Location: customerAccountHomepage.php");
+                header("Location: customerAccountHomepage.php?id=" . $staffID);
             }else{
                 print_r("failed");
             }
@@ -59,9 +59,9 @@
     ?>
 
 <div class="button-row">
-        <a href="addCustomer.php" class="btn btn-primary">Add Customer</a>
+        <a href="addCustomer.php?id=<?php echo $staffID; ?>" class="btn btn-primary">Add Customer</a>
 		<!-- edit form submission here -->
-		<form action='editCustomer.php' method="POST" id="editDeleteForm">
+		<form action='editCustomer.php?id=<?php echo $staffID; ?>' method="POST" id="editDeleteForm">
             <button type="submit" class="btn btn-primary" name="editStaffForm">Edit Customer</button>
         <!-- delete form submission here -->
             <button type="submit" class="btn btn-primary" formaction="customerAccountHomepage.php" name="deleteStaff">Delete Customer</button>
