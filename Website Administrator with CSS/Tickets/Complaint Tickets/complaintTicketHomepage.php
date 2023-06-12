@@ -1,11 +1,5 @@
 <?php
-<<<<<<< HEAD
 	include 'viewComplaintTicketController.php'	 
-=======
-	include 'viewComplaintTicketController.php';
-    session_start();
-
->>>>>>> 85ab0f35c26d57b3af45d1512f0dad1756f6eba8
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +56,7 @@
             <td><?php echo $row['customerName'] ?></td>
             <td><?php echo $row['staffName'] ?></td>
             <td><?php echo $row['ticketStatus'] ?></td>
-            <td><div class="details"><?php echo $row['details'] ?></div></td>
+            <td><?php echo $row['details'] ?></td>
             <td><?php echo $row['time_of_issue'] ?></td>
             <td><?php echo $row['time_of_resolution'] ?></td>
             <td>

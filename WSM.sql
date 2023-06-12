@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS CustomerAccount (
   email varchar(100) DEFAULT NULL, 
   address varchar(100) DEFAULT NULL,
   password varchar(100) NOT NULL,
+  role varchar (10) DEFAULT NULL,
   phone int(11) DEFAULT NULL,
   bankAccount int(20) DEFAULT NULL,
   PRIMARY KEY (customerID)
@@ -54,8 +55,8 @@ CREATE TABLE IF NOT EXISTS Equipments (
 
 CREATE TABLE IF NOT EXISTS WaterUsageBill (
   waterUsageID int(50) NOT NULL AUTO_INCREMENT,
-  usage double(10, 2),
-  Date Date,
+  waterUsage double(10, 2),
+  Date DateTime,
   customerID int(50),
   billStatus bit(1) NOT NULL DEFAULT 0,
   paymentStatus bit(1) NOT NULL DEFAULT 0,
@@ -64,7 +65,7 @@ CREATE TABLE IF NOT EXISTS WaterUsageBill (
 
 CREATE TABLE IF NOT EXISTS priceRate (
 	priceID int(50) NOT NULL AUTO_INCREMENT,
-  Date Date,
+  Date DateTime,
   price_rate double(10, 2),
   PRIMARY KEY (priceID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -139,11 +140,5 @@ ALTER TABLE ComplaintTicket
 ALTER TABLE `supportticket` CHANGE `time_of_issue` `time_of_issue` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
 
 ALTER TABLE `complaintticket` CHANGE `time_of_issue` `time_of_issue` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
-
-ALTER TABLE `supportticket` CHANGE `status` `status` BIT(1) NOT NULL DEFAULT b'0';
-
-ALTER TABLE `complaintticket` CHANGE `status` `status` BIT(1) NOT NULL DEFAULT b'0';
-
-ALTER TABLE `waterusagebill` ADD FOREIGN KEY (`customerID`) REFERENCES `customeraccount`(`customerID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 COMMIT;

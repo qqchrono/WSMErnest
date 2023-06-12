@@ -1,11 +1,5 @@
 <?php
     require_once 'classes.php';
-    session_start();
-	include '../Account setting/AccountSettingController.php';
-	$staffController = new AccountSettingController;
-	$staffID = $_SESSION['staffID'] ?? null;
-	$dbData = $staffController->retrieveDataFromDatabase($staffID);
-	$img_name = $dbData['imageName'];
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +39,7 @@
                 
             if($result)
             {
-                header("Location: equipmentHomepage.php?id=" . $staffID);
+                header("Location: equipmentHomepage.php");
             }else{
                 print_r("failed");
             }
@@ -53,9 +47,9 @@
     ?>
 
     <div class="button-row">
-        <a href="addEquipments.php?id=<?php echo $staffID; ?>" class="btn btn-primary">Add Equipment</a>
+        <a href="addEquipments.php" class="btn btn-primary">Add Equipment</a>
         <!-- edit form submission here -->
-        <form action='editEquipments.php?id=<?php echo $staffID; ?>' method="POST" id="editDeleteForm">
+        <form action='editEquipments.php' method="POST" id="editDeleteForm">
             <button type="submit" class="btn btn-primary" name="editEquipmentForm">Edit Equipment</button>
         <!-- delete form submission here -->
             <button type="submit" class="btn btn-primary" formaction="equipmentHomepage.php" name="deleteEquipment">Delete Equipment</button>
