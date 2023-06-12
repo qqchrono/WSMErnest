@@ -5,7 +5,7 @@ import EditProfile from '../screens/EditProfile/EditProfile';
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
 import CustomDrawer from '../screens/comp/CustomDrawer/CustomDrawer';
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import TicketScreen from '../screens/Ticket/TicketScreen';
+import TicketScreen from '../screens/TicketActive/TicketActive';
 import BillScreen from '../screens/Bill/BillScreen';
 //drawer for home screen
 const Drawer=()=>{

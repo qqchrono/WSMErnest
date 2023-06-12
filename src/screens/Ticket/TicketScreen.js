@@ -24,7 +24,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Animated from 'react-native-reanimated';
 import { RadioButton } from 'react-native-paper';
-
+import { useNavigation } from "@react-navigation/native";
 
 
 export default function TicketScreen() {
@@ -32,7 +32,7 @@ export default function TicketScreen() {
   const [checked, setChecked] = React.useState('');
   const [detail,setdetail]=useState([]);
   var user_id = require('../HomeScreen/HomeScreen');
-  
+  const navigation =useNavigation();
   const submit=()=>{
    
     var APIURL= "http://10.0.2.2/mobile/submit_support.php"
@@ -53,6 +53,7 @@ export default function TicketScreen() {
     .then((Response)=>Response.json())
     .then((Response)=>{
       alert(Response[0].Message)
+      navigation.navigate("Ticket")
 
     })
     .catch((error)=>{

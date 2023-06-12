@@ -6,7 +6,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ForgotPassword from '../screens/ForgotPassword';
 import EditProfile from '../screens/EditProfile/EditProfile';
 import Drawer from '../drawer';
-
+import TicketScreen from '../screens/Ticket/TicketScreen';
+import TicketActive from '../screens/TicketActive/TicketActive';
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
@@ -17,6 +18,8 @@ const Navigation = () => {
                 <Stack.Screen name="Home" component={Drawer}/>
                 <Stack.Screen name="ForgotPassword" component={ForgotPassword}/> 
                 <Stack.Screen name="EditProfile" component={EditProfile}/>
+                <Stack.Screen name="SubmitTicket" component={TicketScreen}/>
+                
             </Stack.Navigator>
         
         
