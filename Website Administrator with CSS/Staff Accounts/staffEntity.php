@@ -43,6 +43,17 @@
             }
         }
 
+        public function getDataForAssignTicket()
+        {
+            $userQuery = "SELECT * FROM StaffAccount WHERE `role` = 'Staff'";
+            $result = $this->conn->query($userQuery);
+            if($result->num_rows > 0){
+                return $result;
+            }else{
+                return false;
+            }
+        }
+
         public function getDataForEditForm($inputdata)
         {
             $staffID = $inputdata;

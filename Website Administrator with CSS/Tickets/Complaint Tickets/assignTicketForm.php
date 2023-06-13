@@ -17,7 +17,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
 </head>
 <body>
-    <?php include 'complaintTicketNavbar.html';?>
+    <?php include 'complaintTicketNavbar.php';?>
     <h3 class="heading-gap">Choose staff to assign ticket to</h3>
 
     <?php
@@ -40,7 +40,9 @@
                 
             if($result)
             {
-                header("Location: complaintTicketHomepage.php");
+                echo "<SCRIPT>
+                window.location.replace('complaintTicketHomepage.php');
+                </SCRIPT>";
             }else{
                 print_r("failed");
             }
@@ -58,7 +60,7 @@
 
         <?php 
             $staff = new staffView;
-            $result = $staff -> getData();
+            $result = $staff -> getDataForAssignTicket();
             if($result)
             {
                 foreach($result as $row)

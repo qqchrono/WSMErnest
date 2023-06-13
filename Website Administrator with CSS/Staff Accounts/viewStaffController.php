@@ -17,6 +17,21 @@ class staffView
 				return false;
 			}
 		}	
+
+		public function getDataForAssignTicket()
+		{	
+			$staffEntity = new staffEntity;
+			$result = $staffEntity -> getDataForAssignTicket();	
+			
+			if($result)
+            {
+				return $result;
+			}
+			else
+            {
+				return false;
+			}
+		}	
 	}
 
 ?>
