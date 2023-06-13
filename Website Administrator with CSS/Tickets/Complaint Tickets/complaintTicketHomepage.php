@@ -1,6 +1,11 @@
 <?php
 	include 'viewComplaintTicketController.php';
     session_start();
+	include '../../Account setting/AccountSettingController.php';
+	$staffController = new AccountSettingController;
+	$staffID = $_SESSION['staffID'] ?? null;
+	$dbData = $staffController->retrieveDataFromDatabase($staffID);
+	$img_name = $dbData['imageName']; 
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +23,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
 </head>
 <body>
-	<?php include 'complaintTicketNavbar.html';?>
+	<?php include 'complaintTicketNavbar.php';?>
 	
     <h3 class="heading-gap">Complaint Tickets</h3>
 

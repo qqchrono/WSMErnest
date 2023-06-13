@@ -50,7 +50,7 @@
 			if($result)
 			{
 				print_r("success");
-				header("Location: customerAccountHomepage.php?id=" . $staffID);
+				header("Location: customerAccountHomepage.php");
 			}else{
 				print_r("failed");
 			}
@@ -58,7 +58,7 @@
 		
 	?>
 
-	<?php include 'customerAccountHomepageNavbar.html';?>
+	<?php include 'customerAccountHomepageNavbar.php';?>
 	
 	<form action="addCustomer.php" method="POST">
 	<h3 class="heading-gap">Add Customer</h3>
@@ -89,9 +89,10 @@
 							</select>
 					</tr>
 					<tr>
+					<tr>
 						<td class="button-container">
 							<input type="submit" name="submit" value="Add Customer" style="border-radius: 5px;">
-							<a href="customerAccountHomepage.php?id=<?php echo $staffID; ?>"><button type="button" style="border-radius: 5px">Back</button></a>
+							<a href="customerAccountHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a>
 						</td>
 					</tr>
 				</table>

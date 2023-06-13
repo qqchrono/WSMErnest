@@ -23,7 +23,7 @@
 
 </head>
 <body>
-	<?php include 'notificationsNavbar.html';?>
+	<?php include 'notificationsNavbar.php';?>
 	<h3 class="heading-gap">Customer's Request to Reset Password</h3>	
 	
     <!-- Table of notifs go here -->

@@ -31,7 +31,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
 </head>
 <body>
-	<?php include 'customerAccountHomepageNavbar.html';?>
+	<?php include 'customerAccountHomepageNavbar.php';?>
 	<h3 class="heading-gap">Customer List</h3>
 
 	<div class="search-container">
@@ -53,7 +53,7 @@
                 
             if($result)
             {
-                header("Location: customerAccountHomepage.php?id=" . $staffID);
+                header("Location: customerAccountHomepage.php");
             }else{
                 print_r("failed");
             }
@@ -67,9 +67,9 @@
     ?>
 
 <div class="button-row">
-        <a href="addCustomer.php?id=<?php echo $staffID; ?>" class="btn btn-primary">Add Customer</a>
+        <a href="addCustomer.php" class="btn btn-primary">Add Customer</a>
 		<!-- edit form submission here -->
-		<form action='editCustomer.php?id=<?php echo $staffID; ?>' method="POST" id="editDeleteForm">
+		<form action='editCustomer.php' method="POST" id="editDeleteForm">
             <button type="submit" class="btn btn-primary" name="editStaffForm">Edit Customer</button>
         <!-- delete form submission here -->
             <button type="submit" class="btn btn-primary" formaction="customerAccountHomepage.php" name="deleteStaff">Delete Customer</button>

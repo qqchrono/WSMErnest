@@ -77,14 +77,14 @@
 			
 		if($result)
 		{
-			header("Location: customerAccountHomepage.php?id=" . $staffID);
+			header("Location: customerAccountHomepage.php");
 		}else{
 			print_r("failed");
 		}
 	}
 ?>
 
-	<?php include 'customerAccountHomepageNavbar.html';?>
+	<?php include 'customerAccountHomepageNavbar.php';?>
 	<form action="editCustomer.php" method="POST">
 	<h3 class="heading-gap">Edit Customer</h3>
 		<div class="container">
@@ -120,7 +120,7 @@
 					<tr>
 						<td class="button-container">
 							<input type="submit" name="submit" value="Edit Customer" style="border-radius: 5px;">
-							<a href="customerAccountHomepage.php?id=<?php echo $staffID; ?>"><button type="button" style="border-radius: 5px">Back</button></a>
+							<a href="customerAccountHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a>
 						</td>
 					</tr>
 					</table>

@@ -124,7 +124,7 @@
 					if ($result) {
 						$_SESSION['new_img_name'] = $new_img_name;
 						$_SESSION['img_name'] = $img_name;
-						header("Location:  ../Admin homepage/adminHomePage.php?id={$staffID}");
+						header("Location:  ../Admin homepage/adminHomePage.php");
 						exit();
 					} else {
 						echo "Failed to update the database.";
@@ -137,7 +137,7 @@
 			}
 		} else {
 			if ($result) {
-				header("Location: ../Admin homepage/adminHomePage.php?id={$staffID}");
+				header("Location: ../Admin homepage/adminHomePage.php");
 				exit();
 			} else {
 				echo "Failed to update the database.";
@@ -146,7 +146,7 @@
 	}
 ?>
 
-	<?php include 'AccountSettingNavbar.html';?>
+	<?php include 'AccountSettingNavbar.php';?>
 	<form action="AccountSetting.php" method="POST" enctype="multipart/form-data">
 	<h3 class="heading-gap">Account Setting</h3>
 		<div class="container">
@@ -190,7 +190,7 @@
 					<tr>
 						<td class="button-container">
 							<input type="submit" name="submit" value="Edit Details" style="border-radius: 5px;">
-							<a href="../Admin homepage/adminHomePage.php?id=<?php echo $staffID; ?>"><button type="button" style="border-radius: 5px">Back</button></a>
+							<a href="../Admin homepage/adminHomePage.php"><button type="button" style="border-radius: 5px">Back</button></a>
 						</td>
 					</tr>
 					</table>

@@ -23,7 +23,7 @@
 
 </head>
 <body>
-	<?php include 'adminHomePageNavBar.html';?>
+	<?php include 'adminHomePageNavBar.php';?>
 	 <h3 class="heading-gap">Staff List</h3>	
 
 	<div class="button-container">

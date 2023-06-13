@@ -51,7 +51,7 @@
 		if($result)
 		{
 			print_r("success");
-			header("Location: equipmentHomepage.php?id=" . $staffID);
+			header("Location: equipmentHomepage.php");
 		}else{
 			print_r("failed");
 		}
@@ -59,7 +59,7 @@
     
 ?>
 
-	<?php include 'equipmentNavbar.html';?>
+	<?php include 'equipmentNavbar.php';?>
 	
 	<form action="addEquipments.php" method="POST">
     <h3 class="heading-gap">Add Equipment</h3>
@@ -90,7 +90,7 @@
 					<tr>
 						<td class="button-container">
 							<input type="submit" name="submit" value="Add Equipment" style="border-radius: 5px;">
-							<a href="equipmentHomepage.php?id=<?php echo $staffID; ?>"><button type="button" style="border-radius: 5px">Back</button></a>
+							<a href="equipmentHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a>
 						</td>
 					</tr>
 				</table>
