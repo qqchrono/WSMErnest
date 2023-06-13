@@ -66,16 +66,7 @@
                     
                 if($result)
                 {
-                    foreach($result as $row)
-                    {
-                        $complaintTicketID = $row['complaintTicketID'];
-                        $customerName = $row['customerName'];
-                        $staffName = $row['staffName'];
-                        $ticketStatus = $row['ticketStatus'];
-                        $details = $row['details'];
-                        $timeOfIssue = $row['time_of_issue'];
-                        $timeOfResolution = $row['time_of_resolution'];
-                    }
+                    header("Location: complaintTicketHomepage.php");
                 }else{
                     print_r("failed");
                 }
