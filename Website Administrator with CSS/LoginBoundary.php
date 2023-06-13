@@ -1,6 +1,5 @@
 <?php
 	include 'LoginController.php';
-
 	if(isset($_POST["submit"]))
 	{
 		$user = $_POST["user"];
@@ -34,12 +33,14 @@
 	if ($result && mysqli_num_rows($result) > 0) {
 		while (($Row = mysqli_fetch_assoc($result)) != FALSE) {
 			session_start();
-			$_SESSION['user'] = $user;
+			$_SESSION['staffName'] = $Row['staffName'];
 			$_SESSION['staffID'] = $Row['staffID'];
+			$_SESSION['accountRole'] = $Row['role'];
 
-			if ($Row['role'] == "Admin") {
+			#if ($Row['role'] == "Admin") {
+			if ($_SESSION['accountRole'] == "Admin") {
 				header("Location:  Admin homepage/adminHomePage.php?id={$Row['staffID']}");
-			} else if ($Row['role'] == "Staff") {
+			} else if ($_SESSION['accountRole'] == "Staff") {
 				header("Location: Technical Staff Homepage/technicalStaffHomePage.php");
 			}
 		}
@@ -68,8 +69,14 @@
 	<div class="rectangle-box">
 		<h3>Please log in first</h3>
 		<table align="center">
+		<?php
+			$path = "Account setting/upload/";
+			$imageName = 'defaultpic.png';
+			$target = $path . $imageName;
+		?>
 			<tr>
-				<td><img class="profile-photo" src="profilephoto.png" alt="Profile Photo"></td>
+				<!-- <td><img class="profile-photo" src="Account setting/upload/defaultpic.png" alt="Profile Photo"></td> -->
+				<td><img class="profile-photo" src="<?php echo $target?>" alt="Profile Photo"></td>
 			</tr>
 			<tr>
 				<td>Enter your name: <input type="text" class="form-control" placeholder="User Name" name="user" required="required"></td>
