@@ -27,7 +27,6 @@ CREATE TABLE IF NOT EXISTS StaffAccount (
   email varchar(100) DEFAULT NULL,
   password varchar(100) NOT NULL,
   role varchar (10) DEFAULT NULL,
-  status bit(1) DEFAULT 0,
   imageName varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (staffID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -77,6 +76,7 @@ CREATE TABLE IF NOT EXISTS SupportTicket (
   ticketStatus bit(1) DEFAULT 0,
   details varchar(200),
   time_of_issue DateTime,
+  time_of_resolution DateTime,
   PRIMARY KEY (supportTicketID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -98,8 +98,11 @@ INSERT INTO `Equipments` (`equipmentName`, `quantity`, `installationDate`, `expi
 INSERT INTO `Chemicals` (`chemicalName`, `useTime`, `quantity`, `expiryDate`) VALUES
 ('Chemical1', '123', '3', now());
 
-INSERT INTO `StaffAccount` (`username`, `staffName`, `email`, `password`, `role`, `status`) VALUES
-('asd', 'Ernest', 'abc@gmail.com', 'password', 'Admin', 0);
+INSERT INTO `StaffAccount` (`username`, `staffName`, `email`, `password`, `role`) VALUES
+('asd', 'Ernest', 'abc@gmail.com', 'password', 'Admin');
+
+INSERT INTO `StaffAccount` (`username`, `staffName`, `email`, `password`, `role`) VALUES
+('staff', 'Ernest', 'abc@gmail.com', 'password', 'Staff');
 
 INSERT INTO `CustomerAccount` (`customerName`, `email`, `password`) VALUES
 ('Bob', 'c@gmail.com', 'password');
@@ -137,13 +140,13 @@ ALTER TABLE SupportTicket
 ALTER TABLE ComplaintTicket 
   AUTO_INCREMENT=1;
 
-#ALTER TABLE `supportticket` CHANGE `time_of_issue` `time_of_issue` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE `supportticket` CHANGE `time_of_issue` `time_of_issue` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
 
-#ALTER TABLE `complaintticket` CHANGE `time_of_issue` `time_of_issue` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE `complaintticket` CHANGE `time_of_issue` `time_of_issue` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
 
-#ALTER TABLE `supportticket` CHANGE `ticketStatus` `ticketStatus` BIT(1) NOT NULL DEFAULT b'0';
+ALTER TABLE `supportticket` CHANGE `ticketStatus` `ticketStatus` BIT(1) NOT NULL DEFAULT b'0';
 
-#ALTER TABLE `complaintticket` CHANGE `ticketStatus` `ticketStatus` BIT(1) NOT NULL DEFAULT b'0';
+ALTER TABLE `complaintticket` CHANGE `ticketStatus` `ticketStatus` BIT(1) NOT NULL DEFAULT b'0';
 
 ALTER TABLE `waterusagebill` ADD FOREIGN KEY (`customerID`) REFERENCES `customeraccount`(`customerID`) ON DELETE CASCADE ON UPDATE CASCADE;
 

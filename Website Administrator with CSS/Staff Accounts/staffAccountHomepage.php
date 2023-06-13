@@ -6,6 +6,14 @@
 	$staffID = $_SESSION['staffID'] ?? null;
 	$dbData = $staffController->retrieveDataFromDatabase($staffID);
 	$img_name = $dbData['imageName'];
+    
+	if ($_SESSION['accountRole'] != 'Admin'){
+		$message = "Please login as Admin";
+		echo "<SCRIPT>
+        alert('$message')
+        window.location.replace('../LoginBoundary.php');
+    	</SCRIPT>";
+	}
 ?>
 
 <!DOCTYPE html>
@@ -81,7 +89,6 @@
             <th>Email</th>
             <th>Password</th>
             <th>Role</th>
-            <th>Status</th>
             <th></th>
         </tr>
 
@@ -110,7 +117,6 @@
             <td><?php echo $row['email'] ?></td>
             <td><?php echo $row['password'] ?></td>
             <td><?php echo $row['role'] ?></td>
-            <td><?php echo $row['status'] ?></td>
             <!-- input for editing and deleting equipment form -->
             <td>
                 <input form="editDeleteForm" type='radio' name='staffID' value='<?php echo $row['staffID']?>'>

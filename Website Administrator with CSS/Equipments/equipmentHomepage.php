@@ -50,7 +50,10 @@
                 print_r("failed");
             }
         }
+        if ($_SESSION['accountRole'] == 'Admin')
+        {
     ?>
+
 
     <div class="button-row">
         <a href="addEquipments.php?id=<?php echo $staffID; ?>" class="btn btn-primary">Add Equipment</a>
@@ -61,6 +64,10 @@
             <button type="submit" class="btn btn-primary" formaction="equipmentHomepage.php" name="deleteEquipment">Delete Equipment</button>
         </form>
     </div>
+
+    <?php
+        }
+    ?>
 
 	<!-- Table of equipment go here -->
     <div class = "tableScroll">
@@ -91,7 +98,14 @@
             <td><?=$row['warrantyDate'] ?></td>
             <!-- input for editing and deleting equipment form -->
             <td>
+                <?php
+                    if ($_SESSION['accountRole'] == 'Admin')
+                    {
+                ?>
                 <input form="editDeleteForm" type='radio' name='equipmentID' value='<?php echo $row['equipmentID']?>'>
+                <?php
+                    }
+                ?>
             </td>
         </tr>
   <?php

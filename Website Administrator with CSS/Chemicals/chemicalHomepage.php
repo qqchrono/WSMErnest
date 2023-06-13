@@ -51,8 +51,10 @@
             print_r("failed");
         }
     }
+    if ($_SESSION['accountRole'] == 'Admin')
+    {
     ?>
-
+    
     <div class="button-row">
     <a href="addChemicals.php?id=<?php echo $staffID; ?>" class="btn btn-primary">Add Chemical</a>
     <!-- edit form submission here -->
@@ -62,6 +64,10 @@
         <button type="submit" class="btn btn-primary" formaction="chemicalHomepage.php" name="deleteChemical">Delete Chemical</button>
     </form>
     </div>
+
+    <?php
+    }
+    ?>
     
     <!-- Table of chemicals go here -->
     <div class = "tableScroll">
@@ -91,7 +97,14 @@
             <td><?=$row['expiryDate'] ?></td>
             <!-- input for editing and deleting equipment form -->
             <td>
-                <input form="editDeleteForm" type='radio' name='chemicalID' value='<?php echo $row['chemicalID']?>'>
+                <?php
+                    if ($_SESSION['accountRole'] == 'Admin')
+                    {
+                ?>
+                    <input form="editDeleteForm" type='radio' name='chemicalID' value='<?php echo $row['chemicalID']?>'>
+                <?php
+                    }
+                ?>
             </td>
         </tr>
   <?php

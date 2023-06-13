@@ -17,6 +17,21 @@ class complaintTicketView
 				return false;
 			}
 		}	
+
+		public function getDataForStaff($inputdata)
+		{	
+			$complaintTicketEntity = new complaintTicketEntity;
+			$result = $complaintTicketEntity -> getDataForStaff($inputdata);	
+			
+			if($result)
+            {
+				return $result;
+			}
+			else
+            {
+				return false;
+			}
+		}	
 	}
 
 ?>

@@ -5,6 +5,14 @@
 	$staffID = $_SESSION['staffID'] ?? null;
 	$dbData = $staffController->retrieveDataFromDatabase($staffID);
 	$img_name = $dbData['imageName'];
+	
+	if ($_SESSION['accountRole'] != 'Admin'){
+		$message = "Please login as Admin";
+		echo "<SCRIPT>
+        alert('$message')
+        window.location.replace('../LoginBoundary.php');
+    	</SCRIPT>";
+	}
 ?>
 
 <!DOCTYPE html>

@@ -1,5 +1,6 @@
 <?php
-	include 'viewComplaintTicketController.php'	 
+	include 'viewComplaintTicketController.php';
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -43,6 +44,8 @@
         	</tr>
 
         <?php 
+        if ($_SESSION['accountRole'] == 'Admin')
+        {
             $ticket = new complaintTicketView;
             $result = $ticket -> getData();
             if($result)
@@ -50,7 +53,6 @@
                 foreach($result as $row)
                 {
         ?>
-
         <tr>
             <td><?php echo $row['complaintTicketID'] ?></td>
             <td><?php echo $row['customerName'] ?></td>
@@ -65,11 +67,39 @@
                     <input type='submit' name='viewDetails' value='View Details'>
                 </form> 
             </td>
-    
         </tr>
         <?php
                 }
             }
+        }
+        else if ($_SESSION['accountRole'] == 'Staff')
+        {
+            $ticket = new complaintTicketView;
+            $result = $ticket -> getDataForStaff($_SESSION['staffID']);
+            if($result)
+            {
+                foreach($result as $row)
+                {
+        ?>
+        <tr>
+            <td><?php echo $row['complaintTicketID'] ?></td>
+            <td><?php echo $row['customerName'] ?></td>
+            <td><?php echo $row['staffName'] ?></td>
+            <td><?php echo $row['ticketStatus'] ?></td>
+            <td><?php echo $row['details'] ?></td>
+            <td><?php echo $row['time_of_issue'] ?></td>
+            <td><?php echo $row['time_of_resolution'] ?></td>
+            <td>
+                <form action='viewComplaintTicketDetails.php' method="POST">
+                    <input type='hidden' name='complaintTicketID' value='<?php echo $row['complaintTicketID']?>'>
+                    <input type='submit' name='viewDetails' value='View Details'>
+                </form> 
+            </td>
+        </tr>
+        <?php
+                }
+            }
+        }
         ?>
       </table>
     </div>

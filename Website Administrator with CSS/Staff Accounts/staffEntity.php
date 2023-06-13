@@ -2,7 +2,7 @@
     $path = $_SERVER['DOCUMENT_ROOT'];
 	$path .= "/Water-Supply-Management/Website Administrator with CSS/DatabaseConnection.php";
 	require_once($path);
-
+    
     class staffEntity
     {
         private $conn;

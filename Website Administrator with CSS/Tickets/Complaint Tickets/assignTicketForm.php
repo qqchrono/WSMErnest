@@ -52,7 +52,7 @@
             <th></th>
             <th>Staff ID</th>
             <th>Staff Name</th>
-            <th>Status</th>
+            <th>Current tickets</th>
             <th></th>
         </tr>
 
@@ -76,7 +76,7 @@
                     <input type="text" id="staffName" value="<?php echo $row['staffName'] ?>" readonly></td>
                 </td>
                 <td>
-                    <input type="text" id="status" value="<?php echo $row['status'] ?>" readonly></td>
+                    <!-- have the ticket list here -->
                 </td>
                 <td>
                     <td class="button-container">
