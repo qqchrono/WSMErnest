@@ -23,7 +23,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
 </head>
 <body>
-	<?php include 'staffAccountHomepageNavbar.html';?>
+	<?php include 'staffAccountHomepageNavbar.php';?>
 	<h3 class="heading-gap">Staff List</h3>
 
 	<div class="search-container">
@@ -45,7 +45,7 @@
                 
             if($result)
             {
-                header("Location: staffAccountHomepage.php?id=" . $_SESSION['staffID']);
+                header("Location: staffAccountHomepage.php");
             }else{
                 print_r("failed");
             }
@@ -60,9 +60,9 @@
 
 	
     <div class="button-row">
-        <a href="addStaff.php?id=<?php echo $staffID; ?>" class="btn btn-primary">Add Staff</a>
+        <a href="addStaff.php" class="btn btn-primary">Add Staff</a>
 		<!-- edit form submission here -->
-		<form action='editStaff.php?id=<?php echo $staffID; ?>' method="POST" id="editDeleteForm">
+		<form action='editStaff.php' method="POST" id="editDeleteForm">
             <button type="submit" class="btn btn-primary" name="editStaffForm">Edit Staff</button>
         <!-- delete form submission here -->
             <button type="submit" class="btn btn-primary" formaction="staffAccountHomepage.php" name="deleteStaff">Delete Staff</button>

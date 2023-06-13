@@ -39,7 +39,7 @@
 
 			#if ($Row['role'] == "Admin") {
 			if ($_SESSION['accountRole'] == "Admin") {
-				header("Location:  Admin homepage/adminHomePage.php?id={$Row['staffID']}");
+				header("Location:  Admin homepage/adminHomePage.php");
 			} else if ($_SESSION['accountRole'] == "Staff") {
 				header("Location: Technical Staff Homepage/technicalStaffHomePage.php");
 			}

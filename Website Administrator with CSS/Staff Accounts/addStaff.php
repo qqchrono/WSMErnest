@@ -42,7 +42,7 @@
 			if($result)
 			{
 				print_r("success");
-				header("Location: staffAccountHomepage.php?id=" . $staffID);
+				header("Location: staffAccountHomepage.php");
 			}else{
 				print_r("failed");
 			}
@@ -50,7 +50,7 @@
 		
 	?>
 
-	<?php include 'staffAccountHomepageNavbar.html';?>
+	<?php include 'staffAccountHomepageNavbar.php';?>
 	
 	<form action="addStaff.php" method="POST">
 	<h3 class="heading-gap">Add Staff</h3>
@@ -84,7 +84,7 @@
 					<tr>
 						<td class="button-container">
 							<input type="submit" name="submit" value="Add Staff" style="border-radius: 5px;">
-							<a href="staffAccountHomepage.php?id=<?php echo $staffID; ?>"><button type="button" style="border-radius: 5px">Back</button></a>
+							<a href="staffAccountHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a>
 						</td>
 					</tr>
 				</table>

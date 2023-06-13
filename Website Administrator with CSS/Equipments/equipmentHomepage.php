@@ -23,7 +23,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
 </head>
 <body>
-	<?php include 'equipmentNavbar.html';?>
+	<?php include 'equipmentNavbar.php';?>
     <h3 class="heading-gap">Equipment List</h3>
 
     <div class="search-container">
@@ -45,7 +45,7 @@
                 
             if($result)
             {
-                header("Location: equipmentHomepage.php?id=" . $staffID);
+                header("Location: equipmentHomepage.php");
             }else{
                 print_r("failed");
             }
@@ -53,9 +53,9 @@
     ?>
 
     <div class="button-row">
-        <a href="addEquipments.php?id=<?php echo $staffID; ?>" class="btn btn-primary">Add Equipment</a>
+        <a href="addEquipments.php" class="btn btn-primary">Add Equipment</a>
         <!-- edit form submission here -->
-        <form action='editEquipments.php?id=<?php echo $staffID; ?>' method="POST" id="editDeleteForm">
+        <form action='editEquipments.php' method="POST" id="editDeleteForm">
             <button type="submit" class="btn btn-primary" name="editEquipmentForm">Edit Equipment</button>
         <!-- delete form submission here -->
             <button type="submit" class="btn btn-primary" formaction="equipmentHomepage.php" name="deleteEquipment">Delete Equipment</button>

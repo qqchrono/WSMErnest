@@ -42,7 +42,7 @@
 			if($result)
 			{
 				print_r("success");
-				header("Location: chemicalHomepage.php?id=" . $staffID);
+				header("Location: chemicalHomepage.php");
 			}else{
 				print_r("failed");
 			}
@@ -50,7 +50,7 @@
 		
 	?>
 
-	<?php include 'chemicalNavbar.html';?>
+	<?php include 'chemicalNavbar.php';?>
 	
 	<form action="addChemicals.php" method="POST">
     <h3 class="heading-gap">Add Chemical</h3>
@@ -77,7 +77,7 @@
 				<tr>
 					<td class="button-container">
 						<input type="submit" name="submit" value="Add Chemical" style="border-radius: 5px;"></div>
-						<a href="chemicalHomepage.php?id=<?php echo $staffID; ?>"><button type="button" style="border-radius: 5px">Back</button></a>
+						<a href="chemicalHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a>
 					</td>
 				</tr>
 				</table>

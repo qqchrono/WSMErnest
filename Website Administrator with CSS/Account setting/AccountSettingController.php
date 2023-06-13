@@ -1,5 +1,6 @@
 <?php
-require_once '../Staff Accounts/staffEntity.php';
+$normalPath = $_SERVER['DOCUMENT_ROOT'] . '/Water-Supply-Management/Website Administrator with CSS/';
+require_once $normalPath . 'Staff Accounts/staffEntity.php';
 
 class AccountSettingController
 {

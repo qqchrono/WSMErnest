@@ -67,14 +67,14 @@
 			
 		if($result)
 		{
-			header("Location: chemicalHomepage.php?id=" . $staffID);
+			header("Location: chemicalHomepage.php");
 		}else{
 			print_r("failed");
 		}
 	}
 ?>
 
-	<?php include 'chemicalNavbar.html';?>
+	<?php include 'chemicalNavbar.php';?>
 	<form action="editChemicals.php" method="POST">
 	<h3 class="heading-gap">Edit Chemical</h3>
 		<div class="container">
@@ -103,7 +103,7 @@
 					<tr>
 					<td class="button-container">
 						<input type="submit" name="submit" value="Edit Chemical" style="border-radius: 5px;">
-						<a href="chemicalHomepage.php?id=<?php echo $staffID; ?>"><button type="button" style="border-radius: 5px">Back</button></a>
+						<a href="chemicalHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a>
 					</td>
 					</tr>
 					</table>

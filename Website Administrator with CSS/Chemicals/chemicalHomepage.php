@@ -24,7 +24,7 @@
 </head>
 
 <body>
-	<?php include 'chemicalNavbar.html';?>
+	<?php include 'chemicalNavbar.php';?>
 	<h3 class="heading-gap">Chemical List</h3>
 
     <div class="search-container">
@@ -46,7 +46,7 @@
             
         if($result)
         {
-            header("Location: chemicalHomepage.php?id=" . $staffID);
+            header("Location: chemicalHomepage.php");
         }else{
             print_r("failed");
         }
@@ -54,9 +54,9 @@
     ?>
 
     <div class="button-row">
-    <a href="addChemicals.php?id=<?php echo $staffID; ?>" class="btn btn-primary">Add Chemical</a>
+    <a href="addChemicals.php" class="btn btn-primary">Add Chemical</a>
     <!-- edit form submission here -->
-    <form action='editChemicals.php?id=<?php echo $staffID; ?>' method="POST" id="editDeleteForm">
+    <form action='editChemicals.php' method="POST" id="editDeleteForm">
         <button type="submit" class="btn btn-primary" name="editChemicalForm">Edit Chemical</button>
     <!-- delete form submission here -->
         <button type="submit" class="btn btn-primary" formaction="chemicalHomepage.php" name="deleteChemical">Delete Chemical</button>
