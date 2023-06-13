@@ -19,10 +19,10 @@
 
 		public function checkAccount($inputdata)
 		{
-			$staffName = $inputdata["user"];
+			$username = $inputdata["user"];
 			$password = $inputdata["pass"];
 
-			$userQuery = "SELECT * FROM staffAccount WHERE `staffName` = '$staffName' AND `password` = '$password'";
+			$userQuery = "SELECT * FROM staffAccount WHERE `username` = '$username' AND `password` = '$password'";
 			$result = $this->conn->query($userQuery);
 
 			if ($result && $result->num_rows > 0) {
@@ -60,7 +60,7 @@
         {   
             $data = "'" .implode ("','",$inputdata) . "'";
 
-            $staffQuery = "INSERT INTO `staffAccount` (staffName, email, password, role)
+            $staffQuery = "INSERT INTO `staffAccount` (username, staffName, email, password, role)
             VALUES ($data)";
             
             $result = $this->conn->query($staffQuery);
@@ -77,13 +77,15 @@
 
         public function editStaff($inputdata)
         {   
+       
             $staffID = $inputdata[0];
-            $staffName = $inputdata[1];
-            $email = $inputdata[2];
-            $password = $inputdata[3];
-            $role = $inputdata[4];
+            $username = $inputdata[1];
+            $staffName = $inputdata[2];
+            $email = $inputdata[3];
+            $password = $inputdata[4];
+            $role = $inputdata[5];
 
-            $staffQuery = "UPDATE `staffAccount` SET `staffName` = '$staffName', `email` = '$email',
+            $staffQuery = "UPDATE `staffAccount` SET `username` = '$username', `staffName` = '$staffName', `email` = '$email',
             `password` = '$password', `role` = '$role'
             WHERE `staffID` = '$staffID'";
             

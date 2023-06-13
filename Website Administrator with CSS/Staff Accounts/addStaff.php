@@ -29,6 +29,7 @@
 		{
 			$inputdata = 
 			[
+			$username = $_POST["username"],
 			$staffName = $_POST["staffName"],
 			$email= $_POST["email"],
 			$password = $_POST["password"],
@@ -57,7 +58,11 @@
 	<div class="container">
 		<div class="rectangle-box">
 				<table align="center">
-				<tr>
+					<tr>
+						<td><label for="username">Username : </label>
+						<input type="text" id="username" placeholder="username" name="username" value=""></td>
+					</tr>
+					<tr>
 						<td><label for="staffName">Staff Name : </label>
 						<input type="text" id="staffName" placeholder="Staff Name" name="staffName" value=""></td>
 					</tr>

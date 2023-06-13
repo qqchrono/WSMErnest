@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS CustomerAccount (
   email varchar(100) DEFAULT NULL, 
   address varchar(100) DEFAULT NULL,
   password varchar(100) NOT NULL,
-  phone int(11) DEFAULT NULL,
+  phoneNumber int(11) DEFAULT NULL,
   bankAccount int(20) DEFAULT NULL,
   PRIMARY KEY (customerID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS CustomerAccount (
 #Table structure for staff
 CREATE TABLE IF NOT EXISTS StaffAccount (
   staffID int(50) NOT NULL AUTO_INCREMENT,
+  username varchar(20) DEFAULT NULL,
   staffName varchar(100) DEFAULT NULL,
   email varchar(100) DEFAULT NULL,
   password varchar(100) NOT NULL,
@@ -54,8 +55,8 @@ CREATE TABLE IF NOT EXISTS Equipments (
 
 CREATE TABLE IF NOT EXISTS WaterUsageBill (
   waterUsageID int(50) NOT NULL AUTO_INCREMENT,
-  usage double(10, 2),
-  Date Date,
+  `usage` float(10,2),
+  billDate Date,
   customerID int(50),
   billStatus bit(1) NOT NULL DEFAULT 0,
   paymentStatus bit(1) NOT NULL DEFAULT 0,
@@ -64,7 +65,7 @@ CREATE TABLE IF NOT EXISTS WaterUsageBill (
 
 CREATE TABLE IF NOT EXISTS priceRate (
 	priceID int(50) NOT NULL AUTO_INCREMENT,
-  Date Date,
+  priceDate Date,
   price_rate double(10, 2),
   PRIMARY KEY (priceID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -97,11 +98,11 @@ INSERT INTO `Equipments` (`equipmentName`, `quantity`, `installationDate`, `expi
 INSERT INTO `Chemicals` (`chemicalName`, `useTime`, `quantity`, `expiryDate`) VALUES
 ('Chemical1', '123', '3', now());
 
-INSERT INTO `StaffAccount` (`staffName`, `email`, `password`, `role`, `status`) VALUES
-('Ernest', 'abc@gmail.com', 'password', 'Admin', 0);
+INSERT INTO `StaffAccount` (`username`, `staffName`, `email`, `password`, `role`, `status`) VALUES
+('asd', 'Ernest', 'abc@gmail.com', 'password', 'Admin', 0);
 
-INSERT INTO `CustomerAccount` (`customerName`, `email`, `password`, `role`) VALUES
-('Bob', 'c@gmail.com', 'password', 'customer');
+INSERT INTO `CustomerAccount` (`customerName`, `email`, `password`) VALUES
+('Bob', 'c@gmail.com', 'password');
 
 INSERT INTO `SupportTicket` (`customerID`, `ticketStatus`, `details`, `time_of_issue`) VALUES
 ('1', 0, 'asdasdasdasd', now());
@@ -136,13 +137,13 @@ ALTER TABLE SupportTicket
 ALTER TABLE ComplaintTicket 
   AUTO_INCREMENT=1;
 
-ALTER TABLE `supportticket` CHANGE `time_of_issue` `time_of_issue` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
+#ALTER TABLE `supportticket` CHANGE `time_of_issue` `time_of_issue` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
 
-ALTER TABLE `complaintticket` CHANGE `time_of_issue` `time_of_issue` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
+#ALTER TABLE `complaintticket` CHANGE `time_of_issue` `time_of_issue` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
 
-ALTER TABLE `supportticket` CHANGE `status` `status` BIT(1) NOT NULL DEFAULT b'0';
+#ALTER TABLE `supportticket` CHANGE `ticketStatus` `ticketStatus` BIT(1) NOT NULL DEFAULT b'0';
 
-ALTER TABLE `complaintticket` CHANGE `status` `status` BIT(1) NOT NULL DEFAULT b'0';
+#ALTER TABLE `complaintticket` CHANGE `ticketStatus` `ticketStatus` BIT(1) NOT NULL DEFAULT b'0';
 
 ALTER TABLE `waterusagebill` ADD FOREIGN KEY (`customerID`) REFERENCES `customeraccount`(`customerID`) ON DELETE CASCADE ON UPDATE CASCADE;
 

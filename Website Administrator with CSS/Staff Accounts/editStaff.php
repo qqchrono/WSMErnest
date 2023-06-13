@@ -29,6 +29,7 @@
 	include 'editStaffController.php';
 
 	$staffID = '';
+	$username = '';
 	$staffName = '';
 	$email = '';
 	$password = '';
@@ -44,6 +45,7 @@
 		{
 			foreach($result as $row)
         	{
+				$username = $row['username'];
 				$staffName = $row['staffName'];
 				$email = $row['email'];
 				$password = $row['password'];
@@ -83,6 +85,10 @@
 					<tr>
 						<td><label for="staffID">Staff ID : </label>
 						<input type='text' id="staffID" name='staffID' value='<?php echo $staffID ?>' readonly></td>
+					</tr>
+					<tr>
+						<td><label for="username">Username : </label>
+						<input type="text" id="username" placeholder="Username" name="username" value="<?php echo $username ?>"></td>
 					</tr>
 					<tr>
 						<td><label for="staffName">Staff Name : </label>

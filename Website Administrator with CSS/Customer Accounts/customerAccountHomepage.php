@@ -78,9 +78,10 @@
             <th>Customer ID</th>
             <th>Customer Name</th>
             <th>Email</th>
+            <th>Address</th>
             <th>Password</th>
-            <th>Role</th>
-            <th>Ticket ID</th> <!-- might remove this and change to view tickets  KIV!!-->
+            <th>Phone Number</th>
+            <th>Bank Number</th>
             <th></th>
         </tr>
 
@@ -102,9 +103,10 @@
             <td><?php echo $row['customerID'] ?></td>
             <td><?php echo $row['customerName'] ?></td>
             <td><?php echo $row['email'] ?></td>
+            <td><?php echo $row['address'] ?></td>
             <td><?php echo $row['password'] ?></td>
-            <td><?php echo $row['role'] ?></td>
-            <td><?php echo $row['ticketID'] ?></td>
+            <td><?php echo $row['phoneNumber'] ?></td>
+            <td><?php echo $row['bankAccount'] ?></td>
             <!-- input for editing and deleting equipment form -->
             <td>
                 <input form="editDeleteForm" type='radio' name='customerID' value='<?php echo $row['customerID']?>'>

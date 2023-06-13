@@ -7,6 +7,7 @@
  	 	$pass = $_POST["pass"];
 
 		// Validate username as an email
+		/*
 		if(!filter_var($user, FILTER_VALIDATE_EMAIL))
 		{
 		echo "Invalid email format";
@@ -19,6 +20,7 @@
 		echo "Password should contain at least one uppercase letter, one lowercase letter, and one special character";
 		exit;
 		}
+		*/
 
 		$inputdata = [
 		//Grab data from user
