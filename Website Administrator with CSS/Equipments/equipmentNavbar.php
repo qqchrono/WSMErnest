@@ -1,5 +1,11 @@
 <?php
 	$staffID = $_SESSION['staffID'] ?? null;
+	if (isset($_POST['logout'])) {
+		session_unset();
+		session_destroy();
+		header("Location: ../LoginBoundary.php");
+		exit();
+	}
 ?>
 
 <div class="w3-bar w3-blue w3-card">
@@ -32,7 +38,9 @@
 			<button class="w3-padding-large w3-button" title="More" style="width:1px;"><i class="fa">&#8942;</i></button>
 			<div class="w3-dropdown-content w3-bar-block w3-card-4" style="right:1px;">
 				<a href="../Account setting/AccountSetting.php" class="w3-bar-item w3-button">Account settings</a>
-				<a href="../LoginBoundary.php" class="w3-bar-item w3-button">Log out</a>
+				<form method="post" action="">
+					<button type="submit" name="logout" class="w3-bar-item w3-button" style="width:100%;">Log out</button>
+				</form>
 			</div>
 		</div>
 	</div>
