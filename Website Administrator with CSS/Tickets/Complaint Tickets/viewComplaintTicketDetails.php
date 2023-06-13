@@ -53,6 +53,7 @@
             }
         }
     ?>
+    
     <form action="assignTicketForm.php" method="POST">
         <table>
             <tr>
