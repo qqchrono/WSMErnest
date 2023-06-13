@@ -96,6 +96,7 @@
             <td><?php echo $row['time_of_resolution'] ?></td>
             <td>
                 <form action='viewComplaintTicketDetails.php' method="POST">
+                    <input type='hidden' name='staffID' value='<?php echo $row['staffID']?>'>
                     <input type='hidden' name='complaintTicketID' value='<?php echo $row['complaintTicketID']?>'>
                     <input type='submit' name='viewDetails' value='View Details'>
                 </form> 

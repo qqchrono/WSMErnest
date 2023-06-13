@@ -1,7 +1,7 @@
 <?php
 require_once 'complaintTicketEntity.php';
 
-class assignTicket
+class resolveTicket
 	{
 		public function resolveTicket($inputdata)
 		{	

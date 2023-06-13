@@ -74,6 +74,19 @@
                 return false;
             }
         }
+
+        public function resolveTicket($inputdata)
+        {
+            $query = "UPDATE `complaintTicket` SET `ticketStatus` = 1
+            WHERE `complaintTicketID` = '$inputdata'";     
+            
+            $result = $this->conn->query($query);
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 
 ?>

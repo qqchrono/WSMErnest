@@ -1,6 +1,7 @@
 <?php
-	include 'viewComplaintTicketDetailsController.php';
     session_start();
+	include_once 'viewComplaintTicketDetailsController.php';
+    include_once 'resolveTicketController.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,12 +18,12 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
 </head>
 <body>
-    <?php include 'complaintTicketNavbar.html';?>
+    <?php include 'complaintTicketNavbar.php';?>
     <h3 class="heading-gap">Complaint Tickets Details</h3>
 
     <?php
         #View details of the ticket 
-
+        $hiddenStaffID = ''; 
         $complaintTicketID = '';
         $customerName = '';
         $staffName = '';
@@ -42,6 +43,7 @@
             {
                 foreach($result as $row)
                 {
+                    $hiddenStaffID = $row['staffID'];
                     $complaintTicketID = $row['complaintTicketID'];
                     $customerName = $row['customerName'];
                     $staffName = $row['staffName'];
@@ -58,17 +60,19 @@
         if(isset($_POST["resolveTicket"]))
         {
             $complaintTicketID = $_POST['complaintTicketID'];
-            $staffID = $_POST['staffID'];
-            if ($staffID == $_SESSION['staffID'])
+            $hiddenStaffID = $_POST['staffID'];
+            if ($hiddenStaffID == $_SESSION['staffID'])
             {
-                $ticket = new complaintTicketDetailView;
-                $result = $ticket -> viewTicketDetails($complaintTicketID);
+                $ticket = new resolveTicket;
+                $result = $ticket -> resolveTicket($complaintTicketID);
                     
                 if($result)
                 {
-                    header("Location: complaintTicketHomepage.php");
+                    echo "<SCRIPT>
+                    window.location.replace('complaintTicketHomepage.php');
+    	            </SCRIPT>";
                 }else{
-                    print_r("failed");
+                    print_r('failed');
                 }
             }
         
@@ -132,7 +136,7 @@
                     </tr>
                     <tr>
                         <td><label for="staffName">Staff Name : </label>
-                        <input type="text" name = 'staffID' id="staffName" value="<?php echo $staffName ?>" readonly></td>
+                        <input type="text" id="staffName" value="<?php echo $staffName ?>" readonly></td>
                     </tr>
                     <tr>
                         <td><label for="ticketStatus">Ticket Status : </label>
@@ -152,6 +156,7 @@
                     </tr>
                     <tr>
                         <td class="button-container">
+                            <input type='hidden' name='staffID' value='<?php echo $hiddenStaffID ?>'>
                             <input type="submit" name="resolveTicket" value="Resolve Ticket" style="border-radius: 5px;">
                             <a href="complaintTicketHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a>
                         </td>
