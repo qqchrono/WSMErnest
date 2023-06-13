@@ -1,0 +1,49 @@
+body {
+    font-family: "Lato", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.active {
+    font-weight: bold;
+}
+
+.navbar-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.navbar-links a {
+    padding: 8px 16px;
+}
+
+.heading-gap {
+    margin-left: 10px;
+    margin-bottom: 30px;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.form-row label {
+    width: 170px;
+    margin-left: 20px;
+    font-size: 17px;
+}
+
+.form-value {
+    flex-grow: 1;
+    font-size: 17px;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    margin-left: 20px;
+}
