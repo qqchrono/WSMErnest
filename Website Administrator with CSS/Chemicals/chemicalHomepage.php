@@ -24,7 +24,17 @@
 </head>
 
 <body>
-	<?php include 'chemicalNavbar.php';?>
+
+    <?php if ($_SESSION['accountRole'] == 'Admin')
+	{
+		include 'chemicalNavbar.php';
+	}
+	else if ($_SESSION['accountRole'] == 'Staff')
+	{
+		include '../Technical Staff Homepage/TechnicalStaffChemicalNavbar.php';
+	}
+	?>
+
 	<h3 class="heading-gap">Chemical List</h3>
 
     <div class="search-container">

@@ -23,7 +23,17 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
 </head>
 <body>
-	<?php include 'equipmentNavbar.php';?>
+
+    <?php if ($_SESSION['accountRole'] == 'Admin')
+	{
+		include 'equipmentNavbar.php';
+	}
+	else if ($_SESSION['accountRole'] == 'Staff')
+	{
+		include '../Technical Staff Homepage/TechnicalStaffEquipmentNavbar.php';
+	}
+	?>
+
     <h3 class="heading-gap">Equipment List</h3>
 
     <div class="search-container">

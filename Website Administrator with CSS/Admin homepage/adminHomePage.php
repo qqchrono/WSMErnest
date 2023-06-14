@@ -23,8 +23,15 @@
 
 </head>
 <body>
-	<?php include 'adminHomePageNavBar.php';?>
-	<?php include '../Technical Staff Homepage/TechnicalStaffHomePageNavbar.php';?>
+	<?php if ($_SESSION['accountRole'] == 'Admin')
+	{
+		include 'adminHomePageNavBar.php';
+	}
+	else if ($_SESSION['accountRole'] == 'Staff')
+	{
+		include '../Technical Staff Homepage/TechnicalStaffHomePageNavbar.php';
+	}
+	?>
 	 <h3 class="heading-gap">Staff List</h3>	
 
 	<div class="button-container">

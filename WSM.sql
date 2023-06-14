@@ -56,6 +56,7 @@ CREATE TABLE IF NOT EXISTS WaterUsageBill (
   waterUsageID int(50) NOT NULL AUTO_INCREMENT,
   `usage` float(10,2),
   billDate Date,
+  dueDate Date,
   customerID int(50),
   billStatus bit(1) NOT NULL DEFAULT 0,
   paymentStatus bit(1) NOT NULL DEFAULT 0,
@@ -107,8 +108,8 @@ INSERT INTO `StaffAccount` (`username`, `staffName`, `email`, `password`, `role`
 INSERT INTO `CustomerAccount` (`customerName`, `email`, `password`) VALUES
 ('Bob', 'c@gmail.com', 'password');
 
-INSERT INTO `SupportTicket` (`customerID`, `ticketStatus`, `details`, `time_of_issue`) VALUES
-('1', 0, 'asdasdasdasd', now());
+INSERT INTO `SupportTicket` (`customerID`, `ticketStatus`, `details`, `time_of_issue`, `time_of_resolution`) VALUES
+('1', 0, 'asdasdasdasd', now(), now());
 
 INSERT INTO `ComplaintTicket` (`customerID`, `ticketStatus`, `details`, `time_of_issue`, `time_of_resolution`) VALUES
 ('1', 0, 'test1', now(), now());

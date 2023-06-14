@@ -31,6 +31,8 @@
 </head>
 <body>
 
+	<?php include 'chemicalNavbar.php'; ?>
+
 	<?php
 		include 'addChemicalController.php';
 
@@ -58,7 +60,6 @@
 		
 	?>
 
-	<?php include 'chemicalNavbar.php';?>
 	
 	<form action="addChemicals.php" method="POST">
     <h3 class="heading-gap">Add Chemical</h3>

@@ -1,10 +1,11 @@
 <?php
-   session_start();
-   include '../../Account setting/AccountSettingController.php';
-   $staffController = new AccountSettingController;
-   $staffID = $_SESSION['staffID'] ?? null;
-   $dbData = $staffController->retrieveDataFromDatabase($staffID);
-   $img_name = $dbData['imageName']; 
+	include 'viewSupportTicketController.php';
+    session_start();
+	include '../../Account setting/AccountSettingController.php';
+	$staffController = new AccountSettingController;
+	$staffID = $_SESSION['staffID'] ?? null;
+	$dbData = $staffController->retrieveDataFromDatabase($staffID);
+	$img_name = $dbData['imageName']; 
 ?>
 
 <!DOCTYPE html>
@@ -22,32 +23,65 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
 </head>
 <body>
-	<?php include 'supportTicketNavbar.php';?>
+    <?php include 'supportTicketNavbar.php'; ?>
+
 	
     <h3 class="heading-gap">Support Tickets</h3>
+
+	<div class="search-container">
+        <form action="/action_page.php"><!-- php file placeholder for now -->
+            <input type="text" placeholder="Search..." name="search">
+            <button type="submit">Search</button>
+        </form>
+    </div>
     
     <!-- Table of tickets go here -->
-		<table>
-		<tr>
-		  <th>Ticket ID</th>
-		  <th>Customer Name</th>
-		  <th>Status</th>
-		  <th>Details</th>
-		  <th>Time of Issue</th>
-		  <th>Type</th>
-		  <th colspan="2"></th>
-		</tr>
-		<tr>
-		  <td>Data</td>
-		  <td>Data</td>
-		  <td>Data</td>
-		  <td>Data</td>
-		  <td>Data</td>
-		  <td>Data</td>
-		  <td><button>Assign</button></td>
-		  <td><a href="#"><button class="arrow-button"></button></td>
-		</tr>
-	</table>
+	<div class = "tableScroll">
+        <table>
+            <tr>
+				<th>Ticket ID</th>
+				<th>Customer Name</th>
+				<th>Staff Name</th>
+				<th>Ticket Status</th>
+				<th>Details</th>
+				<th>Time of Issue</th>
+				<th>Time of Resolution</th>
+				<th colspan="2"></th>
+        	</tr>
+
+        <?php 
+        if ($_SESSION['accountRole'] == 'Admin')
+        {
+            $ticket = new supportTicketView;
+            $result = $ticket -> getData();
+            if($result)
+            {
+                foreach($result as $row)
+                {
+        ?>
+        <tr>
+            <td><?php echo $row['supportTicketID'] ?></td>
+            <td><?php echo $row['customerName'] ?></td>
+            <td><?php echo $row['staffName'] ?></td>
+            <td><?php echo $row['ticketStatus'] ?></td>
+            <td><?php echo $row['details'] ?></td>
+            <td><?php echo $row['time_of_issue'] ?></td>
+            <td><?php echo $row['time_of_resolution'] ?></td>
+            <td>
+                <form action='viewSupportTicketDetails.php' method="POST">
+					<input type='hidden' name='staffID' value='<?php echo $row['staffID']?>'>
+                    <input type='hidden' name='supportTicketID' value='<?php echo $row['supportTicketID']?>'>
+                    <input type='submit' name='viewDetails' value='View Details'>
+                </form> 
+            </td>
+        </tr>
+        <?php
+                }
+            }
+        }
+		?>
+      </table>
+    </div>
 
 </body>
 </html>
