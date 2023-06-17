@@ -36,7 +36,7 @@
 	}
 	?>
 
-	<h3 class="heading-gap">Chemical List</h3>
+	<h3 class="heading-gap">Chemical List</h3> 
 
     <div class="search-container">
         <form action="searchChemical.php" method="GET"><!-- php file placeholder for now -->
