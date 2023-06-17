@@ -38,8 +38,8 @@
 	<h3 class="heading-gap">Chemical List</h3>
 
     <div class="search-container">
-        <form action="/action_page.php"><!-- php file placeholder for now -->
-            <input type="text" placeholder="Search..." name="search">
+        <form action="searchChemical.php"><!-- php file placeholder for now -->
+            <input type="text" placeholder="Search..." name="searchTerm">
             <button type="submit">Search</button>
         </form>
     </div>
@@ -56,7 +56,7 @@
             
         if($result)
         {
-            header("Location: chemicalHomepage.php");
+            header("Location: searchChemical.php");
         }else{
             print_r("failed");
         }

@@ -6,4 +6,5 @@
     include 'addChemicalController.php';
     include 'editChemicalController.php';
     include 'deleteChemicalController.php';
+    include 'searchChemicalController.php'
 ?>
