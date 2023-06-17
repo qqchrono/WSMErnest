@@ -37,7 +37,7 @@ $img_name = $dbData['imageName'];
     <div class="search-container">
         <form action="searchChemical.php">
             <input type="text" placeholder="Search..." name="searchTerm">
-            <button type="submit">Search</button>
+            <button type="submit" class="btn" name="submit">Search</button>
         </form>
     </div>
 
@@ -80,7 +80,7 @@ $img_name = $dbData['imageName'];
             </tr>
 
             <?php
-            if (isset($_POST["searchTerm"])) {
+            if (isset($_POST["submit"])) {
                 $searchTerm = $_POST['searchTerm'];
 
                 $search = new searchChemical;
@@ -112,22 +112,3 @@ $img_name = $dbData['imageName'];
     </div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

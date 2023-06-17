@@ -40,7 +40,7 @@
     <div class="search-container">
         <form action="searchChemical.php"><!-- php file placeholder for now -->
             <input type="text" placeholder="Search..." name="searchTerm">
-            <button type="submit">Search</button>
+            <button type="submit" class="btn" name="submit">Search</button>
         </form>
     </div>
 
