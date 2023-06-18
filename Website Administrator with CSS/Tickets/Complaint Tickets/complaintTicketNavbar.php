@@ -4,7 +4,7 @@
 	if (isset($_POST['logout'])) {
 		session_unset();
 		session_destroy();
-		header("Location: ../LoginBoundary.php");
+		header("Location: ../../LoginBoundary.php");
 		exit();
 	}
 ?>

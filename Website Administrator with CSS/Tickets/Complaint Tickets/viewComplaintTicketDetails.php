@@ -111,7 +111,8 @@
                     <div class="form-value"><?php echo $timeOfResolution ?></div>
                 </div>
                 <div class="button-container">
-                   <input type="submit" name="assignTicket" value="Assign Ticket" style="border-radius: 5px;">
+                    <input type='hidden' name='complaintTicketID' value='<?php echo $complaintTicketID ?>'>
+                    <input type="submit" name="assignTicket" value="Assign Ticket" style="border-radius: 5px;">
                     <a href="complaintTicketHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a>
                 </div>
             </form>
@@ -151,6 +152,7 @@
                 </div>
                     <div class="button-container">
                         <input type='hidden' name='staffID' value='<?php echo $hiddenStaffID ?>'>
+                        <input type='hidden' name='complaintTicketID' value='<?php echo $complaintTicketID ?>'>
                         <input type="submit" name="resolveTicket" value="Resolve Ticket" style="border-radius: 5px;">
                         <a href="complaintTicketHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a>
                     </div>

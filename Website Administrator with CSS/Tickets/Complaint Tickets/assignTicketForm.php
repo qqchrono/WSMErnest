@@ -24,7 +24,7 @@
         $complaintTicketID = '';
         if(isset($_POST["assignTicket"]))
         {
-            $complaintTicketID =$_POST['complaintTicketID'];
+            $complaintTicketID = $_POST['complaintTicketID'];
         }
 
         #Assign ticket to the staff
