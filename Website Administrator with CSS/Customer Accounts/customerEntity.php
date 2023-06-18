@@ -112,10 +112,10 @@
             $priceDate = $inputdata[1];
             $waterPriceRate = $inputdata[2];
 
-            $userQuery = "UPDATE `priceRate` SET `priceDate` = '$priceDate', `waterPriceRate` = $waterPriceRate
+            $userQuery = "UPDATE `priceRate` SET `priceDate` = '$priceDate', `waterPriceRate` = '$waterPriceRate'
             WHERE `priceID` = '$priceID'";
             $result = $this->conn->query($userQuery);
-            if($result->num_rows > 0){
+            if($result){
                 return $result;
             }else{
                 return false;

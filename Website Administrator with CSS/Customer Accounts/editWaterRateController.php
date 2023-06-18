@@ -6,7 +6,7 @@ class changeWaterPrice
 		public function changeWaterPrice($inputdata)
 		{	
 			$priceEntity = new customerEntity;
-            $result = $priceEntity -> getWaterPrice($inputdata);
+            $result = $priceEntity -> changeWaterPrice($inputdata);
 			
 			if($result){
 				return true;

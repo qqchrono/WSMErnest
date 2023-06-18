@@ -88,8 +88,9 @@
                 
             if($result)
             {
-                header("Location: addCustomer.php");
-                #echo "<SCRIPT>window.location.replace('customerAccountHomepage.php');</SCRIPT>";
+                echo "<SCRIPT>
+                window.location.replace('customerAccountHomepage.php');
+                </SCRIPT>";
             }else{
                 print_r("failed");
             }
@@ -114,7 +115,7 @@
         </form>
         <!-- For water rate viewing -->
         <?php
-        /*
+        
             #Retrieving waterPriceRate data
             $priceID = '';
             $priceRate = '';
@@ -137,20 +138,18 @@
             <button class="open-button" onclick="openForm()">Change Water Price Rate</button>
             <div class = 'formPopup' id = 'waterPriceRateForm'>
                 <form action = 'customerAccountHomepage.php' method="POST" class="form-container">
-                    <input type='hidden' name='priceID' value = '<?php echo $priceID?>'>
+                    <input type='text' name='priceID' value = '<?php echo $priceID?>'>
 
                     <label for="waterPriceRate">Current Water Price Rate : </label>
                     <input id = 'waterPriceRate' type='text' name='waterPriceRate' value = '<?php echo $priceRate?>'>
 
                     <label for="priceDate">Date : </label>
-                    <input type="date" id="priceDate" name="priceDate" value="">
+                    <input type="date" id="priceDate" name="priceDate" value="<?php echo $priceDate?>">
 
                     <button type="submit" class="btn btn-primary" name="changePrice">Change Water Price Rate</button>
                     <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
                 </form>
             </div>
-            */
-            ?>
     </div>
     
     <!-- Table of staffs go here -->
