@@ -93,6 +93,30 @@
                 return false;
             }
         }
+
+        public function searchChemical($inputdata)
+        {
+            $searchTerm  = $inputdata;
+
+            $userQuery = "SELECT * FROM chemicals WHERE `chemicalName` LIKE '%$searchTerm%'";
+            $result = $this->conn->query($userQuery);
+            if($result->num_rows > 0){
+                return $result;
+            }else{
+                return false;
+            }
+        }
+
+        public function getSearchData()
+        {
+            $userQuery = "SELECT * FROM chemicals";
+            $result = $this->conn->query($userQuery);
+            if($result->num_rows>0) {
+                return $result;
+            }else{
+                return false;
+            }
+        }
     }
 
 ?>

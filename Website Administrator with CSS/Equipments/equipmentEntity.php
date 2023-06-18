@@ -94,6 +94,30 @@
                 return false;
             }
         }
+
+        public function searchEquipment($inputdata)
+        {
+            $searchTerm  = $inputdata;
+
+            $userQuery = "SELECT * FROM equipments WHERE `equipmentName` LIKE '%$searchTerm%'";
+            $result = $this->conn->query($userQuery);
+            if($result->num_rows > 0){
+                return $result;
+            }else{
+                return false;
+            }
+        }
+
+        public function getSearchData()
+        {
+            $userQuery = "SELECT * FROM equipments";
+            $result = $this->conn->query($userQuery);
+            if($result->num_rows>0) {
+                return $result;
+            }else{
+                return false;
+            }
+        }
     }
 
 ?>

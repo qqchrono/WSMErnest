@@ -1,6 +1,12 @@
 <?php
 	include 'assignTicketController.php';
     include '../../Staff Accounts/viewStaffController.php';
+    session_start();
+	include '../../Account setting/AccountSettingController.php';
+	$staffController = new AccountSettingController;
+	$staffID = $_SESSION['staffID'] ?? null;
+	$dbData = $staffController->retrieveDataFromDatabase($staffID);
+	$img_name = $dbData['imageName']; 
 ?>
 <!DOCTYPE html>
 <html lang="en">

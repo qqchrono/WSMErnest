@@ -30,13 +30,8 @@
 
     $staffController = new AccountSettingController;
 
-	if (isset($_SESSION["staffID"])) {
-        $staffID = $_SESSION["staffID"];
-    }
-
-	if(isset($_GET["id"]))
-	{
-		$staffID = $_GET["id"];
+	if (isset($_SESSION['staffID'])) {
+		$staffID = $_SESSION['staffID'];
 		$result = $staffController->retrieveDataFromDatabase($staffID);
 		if($result)
 		{
@@ -46,9 +41,10 @@
 				$password = $result['password'];
 				$role = $result['role'];
 				$imageName = $result['imageName'];
-			
+		
 		}
 	}
+
 
 	if (!isset($_SESSION['img_name'])) {
 		$dbData = $staffController->retrieveDataFromDatabase($staffID);

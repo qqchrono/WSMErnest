@@ -6,6 +6,7 @@
 	$staffID = $_SESSION['staffID'] ?? null;
 	$dbData = $staffController->retrieveDataFromDatabase($staffID);
 	$img_name = $dbData['imageName'];
+
 ?>
 
 <!DOCTYPE html>
@@ -35,14 +36,28 @@
 	}
 	?>
 
-	<h3 class="heading-gap">Chemical List</h3>
+	<h3 class="heading-gap">Chemical List</h3> 
 
     <div class="search-container">
-        <form action="/action_page.php"><!-- php file placeholder for now -->
-            <input type="text" placeholder="Search..." name="search">
+        <form action="searchChemical.php" method="GET"><!-- php file placeholder for now -->
+            <input type="text" placeholder="Search..." name="searchTerm" value="<?php if(isset($_GET['searchTerm'])) {echo $_GET['searchTerm']; }?>" placeholder="Search...">
             <button type="submit">Search</button>
         </form>
     </div>
+
+    <!-- For search -->
+    <?php 
+        $chemical = new chemicalEntity;
+        $inputdata = isset($_GET['searchTerm']) ? $_GET['searchTerm'] : '';
+        $searchResult = $chemical->searchChemical($inputdata);
+
+        if (!empty($inputdata)) {
+            $result = $searchResult;
+        } else {
+            $result = $chemical->getSearchData();
+        }
+
+    ?>
 
   <!-- Calling the delete function -->
   <?php
@@ -56,7 +71,7 @@
             
         if($result)
         {
-            header("Location: chemicalHomepage.php");
+            header("Location: searchChemical.php");
         }else{
             print_r("failed");
         }
