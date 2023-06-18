@@ -41,7 +41,8 @@
 			$email= $_POST["email"],
             $address= $_POST["address"],
 			$password = $_POST["password"],
-			$role = $_POST["role"]
+			$phoneNumber = $_POST["phoneNumber"],
+			$bankNumber = $_POST["bankNumber"]
 			];
 			
 			$customer = new addCustomer;
@@ -66,7 +67,7 @@
 	<div class="container">
 		<div class="rectangle-box">
 				<table align="center">
-				<tr>
+					<tr>
 						<td><label for="customerName">Customer Name : </label>
 						<input type="text" id="customerName" placeholder="Customer Name" name="customerName" value=""></td>
 					</tr>
@@ -83,12 +84,13 @@
 						<input type="text" id="password" placeholder="password" name="password" value=""></td>
 					</tr>
 					<tr>
-						<td><label for="role">Role : </label>
-							<select id="role" name="role">
-								<option value="Customer" selected>Customer</option>
-							</select>
+						<td><label for="phoneNumber">Phone Number : </label>
+						<input type="text" id="phoneNumber" placeholder="Phone Number" name="phoneNumber" value=""></td>
 					</tr>
 					<tr>
+						<td><label for="bankNumber">Bank Number : </label>
+						<input type="text" id="bankNumber" placeholder="Bank Number" name="bankNumber" value=""></td>
+					</tr>
 					<tr>
 						<td class="button-container">
 							<input type="submit" name="submit" value="Add Customer" style="border-radius: 5px;">

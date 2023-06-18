@@ -60,14 +60,15 @@
         if(isset($_POST["deleteCustomer"]))
         {
             $customerID = $_POST['customerID'];
-            echo $customerID;
 
             $customer = new deleteCustomer;
             $result = $customer -> deleteCustomer($customerID);
                 
             if($result)
             {
-                header("Location: customerAccountHomepage.php");
+                echo "<SCRIPT>
+                window.location.replace('customerAccountHomepage.php');
+                </SCRIPT>";
             }else{
                 print_r("failed");
             }
@@ -95,7 +96,7 @@
         }
 
 		#Reset password function here         NOT DONE
-		if(isset($_POST["resetStaffPassword"]))
+		if(isset($_POST["resetCustomerPassword"]))
 		{
 
 		}
@@ -105,11 +106,11 @@
         <a href="addCustomer.php" class="btn btn-primary">Add Customer</a>
 		<!-- edit form submission here -->
 		<form action='editCustomer.php' method="POST" id="editDeleteForm">
-            <button type="submit" class="btn btn-primary" name="editStaffForm">Edit Customer</button>
+            <button type="submit" class="btn btn-primary" name="editCustomerForm">Edit Customer</button>
         <!-- delete form submission here -->
-            <button type="submit" class="btn btn-primary" formaction="customerAccountHomepage.php" name="deleteStaff">Delete Customer</button>
+            <button type="submit" class="btn btn-primary" formaction="customerAccountHomepage.php" name="deleteCustomer">Delete Customer</button>
 		<!-- Reset password form submission here -->
-			<button type="submit" class="btn btn-primary" formaction="customerAccountHomepage.php" name="resetStaffPassword">Reset Password</button>
+			<button type="submit" class="btn btn-primary" formaction="customerAccountHomepage.php" name="resetCustomerPassword">Reset Password</button>
         </form>
         <!-- For water rate viewing -->
         <?php

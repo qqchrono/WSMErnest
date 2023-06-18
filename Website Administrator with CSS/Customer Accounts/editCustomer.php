@@ -40,7 +40,8 @@
 	$email = '';
     $address = '';
 	$password = '';
-	$role = '';
+	$phoneNumber = '';
+	$bankNumber = '';
 	
 	if(isset($_POST["editCustomerForm"]))
 	{
@@ -56,7 +57,8 @@
 				$email = $row['email'];
                 $address = $row['address'];
 				$password = $row['password'];
-				$role = $row['role'];
+				$phoneNumber = $row['phoneNumber'];
+				$bankNumber = $row['bankAccount'];
 			}
 		}
 	}
@@ -69,7 +71,8 @@
 			$email = $_POST['email'],
             $address = $_POST['address'],
 			$password = $_POST['password'],
-			$role = $_POST['role']
+			$phoneNumber = $_POST['phoneNumber'],
+			$bankNumber = $_POST['bankNumber']
 		];
 
 		$customer = new editCustomer;
@@ -96,26 +99,27 @@
 					</tr>
 					<tr>
 						<td><label for="customerName">Customer Name : </label>
-						<input type="text" id="customerName" placeholder="Customer Name" name="customerName" value="<?php echo $customerName ?>"></td>
+						<input type="text" id="customerName" name="customerName" value="<?php echo $customerName ?>"></td>
 					</tr>
 					<tr>
 						<td><label for="email">Email : </label>
-						<input type="text" id="email" placeholder="Email" name="email" value="<?php echo $email ?>"></td>
+						<input type="text" id="email" name="email" value="<?php echo $email ?>"></td>
 					</tr>
                     <tr>
 						<td><label for="address">Address : </label>
-						<input type="text" id="address" placeholder="address" name="address" value="<?php echo $email ?>"></td>
+						<input type="text" id="address" name="address" value="<?php echo $address ?>"></td>
 					</tr>
 					<tr>
 						<td><label for="password">Password : </label>
-						<input type="text" id="password" placeholder="Password" name="password" value="<?php echo $password ?>"></td>
+						<input type="text" id="password" name="password" value="<?php echo $password ?>"></td>
 					</tr>
 					<tr>
-						<td><label for="role">Role : </label>
-							<select id="role" name="role">
-                                <option value="Customer" selected>Customer</option>
-							</select>
-						</td>
+						<td><label for="phoneNumber">Phone Number : </label>
+						<input type="text" id="phoneNumber" name="phoneNumber" value="<?php echo $phoneNumber ?>"></td>
+					</tr>
+					<tr>
+						<td><label for="bankNumber">Bank Number : </label>
+						<input type="text" id="bankNumber" name="bankNumber" value="<?php echo $bankNumber ?>"></td>
 					</tr>
 					<tr>
 						<td class="button-container">

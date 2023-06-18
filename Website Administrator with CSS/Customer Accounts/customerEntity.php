@@ -41,8 +41,7 @@
         public function addCustomer($inputdata)
         {   
             $data = "'" .implode ("','",$inputdata) . "'";
-
-            $customerQuery = "INSERT INTO `CustomerAccount` (customerName, email, password, role)
+            $customerQuery = "INSERT INTO `CustomerAccount` (customerName, email, address, password, phoneNumber, bankAccount)
             VALUES ($data)";
             
             $result = $this->conn->query($customerQuery);
@@ -59,15 +58,17 @@
 
         public function editCustomer($inputdata)
         {   
-            $staffID = $inputdata[0];
-            $staffName = $inputdata[1];
+            $customerID = $inputdata[0];
+            $customerName = $inputdata[1];
             $email = $inputdata[2];
-            $password = $inputdata[3];
-            $role = $inputdata[4];
+            $address = $inputdata[3];
+            $password = $inputdata[4];
+            $phoneNumber = $inputdata[5];
+            $bankNumber = $inputdata[6];
 
-            $staffQuery = "UPDATE `staffAccount` SET `staffName` = '$staffName', `email` = '$email',
-            `password` = '$password', `role` = '$role'
-            WHERE `staffID` = '$staffID'";
+            $staffQuery = "UPDATE `CustomerAccount` SET `customerName` = '$customerName', `email` = '$email',
+            `address` = '$address', `password` = '$password', `phoneNumber` = '$phoneNumber', `bankAccount` = '$bankNumber'
+            WHERE `customerID` = '$customerID'";
             
             $result = $this->conn->query($staffQuery);
             

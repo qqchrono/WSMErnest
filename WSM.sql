@@ -14,8 +14,8 @@ CREATE TABLE IF NOT EXISTS CustomerAccount (
   email varchar(100) DEFAULT NULL, 
   address varchar(100) DEFAULT NULL,
   password varchar(100) NOT NULL,
-  phoneNumber int(11) DEFAULT NULL,
-  bankAccount int(20) DEFAULT NULL,
+  phoneNumber int(8) DEFAULT NULL,
+  bankAccount varchar(20) DEFAULT NULL,
   PRIMARY KEY (customerID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -105,8 +105,8 @@ INSERT INTO `StaffAccount` (`username`, `staffName`, `email`, `password`, `role`
 INSERT INTO `StaffAccount` (`username`, `staffName`, `email`, `password`, `role`) VALUES
 ('staff', 'Ernest', 'abc@gmail.com', 'password', 'Staff');
 
-INSERT INTO `CustomerAccount` (`customerName`, `email`, `password`) VALUES
-('Bob', 'c@gmail.com', 'password');
+INSERT INTO `CustomerAccount` (`customerName`, `email`, `address`, `password`, `phoneNumber`, `bankAccount`) VALUES
+('Bob', 'c@gmail.com', 'ang mo kio','password', 12345678, '12312312312312312312');
 
 INSERT INTO `SupportTicket` (`customerID`, `ticketStatus`, `details`, `time_of_issue`, `time_of_resolution`) VALUES
 ('1', 0, 'asdasdasdasd', now(), now());
