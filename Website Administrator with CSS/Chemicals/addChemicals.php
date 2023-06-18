@@ -81,7 +81,7 @@
 				</tr>
 				<tr>
 					<td><label for="expiryDate">Expiry Date : </label>
-					<input type="date" id="expiryDate" placeholder="Expiry Date" name="expiryDate" value=""></td>
+					<input type="date" id="expiryDate" name="expiryDate" value=""></td>
 				</tr>
 				<tr>
 					<td class="button-container">

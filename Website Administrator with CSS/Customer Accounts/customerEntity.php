@@ -93,6 +93,33 @@
                 return false;
             }
         }
+
+        public function getWaterPrice()
+        {
+            $userQuery = "SELECT * FROM priceRate";
+            $result = $this->conn->query($userQuery);
+            if($result->num_rows > 0){
+                return $result;
+            }else{
+                return false;
+            }
+        }
+
+        public function changeWaterPrice($inputdata)
+        {
+            $priceID = $inputdata[0];
+            $priceDate = $inputdata[1];
+            $waterPriceRate = $inputdata[2];
+
+            $userQuery = "UPDATE `priceRate` SET `priceDate` = '$priceDate', `waterPriceRate` = $waterPriceRate
+            WHERE `priceID` = '$priceID'";
+            $result = $this->conn->query($userQuery);
+            if($result->num_rows > 0){
+                return $result;
+            }else{
+                return false;
+            }
+        }
     }
 
 ?>

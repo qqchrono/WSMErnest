@@ -5,6 +5,8 @@ class deleteCustomer
 	{
 		public function deleteCustomer($inputdata)
 		{	
+			echo 'hi delete';
+			echo $inputdata;
 			$customerEntity = new customerEntity;
             $result = $customerEntity -> deleteCustomer($inputdata);
 			

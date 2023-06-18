@@ -6,4 +6,6 @@
     include 'addCustomerController.php';
     include 'editCustomerController.php';
     include 'deleteCustomerController.php';
+    include 'waterPriceViewController.php';
+    include 'editWaterRateController.php';
 ?>

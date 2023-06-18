@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS Equipments (
 
 CREATE TABLE IF NOT EXISTS WaterUsageBill (
   waterUsageID int(50) NOT NULL AUTO_INCREMENT,
-  `usage` float(10,2),
+  waterUsage float(10,2),
   billDate Date,
   dueDate Date,
   customerID int(50),
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS WaterUsageBill (
 CREATE TABLE IF NOT EXISTS priceRate (
 	priceID int(50) NOT NULL AUTO_INCREMENT,
   priceDate Date,
-  price_rate double(10, 2),
+  waterPriceRate double(10, 2),
   PRIMARY KEY (priceID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -116,6 +116,9 @@ INSERT INTO `ComplaintTicket` (`customerID`, `ticketStatus`, `details`, `time_of
 
 INSERT INTO `ComplaintTicket` (`customerID`, `ticketStatus`, `details`, `time_of_issue`, `time_of_resolution`) VALUES
 ('1', 0, 'test2', now(), now());
+
+INSERT INTO `priceRate` (`priceDate`, `waterPriceRate`) VALUES
+(now(), 0.5);
 
 ALTER TABLE CustomerAccount 
   AUTO_INCREMENT=1;
