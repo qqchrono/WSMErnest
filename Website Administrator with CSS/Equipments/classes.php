@@ -6,4 +6,5 @@
     include 'addEquipmentController.php';
     include 'editEquipmentController.php';
     include 'deleteEquipmentController.php';
+    include 'searchEquipmentController.php'
 ?>
