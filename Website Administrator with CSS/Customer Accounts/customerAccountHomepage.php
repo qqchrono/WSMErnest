@@ -133,9 +133,10 @@
                 }
             }
         ?>
+        <div class="water-rate-container">
             <p for="waterPriceRate">Current Water Price Rate : <?php echo '&nbsp$' . $priceRate?></p>
 
-            <button class="open-button" onclick="openForm()">Change Water Price Rate</button>
+            <button class="btn btn-primary" onclick="openForm()">Change Water Price Rate</button>
             <div class = 'formPopup' id = 'waterPriceRateForm'>
                 <form action = 'customerAccountHomepage.php' method="POST" class="form-container">
                     <input type='text' name='priceID' value = '<?php echo $priceID?>'>
@@ -150,6 +151,7 @@
                     <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
                 </form>
             </div>
+        </div>
     </div>
     
     <!-- Table of staffs go here -->
