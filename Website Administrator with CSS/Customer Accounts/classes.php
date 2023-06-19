@@ -8,4 +8,5 @@
     include 'deleteCustomerController.php';
     include 'waterPriceViewController.php';
     include 'editWaterRateController.php';
+    include 'searchCusAccController.php'
 ?>

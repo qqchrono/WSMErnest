@@ -1,0 +1,133 @@
+body {
+    font-family: "Lato", sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .active {
+    font-weight: bold;
+  }
+  
+  .navbar-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .navbar-links a {
+    padding: 8px 16px;
+  }
+  
+  .search-container {
+      border: 1px solid;
+      width: 600px;
+      height: 50px;
+      border-radius: 5px;
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      margin-left: 10px;
+      margin-bottom: 10px;
+  }
+  
+  .search-container input[type="text"] {
+      width: 500px;
+      padding: 8px;
+      border: none;
+      border-radius: 4px;
+  }
+  
+  .search-container button {
+      padding: 8px 16px;
+      background-color: #bebdb8;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      margin-left: 5px;
+  }
+  
+  .heading-gap {
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .button-row {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+  }
+  
+  .button-row .btn {
+    margin-left: 10px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  td {
+    background-color: #f2f2f2;
+  }
+
+  .water-rate-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin-left: 10px;
+  }
+
+  .water-rate-container p {
+    margin: 0;
+  }
+
+  .form-container {
+    width: 300px;
+    padding: 10px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-container input[type=text] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+  }
+
+  .form-container label {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 5px;
+    text-align: left;
+  }
+
+  .form-container .btn {
+    background-color: #04aa6d;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    margin-right: 5px;
+    margin-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .form-container input[type="date"] {
+    width: 100%;
+  }
