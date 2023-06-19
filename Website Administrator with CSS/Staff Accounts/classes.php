@@ -6,4 +6,5 @@
     include 'addStaffController.php';
     include 'editStaffController.php';
     include 'deleteStaffController.php';
+    include 'searchStaffAccController.php'
 ?>

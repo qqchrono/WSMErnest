@@ -154,6 +154,30 @@
     
             return $result;
         }
+
+        public function searchStaffAcc($inputdata)
+        {
+            $searchTerm  = $inputdata;
+
+            $userQuery = "SELECT * FROM staffAccount WHERE `staffName` LIKE '%$searchTerm%'";
+            $result = $this->conn->query($userQuery);
+            if($result->num_rows > 0){
+                return $result;
+            }else{
+                return false;
+            }
+        }
+
+        public function getSearchData()
+        {
+            $userQuery = "SELECT * FROM staffAccount";
+            $result = $this->conn->query($userQuery);
+            if($result->num_rows>0) {
+                return $result;
+            }else{
+                return false;
+            }
+        }
         
     }
 
