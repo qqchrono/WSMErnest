@@ -115,7 +115,6 @@
         </form>
         <!-- For water rate viewing -->
         <?php
-        
             #Retrieving waterPriceRate data
             $priceID = '';
             $priceRate = '';
