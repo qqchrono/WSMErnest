@@ -55,6 +55,7 @@ CREATE TABLE IF NOT EXISTS Equipments (
 CREATE TABLE IF NOT EXISTS WaterUsageBill (
   waterUsageID int(50) NOT NULL AUTO_INCREMENT,
   waterUsage float(10,2),
+  billAmount float(10,2) DEFAULT NULL,
   billDate Date,
   dueDate Date,
   customerID int(50),
@@ -108,6 +109,9 @@ INSERT INTO `StaffAccount` (`username`, `staffName`, `email`, `password`, `role`
 INSERT INTO `CustomerAccount` (`customerName`, `email`, `address`, `password`, `phoneNumber`, `bankAccount`) VALUES
 ('Bob', 'c@gmail.com', 'ang mo kio','password', 12345678, '12312312312312312312');
 
+INSERT INTO `CustomerAccount` (`customerName`, `email`, `address`, `password`, `phoneNumber`, `bankAccount`) VALUES
+('Tom', 'tom@gmail.com', 'bishan','password', 87654321, '12312312312312312312');
+
 INSERT INTO `SupportTicket` (`customerID`, `ticketStatus`, `details`, `time_of_issue`, `time_of_resolution`) VALUES
 ('1', 0, 'asdasdasdasd', now(), now());
 
@@ -119,6 +123,9 @@ INSERT INTO `ComplaintTicket` (`customerID`, `ticketStatus`, `details`, `time_of
 
 INSERT INTO `priceRate` (`priceDate`, `waterPriceRate`) VALUES
 (now(), 0.5);
+
+INSERT INTO `WaterUsageBill` (`waterUsage`, `billDate`, `dueDate`, `customerID`) VALUES
+(10.5, now(), now(), '1');
 
 ALTER TABLE CustomerAccount 
   AUTO_INCREMENT=1;
