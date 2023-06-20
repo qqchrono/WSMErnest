@@ -4,16 +4,17 @@ import {useState, useEffect} from'react';
 import { View,Text,Dimensions,StyleSheet} from 'react-native';
 import {Avatar,Title,Caption, Drawer} from 'react-native-paper';
 import { BarChart } from "react-native-chart-kit";
-import { Dropdown } from 'react-native-element-dropdown';
+import { useIsFocused} from "@react-navigation/native";
 
 const HomeScreen = () => {
     //usestate
-    
+    const isFocused = useIsFocused()
     const [user_id,setid] = useState([]);
     const [item,setitem] = useState([]);
     const [address,setadd]= useState([]);
     const [phone,setphone]=useState([]);
     const [name,setname]= useState([]);
+    const [accountnumber,setaccountnumber]= useState([]);
 
     //variable use to store the current selected year , monthly usage 
     var jan=0;
@@ -52,7 +53,9 @@ const HomeScreen = () => {
        setphone(Response[0]['phone'])
        setadd(Response[0]['address'])
        setname(Response[0]['customerName'])
+       setaccountnumber(Response[0]['bankAccount'])
        module.exports = user_id;
+       
       })
       .catch((error)=>{
         console.error("ERROR FOUND" + error);
@@ -89,53 +92,56 @@ const HomeScreen = () => {
     const filter_data=(year) =>{
 
       for (let i = 0 ; i <item.length ; i++){
-        if(item[i]['Date'].includes(year+"-01")){
+        if(item[i]['billDate'].includes(year+"-01")){
           jan=(item[i]['usage'])
         }
-        else if((item[i]['Date'].includes(year+"-02"))){
+        else if((item[i]['billDate'].includes(year+"-02"))){
           feb=(item[i]['usage'])
         }
-        else if((item[i]['Date'].includes(year+"-03"))){
+        else if((item[i]['billDate'].includes(year+"-03"))){
           mar=(item[i]['usage'])
         }
-        else if((item[i]['Date'].includes(year+"-04"))){
+        else if((item[i]['billDate'].includes(year+"-04"))){
           apr=(item[i]['usage'])
         }
-        else if((item[i]['Date'].includes(year+"-05"))){
+        else if((item[i]['billDate'].includes(year+"-05"))){
           may=(item[i]['usage'])
         }
-        else if((item[i]['Date'].includes(year+"-06"))){
+        else if((item[i]['billDate'].includes(year+"-06"))){
           jun=(item[i]['usage'])
         }
-        else if((item[i]['Date'].includes(year+"-07"))){
+        else if((item[i]['billDate'].includes(year+"-07"))){
           jul=(item[i]['usage'])
         }
-        else if((item[i]['Date'].includes(year+"-08"))){
+        else if((item[i]['billDate'].includes(year+"-08"))){
           aug=(item[i]['usage'])
         }
-        else if((item[i]['Date'].includes(year+"-09"))){
+        else if((item[i]['billDate'].includes(year+"-09"))){
           sep=(item[i]['usage'])
         }
-        else if((item[i]['Date'].includes(year+"-10"))){
+        else if((item[i]['billDate'].includes(year+"-10"))){
           oct=(item[i]['usage'])
         }
-        else if((item[i]['Date'].includes(year+"-11"))){
+        else if((item[i]['billDate'].includes(year+"-11"))){
           nov=(item[i]['usage'])
         }
-        else if((item[i]['Date'].includes(year+"-12"))){
+        else if((item[i]['billDate'].includes(year+"-12"))){
           dec=(item[i]['usage'])
         }
       }
     
     }
   //runing the function once , and rerun with condition 
-  useEffect(()=>{
+  //when page is focused, page will rerun the function to fetch the data 
+ useEffect(() => {
+  if(isFocused){
     fetch_user_detail()
     if(user_id!=""){
       fetch_current_usage()
     }
-  },[user_id])
-  
+    
+  }
+}, [isFocused,user_id])
     return (
       
       <View style={styleSheet.MainContainer}>
@@ -199,7 +205,7 @@ const HomeScreen = () => {
                    }}
                    width={Dimensions.get('window').width - 10}
                    height={180}
-                   yAxisLabel={'$'}
+                   yAxisLabel={''}
                    chartConfig={{
                      backgroundColor: '#FFFFFF',
                      backgroundGradientFrom: '#EAD9A4',
@@ -219,7 +225,7 @@ const HomeScreen = () => {
                    }}
                    width={Dimensions.get('window').width - 10}
                    height={180}
-                   yAxisLabel={'$'}
+                   yAxisLabel={''}
                    chartConfig={{
                      backgroundColor: '#FFFFFF',
                      backgroundGradientFrom: '#EAD9A4',

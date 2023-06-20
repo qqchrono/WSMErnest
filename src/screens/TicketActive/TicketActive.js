@@ -1,10 +1,11 @@
 ﻿import 'react-native-gesture-handler';
 import * as React from 'react';
-import { Button, Text, View, Image, StyleSheet} from 'react-native';
+import  {useState,useEffect} from 'react';
+import { Button, Text, View, Image, StyleSheet,ActivityIndicator,ScrollView,SafeAreaView} from 'react-native';
 //import Logo from '../../../asset/water.jpg';
 import CustomInput from '../comp/CustomInput/CustomInput';
 import CustomButton from '../comp/CustomButton/CustomButton';
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation ,useIsFocused} from "@react-navigation/native";
 
 
 import {
@@ -13,82 +14,112 @@ import {
   Caption,
   TouchableRipple,
 } from 'react-native-paper';
+import { State } from 'react-native-gesture-handler';
 
 export default function TicketActive({ }) {
 const navigation =useNavigation();
-const a=["hi","bye","check"];
-const supportTicket = []
-for (i =0; i <a.length ;i++){
-  supportTicket.push(
-    {suppTicid: 'a',
-    details: "maybe"},
-  )
+var user_id = require('../HomeScreen/HomeScreen');
+const [ticket,setticket]=useState([]);
+const supportTicket =[]
+const [isLoading, setIsLoading] = useState(true);
+const isFocused = useIsFocused()
+
+const fetch_ticket= async()=>{
+  var APIURL = "http://10.0.2.2/mobile/fetch_ticket.php";
+  var headers = {
+    'Accept' : 'application/json',
+    'Content-Type' : 'application/json'
+  };
+  var Data ={
+    user_id: user_id,
+  };
+  fetch(APIURL,{
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify(Data)
+  })
+  .then((Response)=>Response.json())
+  .then((Response)=>{
+      setticket(Response)
+      setIsLoading(false);
+      
+     
+  })
+  .catch((error)=>{
+    console.error("ERROR FOUND" + error);
+  })
+
 }
 
 
-
-   return (
-
-   
-
-
-<View style={styles.container}>
-
-        <Title style={[styles.title, {
-              marginTop:15,
-              marginBottom: 5,
-              marginLeft: 125,
-              fontSize:20,
-              fontWeight:'700',
-            }]}>Active Tickets</Title>
-     
-            
-          
-          
-
-          {supportTicket.map((supportTicket) => { //This loop calls all the data in the array supportTicket and prints it out 
-        return (
-        <View style={styles.card}>
-          <View style={styles.cardInfo}>
-            <Text style={styles.cardTitle}>
-            {supportTicket.suppTicid}
-            </Text>
-            
-            <Text style={styles.cardDetails}>
-              {supportTicket.details}
-            </Text>
-          </View>
-           </View>
-
-        ); //End of loop below
-      })} 
+//fetch ticket when it is forced deal with navigation error
+ useEffect(() => {
+    if(isFocused){
+      fetch_ticket()
       
-
-        
-
-
-          
+    }
+}, [isFocused])
 
 
+//only run render after fetch is completed
+if(!isLoading){
+  
+  //validate if there a ticket fetch 
+  if(ticket[1][0].length >0|| ticket[0][0].length>0 ){
+  for (i =0; i <ticket[0][0].length ;i++){
+
+    supportTicket.push(
+      {suppTicid: ticket[0][0][i]["supportTicketID"],
+      details: ticket[0][0][i]["details"]},
+    )
+  }
+  for (i =0; i <ticket[1][0].length ;i++){
+    supportTicket.push(
+      {suppTicid: ticket[1][0][i]["complaintTicketID"],
+      details: ticket[1][0][i]["details"]},
+    )
+  }
+}
+  return (
+
+
+<ScrollView style={styles.container}>
+
+<Title style={[styles.title, {
+      marginTop:15,
+      marginBottom: 5,
+      marginLeft: 125,
+      fontSize:20,
+      fontWeight:'700',
+    }]}>Active Tickets</Title>
+
+  {supportTicket.map((supportTicket) => { //This loop calls all the data in the array supportTicket and prints it out 
+return (
+<View style={styles.card}>
+  <View style={styles.cardInfo}>
+    <Text style={styles.cardTitle}>
+    {supportTicket.suppTicid}
+    </Text>
+    
+    <Text style={styles.cardDetails}>
+      {supportTicket.details}
+    </Text>
+  </View>
+   </View>
+
+); //End of loop below
+})} 
 
 
 <Button
-      title="Submit a New Ticket"
-      onPress={() => navigation.navigate('SubmitTicket')} />
-      
-
-     
+title="Submit a New Ticket"
+onPress={() => navigation.navigate("SubmitTicket")} />
 
 
-</View>
+</ScrollView>
+);
+}}
 
-
-  );
- }
-
-
-
- 
 const styles = StyleSheet.create({
 
   container: {

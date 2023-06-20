@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import {
   View,
   Text,
-  SafeAreaView, 
+  ScrollView, 
   StyleSheet,
   TouchableOpacity,
   ImageBackground,
@@ -33,6 +33,7 @@ export default function TicketScreen() {
   const [detail,setdetail]=useState([]);
   var user_id = require('../HomeScreen/HomeScreen');
   const navigation =useNavigation();
+  //submit ticket
   const submit=()=>{
    
     var APIURL= "http://10.0.2.2/mobile/submit_support.php"
@@ -53,7 +54,7 @@ export default function TicketScreen() {
     .then((Response)=>Response.json())
     .then((Response)=>{
       alert(Response[0].Message)
-      navigation.navigate("Ticket")
+      navigation.navigate("Ticket") 
 
     })
     .catch((error)=>{

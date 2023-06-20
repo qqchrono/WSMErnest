@@ -117,7 +117,7 @@ useEffect(()=>{
                       </View>
          
         <View style={styles.action}>
-         
+         <Text>Phone:</Text>
           <TextInput
             defaultValue={phone}
             placeholder="Phone"
@@ -133,7 +133,7 @@ useEffect(()=>{
           />
         </View>
          <View style={styles.action}>
-         
+         <Text>Bank Account : </Text>
           <TextInput
             defaultValue={bankaccount}
             placeholder="Bank Account Number"
@@ -151,7 +151,7 @@ useEffect(()=>{
       
        
         <View style={styles.action}>
-          
+        <Text>Password: </Text>
           <TextInput
           secureTextEntry={true}
           defaultValue={password}
