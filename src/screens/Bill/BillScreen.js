@@ -263,7 +263,7 @@ async function setdata(id){
 
       {billinformation.map((billinformation) => { //This loop calls all the data in the array billinformation and prints it out 
     return (
-    <View style={styles.card}>
+    <View key={billinformation.waterbillid}style={styles.card}>
       <View style={styles.cardInfo}>
         <Text style={styles.cardTitle}>
         {billinformation.waterbillid}

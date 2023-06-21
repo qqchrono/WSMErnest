@@ -50,7 +50,7 @@ const HomeScreen = () => {
       .then((Response)=>Response.json())
       .then((Response)=>{
        setid(Response[0]['customerID'])
-       setphone(Response[0]['phone'])
+       setphone(Response[0]['phoneNumber'])
        setadd(Response[0]['address'])
        setname(Response[0]['customerName'])
        setaccountnumber(Response[0]['bankAccount'])
@@ -93,40 +93,40 @@ const HomeScreen = () => {
 
       for (let i = 0 ; i <item.length ; i++){
         if(item[i]['billDate'].includes(year+"-01")){
-          jan=(item[i]['usage'])
+          jan=(item[i]['waterUsage'])
         }
         else if((item[i]['billDate'].includes(year+"-02"))){
-          feb=(item[i]['usage'])
+          feb=(item[i]['waterUsage'])
         }
         else if((item[i]['billDate'].includes(year+"-03"))){
-          mar=(item[i]['usage'])
+          mar=(item[i]['waterUsage'])
         }
         else if((item[i]['billDate'].includes(year+"-04"))){
-          apr=(item[i]['usage'])
+          apr=(item[i]['waterUsage'])
         }
         else if((item[i]['billDate'].includes(year+"-05"))){
-          may=(item[i]['usage'])
+          may=(item[i]['waterUsage'])
         }
         else if((item[i]['billDate'].includes(year+"-06"))){
-          jun=(item[i]['usage'])
+          jun=(item[i]['waterUsage'])
         }
         else if((item[i]['billDate'].includes(year+"-07"))){
-          jul=(item[i]['usage'])
+          jul=(item[i]['waterUsage'])
         }
         else if((item[i]['billDate'].includes(year+"-08"))){
-          aug=(item[i]['usage'])
+          aug=(item[i]['waterUsage'])
         }
         else if((item[i]['billDate'].includes(year+"-09"))){
-          sep=(item[i]['usage'])
+          sep=(item[i]['waterUsage'])
         }
         else if((item[i]['billDate'].includes(year+"-10"))){
-          oct=(item[i]['usage'])
+          oct=(item[i]['waterUsage'])
         }
         else if((item[i]['billDate'].includes(year+"-11"))){
-          nov=(item[i]['usage'])
+          nov=(item[i]['waterUsage'])
         }
         else if((item[i]['billDate'].includes(year+"-12"))){
-          dec=(item[i]['usage'])
+          dec=(item[i]['waterUsage'])
         }
       }
     
@@ -161,22 +161,22 @@ const HomeScreen = () => {
                  marginTop:15,
                  marginBottom: 5,
                }]}>{name}</Title>
-               <Caption style={styles.caption}>{name}</Caption>
+               <Caption style={styles.caption}>Name: {name}</Caption>
              </View>
            </View>
          </View>
          <View style={styles.userInfoSection}>
            <View style={styles.row}>
              
-             <Text style={{color:"#777777", marginLeft: 20}}>{address}</Text>
+             <Text style={{color:"#777777", marginLeft: 20}}>Address: {address}</Text>
            </View>
            <View style={styles.row}>
              
-             <Text style={{color:"#777777", marginLeft: 20}}>{phone}</Text>
+             <Text style={{color:"#777777", marginLeft: 20}}>Phone: {phone}</Text>
            </View>
            <View style={styles.row}>
              
-             <Text style={{color:"#777777", marginLeft: 20}}>{Email}</Text>
+             <Text style={{color:"#777777", marginLeft: 20}}>Email: {Email}</Text>
            </View>
          </View>
    

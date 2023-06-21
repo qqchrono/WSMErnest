@@ -47,7 +47,7 @@ const fetch_user_detail=()=>{
         setname(Response[0]['customerName'])
         setpassword(Response[0]['password'])
         setbank(Response[0]['bankAccount'])
-        setphone(Response[0]['phone'])
+        setphone(Response[0]['phoneNumber'])
     })
     .catch((error)=>{
       console.error("ERROR FOUND" + error);
@@ -119,7 +119,7 @@ useEffect(()=>{
         <View style={styles.action}>
          <Text>Phone:</Text>
           <TextInput
-            defaultValue={phone}
+            defaultValue={String(phone)}
             placeholder="Phone"
             placeholderTextColor="#666666"
             keyboardType="number-pad"
@@ -135,7 +135,7 @@ useEffect(()=>{
          <View style={styles.action}>
          <Text>Bank Account : </Text>
           <TextInput
-            defaultValue={bankaccount}
+            defaultValue={String(bankaccount)}
             placeholder="Bank Account Number"
             placeholderTextColor="#666666"
             keyboardType="number-pad"
@@ -154,7 +154,7 @@ useEffect(()=>{
         <Text>Password: </Text>
           <TextInput
           secureTextEntry={true}
-          defaultValue={password}
+          defaultValue={String(password)}
             placeholder="Password"
             placeholderTextColor="#666666"
             onChangeText={(value) => setpassword(value)}

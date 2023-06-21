@@ -23,6 +23,11 @@ const [ticket,setticket]=useState([]);
 const supportTicket =[]
 const [isLoading, setIsLoading] = useState(true);
 const isFocused = useIsFocused()
+var tic_id=0
+
+
+
+
 
 const fetch_ticket= async()=>{
   var APIURL = "http://10.0.2.2/mobile/fetch_ticket.php";
@@ -70,14 +75,16 @@ if(!isLoading){
 
     supportTicket.push(
       {suppTicid: ticket[0][0][i]["supportTicketID"],
-      details: ticket[0][0][i]["details"]},
+      details: ticket[0][0][i]["details"],key: tic_id},
     )
+    tic_id=tic_id+1;
   }
   for (i =0; i <ticket[1][0].length ;i++){
     supportTicket.push(
       {suppTicid: ticket[1][0][i]["complaintTicketID"],
-      details: ticket[1][0][i]["details"]},
+      details: ticket[1][0][i]["details"],key: tic_id},
     )
+    tic_id=tic_id+1;
   }
 }
   return (
@@ -95,13 +102,16 @@ if(!isLoading){
 
   {supportTicket.map((supportTicket) => { //This loop calls all the data in the array supportTicket and prints it out 
 return (
-<View style={styles.card}>
+<View key={supportTicket.key} style={styles.card}>
   <View style={styles.cardInfo}>
-    <Text style={styles.cardTitle}>
-    {supportTicket.suppTicid}
+    <Text style={styles.cardTitle}>No.
+    {supportTicket.key}
+    </Text>
+    <Text style={styles.cardDetails}>Id:
+      {supportTicket.suppTicid}
     </Text>
     
-    <Text style={styles.cardDetails}>
+    <Text style={styles.cardDetails}>Detail:
       {supportTicket.details}
     </Text>
   </View>
