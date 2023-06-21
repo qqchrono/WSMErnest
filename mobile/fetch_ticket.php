@@ -2,9 +2,9 @@
 include 'Ticket.php';
 include 'json_encode.php';
 $g= new Ticket;
-//$userid=$decodedData['userid'];
-$result[] = $g->fetch_support_ticket("2");
-$res2[] = $g->fetch_complaint_ticket("2");
+$userid=$decodedData['user_id'];
+$result[] = $g->fetch_support_ticket($userid);
+$res2[] = $g->fetch_complaint_ticket($userid);
 $response= [];
 array_push($response,$result,$res2);
 echo json_encode($response);    

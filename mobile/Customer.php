@@ -25,7 +25,7 @@ class Customer {
     #update user information 
     public function update_detail($phone,$password,$bank,$customer_email){
         global $conn;
-        $SQL = "UPDATE customeraccount SET password = '$password' ,bankAccount = '$bank'  ,phone ='$phone' WHERE email='$customer_email'";
+        $SQL = "UPDATE customeraccount SET password = '$password' ,bankAccount = '$bank'  ,phoneNumber ='$phone' WHERE email='$customer_email'";
         $exeSQL = mysqli_query($conn,$SQL);
         if ($exeSQL === TRUE){
             return " updated";
