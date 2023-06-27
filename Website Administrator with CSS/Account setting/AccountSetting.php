@@ -141,8 +141,16 @@
 		}
 	}
 ?>
+	<?php if ($_SESSION['accountRole'] == 'Admin')
+	{
+		include 'AccountSettingNavbar.php';
+	}
+	else if ($_SESSION['accountRole'] == 'Staff')
+	{
+		include '../Technical Staff Homepage/TechnicalStaffAccountSettingNavbar.php';
+	}
+	?>
 
-	<?php include 'AccountSettingNavbar.php';?>
 	<form action="AccountSetting.php" method="POST" enctype="multipart/form-data">
 	<h3 class="heading-gap">Account Setting</h3>
 		<div class="container">

@@ -206,14 +206,6 @@
             <td><?php echo $row['password'] ?></td>
             <td><?php echo $row['phoneNumber'] ?></td>
             <td><?php echo $row['bankAccount'] ?></td>
-            <td>
-                <form action='viewBillDetails.php' method="POST">
-                    <input type='hidden' name='customerID' value='<?php echo $row['customerID']?>'>
-                    <input type='hidden' name='priceRate' value='<?php echo $priceRate?>'>
-                    <input type='hidden' name='priceDate' value='<?php echo $priceDate?>'>
-                    <input type='submit' name='viewBills' value='View Bills'>
-                </form> 
-            </td>
             <!-- input for editing and deleting equipment form -->
             <td>
                 <input form="editDeleteForm" type='radio' name='customerID' value='<?php echo $row['customerID']?>'>

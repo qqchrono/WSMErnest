@@ -19,9 +19,19 @@ CREATE TABLE IF NOT EXISTS CustomerAccount (
   PRIMARY KEY (customerID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+#Table structure for Companies
+CREATE TABLE IF NOT EXISTS CompanyAccount (
+  companyID int(50) NOT NULL AUTO_INCREMENT,
+  companyName varchar(20) DEFAULT NULL,
+  companyAddress varchar(100) DEFAULT NULL,
+  companyPhoneNumber varchar(100) DEFAULT NULL,
+  PRIMARY KEY (companyID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 #Table structure for staff
 CREATE TABLE IF NOT EXISTS StaffAccount (
   staffID int(50) NOT NULL AUTO_INCREMENT,
+  companyID int(50) NOT NULL,
   username varchar(20) DEFAULT NULL,
   staffName varchar(100) DEFAULT NULL,
   email varchar(100) DEFAULT NULL,
@@ -101,7 +111,7 @@ INSERT INTO `Chemicals` (`chemicalName`, `useTime`, `quantity`, `expiryDate`) VA
 ('Chemical1', '123', '3', now());
 
 INSERT INTO `StaffAccount` (`username`, `staffName`, `email`, `password`, `role`) VALUES
-('asd', 'Ernest', 'abc@gmail.com', 'password', 'Admin');
+('admin', 'Ernest', 'abc@gmail.com', 'password', 'Admin');
 
 INSERT INTO `StaffAccount` (`username`, `staffName`, `email`, `password`, `role`) VALUES
 ('staff', 'Ernest', 'abc@gmail.com', 'password', 'Staff');

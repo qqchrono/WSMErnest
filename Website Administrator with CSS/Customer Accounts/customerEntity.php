@@ -122,20 +122,6 @@
             }
         }
 
-        public function viewBill($customerID) #need to figure out where to update the bill amount
-        {
-            $userQuery = "SELECT * FROM WaterUsageBill
-            LEFT JOIN CustomerAccount ON WaterUsageBill.customerID=CustomerAccount.customerID
-            WHERE WaterUsageBill.customerID = $customerID";
-
-            $result = $this->conn->query($userQuery);
-            if($result->num_rows > 0){
-                return $result;
-            }else{
-                return false;
-            }
-        }
-
         public function searchCusAcc($inputdata)
         {
             $searchTerm  = $inputdata;
