@@ -10,28 +10,35 @@ USE `watersupplymanagement`;
 #Table structure for customers
 CREATE TABLE IF NOT EXISTS CustomerAccount (
   customerID int(50) NOT NULL AUTO_INCREMENT,
+  companyUEN int(50) NOT NULL,
   customerName varchar(100) DEFAULT NULL,
   email varchar(100) DEFAULT NULL, 
   address varchar(100) DEFAULT NULL,
   password varchar(100) NOT NULL,
   phoneNumber int(8) DEFAULT NULL,
   bankAccount varchar(20) DEFAULT NULL,
+  customerPlanType varchar(20) DEFAULT NULL,
   PRIMARY KEY (customerID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 #Table structure for Companies
 CREATE TABLE IF NOT EXISTS CompanyAccount (
-  companyID int(50) NOT NULL AUTO_INCREMENT,
+  companyUEN int(50) NOT NULL,
   companyName varchar(20) DEFAULT NULL,
   companyAddress varchar(100) DEFAULT NULL,
   companyPhoneNumber varchar(100) DEFAULT NULL,
-  PRIMARY KEY (companyID)
+  companyAccountStatus bit(1) DEFAULT NULL, #Active or not
+  companyPaymentStatus bit(1) DEFAULT NULL, #Paid for the sub or not
+  companySubscriptionType bit(3) DEFAULT NULL, #How long are they subbed for
+  companyTrialStatus bit(1) DEFAULT NULL, #Have they applied for free trial already
+  companyExpiryDate DATETIME DEFAULT NULL,
+  PRIMARY KEY (companyUEN)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 #Table structure for staff
 CREATE TABLE IF NOT EXISTS StaffAccount (
   staffID int(50) NOT NULL AUTO_INCREMENT,
-  companyID int(50) NOT NULL,
+  companyUEN int(50) NOT NULL,
   username varchar(20) DEFAULT NULL,
   staffName varchar(100) DEFAULT NULL,
   email varchar(100) DEFAULT NULL,
@@ -44,6 +51,7 @@ CREATE TABLE IF NOT EXISTS StaffAccount (
 #Table structure for chemicals
 CREATE TABLE IF NOT EXISTS Chemicals (
   chemicalID int(50) NOT NULL AUTO_INCREMENT,
+  companyUEN int(50) NOT NULL,
   chemicalName varchar(100) DEFAULT NULL,
   useTime int(5) DEFAULT NULL,
   quantity int(50) NOT NULL,
@@ -54,6 +62,7 @@ CREATE TABLE IF NOT EXISTS Chemicals (
 #Table structure for equipment
 CREATE TABLE IF NOT EXISTS Equipments (
   equipmentID int(50) NOT NULL AUTO_INCREMENT,
+  companyUEN int(50) NOT NULL,
   equipmentName varchar(100) DEFAULT NULL,
   quantity int(50) NOT NULL,
   installationDate DATE DEFAULT NULL,
@@ -64,10 +73,11 @@ CREATE TABLE IF NOT EXISTS Equipments (
 
 CREATE TABLE IF NOT EXISTS WaterUsageBill (
   waterUsageID int(50) NOT NULL AUTO_INCREMENT,
+  companyUEN int(50) NOT NULL,
   waterUsage float(10,2),
   billAmount float(10,2) DEFAULT NULL,
   billDate Date,
-  dueDate Date,
+  dueDate Date DEFAULT NULL,
   customerID int(50),
   billStatus bit(1) NOT NULL DEFAULT 0,
   paymentStatus bit(1) NOT NULL DEFAULT 0,
@@ -76,13 +86,17 @@ CREATE TABLE IF NOT EXISTS WaterUsageBill (
 
 CREATE TABLE IF NOT EXISTS priceRate (
 	priceID int(50) NOT NULL AUTO_INCREMENT,
+  companyUEN int(50) NOT NULL,
   priceDate Date,
   waterPriceRate double(10, 2),
+  offPeakwaterPriceRate double(10, 2),
+  peakWaterPriceRate double(10, 2),
   PRIMARY KEY (priceID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS SupportTicket (
 	supportTicketID int(50) NOT NULL AUTO_INCREMENT,
+  companyUEN int(50) NOT NULL,
   customerID int(50),
   staffID int(50) DEFAULT NULL,
   ticketStatus bit(1) DEFAULT 0,
@@ -94,6 +108,7 @@ CREATE TABLE IF NOT EXISTS SupportTicket (
 
 CREATE TABLE IF NOT EXISTS ComplaintTicket (
 	complaintTicketID int(50) NOT NULL AUTO_INCREMENT,
+  companyUEN int(50) NOT NULL,
   customerID int(50),
   staffID int(50) DEFAULT NULL,
   ticketStatus bit(1) DEFAULT 0,
