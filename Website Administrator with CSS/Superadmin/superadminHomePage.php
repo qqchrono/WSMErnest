@@ -27,12 +27,12 @@
     <!-- Table of staffs go here -->
 	<table>
 		<tr>
-		  <th>?</th>
-		  <th>?</th>
-		  <th>?</th>
-		  <th>?</th>
-		  <th>?</th>
-		  <th></th>
+            <th>Staff ID</th>
+            <th>Staff Name</th>
+            <th>Email</th>
+            <th>Password</th>
+			<th>Company Name</th>
+            <th></th>
 		</tr>
 		<tr>
 		  <td>Data</td>
@@ -40,7 +40,7 @@
 		  <td>Data</td>
 		  <td>Data</td>
 		  <td>Data</td>
-		  <td><a href="#"><button class="arrow-button"></button></td>
+		  <td>Options</button></td>
 		</tr>
 	</table>
 </body>
