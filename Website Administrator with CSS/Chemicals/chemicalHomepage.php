@@ -71,7 +71,9 @@
             
         if($result)
         {
-            header("Location: searchChemical.php");
+            echo "<SCRIPT>
+            window.location.replace('searchChemical.php');
+    	    </SCRIPT>";
         }else{
             print_r("failed");
         }

@@ -1,5 +1,7 @@
 <?php
-	include 'viewSupportTicketController.php';
+    $path = $_SERVER['DOCUMENT_ROOT'];
+    include_once $path . "/Water-Supply-Management/Website Administrator with CSS/Tickets/Support Tickets/Controllers/viewSupportTicketController.php";
+
     session_start();
 	include '../../Account setting/AccountSettingController.php';
 	$staffController = new AccountSettingController;
@@ -69,7 +71,7 @@
             <td><?php echo $row['time_of_resolution'] ?></td>
             <td>
                 <form action='viewSupportTicketDetails.php' method="POST">
-					<input type='hidden' name='staffID' value='<?php echo $row['staffID']?>'>
+					<!-- <input type='hidden' name='staffID' value='<?php #echo $row['staffID']?>'> -->
                     <input type='hidden' name='supportTicketID' value='<?php echo $row['supportTicketID']?>'>
                     <input type='submit' name='viewDetails' value='View Details'>
                 </form> 

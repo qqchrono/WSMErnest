@@ -1,10 +1,10 @@
 <?php
-    include '../DatabaseConnection.php';
-    #include 'Controllers/viewEquipmentController.php';
-    #include 'Controllers/editEquipmentController.php';
-    include 'viewEquipmentController.php';
-    include 'addEquipmentController.php';
-    include 'editEquipmentController.php';
-    include 'deleteEquipmentController.php';
-    include 'searchEquipmentController.php'
+    $path = $_SERVER['DOCUMENT_ROOT'];
+    $path2 = $_SERVER['DOCUMENT_ROOT'];
+    
+    include_once $path . "/Water-Supply-Management/Website Administrator with CSS/DatabaseConnection.php";
+
+    include_once $path2 . "/Water-Supply-Management/Website Administrator with CSS/Equipments/Controllers/viewEquipmentController.php";
+    include_once $path2 . "/Water-Supply-Management/Website Administrator with CSS/Equipments/Controllers/deleteEquipmentController.php";
+    include_once $path2 . "/Water-Supply-Management/Website Administrator with CSS/Equipments/Controllers/searchEquipmentController.php";
 ?>

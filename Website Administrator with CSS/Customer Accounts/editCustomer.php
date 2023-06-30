@@ -33,7 +33,8 @@
 <body>
 
 <?php
-	include 'editCustomerController.php';
+	$path = $_SERVER['DOCUMENT_ROOT'];
+	include_once $path . "/Water-Supply-Management/Website Administrator with CSS/Customer Accounts/Controllers/editCustomerController.php";
 
 	$customerID = '';
 	$customerName = '';

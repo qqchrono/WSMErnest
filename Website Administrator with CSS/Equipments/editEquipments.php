@@ -33,7 +33,8 @@
 <body>
 
 <?php
-	include 'editEquipmentController.php';
+	$path = $_SERVER['DOCUMENT_ROOT'];
+	include_once $path . "/Water-Supply-Management/Website Administrator with CSS/Equipments/Controllers/editEquipmentController.php";
 
 	$equipmentID = '';
 	$equipmentName = '';
@@ -78,7 +79,9 @@
 			
 		if($result)
 		{
-			header("Location: equipmentHomepage.php");
+			echo "<SCRIPT>
+            window.location.replace('equipmentHomepage.php');
+    	    </SCRIPT>";
 		}else{
 			print_r("failed");
 		}

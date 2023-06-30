@@ -1,7 +1,10 @@
 <?php
     session_start();
-    include_once 'viewSupportTicketDetailsController.php';
-    include_once 'resolveTicketController.php';
+    $path = $_SERVER['DOCUMENT_ROOT'];
+    $path2 = $_SERVER['DOCUMENT_ROOT'];
+    include_once $path . "/Water-Supply-Management/Website Administrator with CSS/Tickets/Support Tickets/Controllers/viewSupportTicketDetailsController.php";
+    include_once $path2 . "/Water-Supply-Management/Website Administrator with CSS/Tickets/Support Tickets/Controllers/resolveTicketController.php";
+    
 	include '../../Account setting/AccountSettingController.php';
 	$staffController = new AccountSettingController;
 	$staffID = $_SESSION['staffID'] ?? null;
@@ -111,9 +114,10 @@
             <div class="form-value"><?php echo $timeOfResolution ?></div>
         </div>
         <div class="button-container">
-                    <input type='hidden' name='staffID' value='<?php echo $_SESSION['staffID'] ?>'>
-                    <input type="submit" name="resolveTicket" value="Resolve Ticket" style="border-radius: 5px;">
-                    <a href="supportTicketHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a>
+            <input type='hidden' name='supportTicketID' value='<?php echo $supportTicketID ?>'>
+            <input type='hidden' name='staffID' value='<?php echo $_SESSION['staffID'] ?>'>
+            <input type="submit" name="resolveTicket" value="Resolve Ticket" style="border-radius: 5px;">
+            <a href="supportTicketHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a>
         </div>
     </form>
 

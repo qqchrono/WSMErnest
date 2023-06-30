@@ -33,8 +33,9 @@
 <body>
 
 <?php
-	include 'editChemicalController.php';
-
+	$path = $_SERVER['DOCUMENT_ROOT'];
+	include $path . "/Water-Supply-Management/Website Administrator with CSS/Chemicals/Controllers/editChemicalController.php";
+	
 	$chemicalID = '';
 	$chemicalName = '';
 	$useTime = '';
@@ -47,7 +48,7 @@
 	
 		$chemical = new editChemical;
 		$result = $chemical -> getDataForEditForm($chemicalID);
-
+     
 		if($result)
 		{
 			foreach($result as $row)

@@ -1,7 +1,10 @@
 <?php
     session_start();
-	include_once 'viewComplaintTicketDetailsController.php';
-    include_once 'resolveTicketController.php';
+    $path = $_SERVER['DOCUMENT_ROOT'];
+    $path2 = $_SERVER['DOCUMENT_ROOT'];
+    include_once $path . "/Water-Supply-Management/Website Administrator with CSS/Tickets/Complaint Tickets/Controllers/resolveTicketController.php";
+    include_once $path2 . "/Water-Supply-Management/Website Administrator with CSS/Tickets/Complaint Tickets/Controllers/viewComplaintTicketDetailsController.php";
+    
 	include '../../Account setting/AccountSettingController.php';
 	$staffController = new AccountSettingController;
 	$staffID = $_SESSION['staffID'] ?? null;

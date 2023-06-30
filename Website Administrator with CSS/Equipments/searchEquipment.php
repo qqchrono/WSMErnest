@@ -69,7 +69,9 @@
                 
             if($result)
             {
-                header("Location: equipmentHomepage.php");
+                echo "<SCRIPT>
+                window.location.replace('equipmentHomepage.php');
+                </SCRIPT>";
             }else{
                 print_r("failed");
             }

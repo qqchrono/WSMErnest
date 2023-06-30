@@ -32,7 +32,8 @@
 <body>
 
 <?php
-	include 'addEquipmentController.php';
+	$path = $_SERVER['DOCUMENT_ROOT'];
+	include_once $path . "/Water-Supply-Management/Website Administrator with CSS/Equipments/Controllers/addEquipmentController.php";
 
 	if(isset($_POST["submit"]))
 	{
@@ -51,7 +52,10 @@
 		if($result)
 		{
 			print_r("success");
-			header("Location: equipmentHomepage.php");
+			echo "<SCRIPT>
+            window.location.replace('equipmentHomepage.php');
+    	    </SCRIPT>";
+			
 		}else{
 			print_r("failed");
 		}

@@ -1,5 +1,7 @@
 <?php
-    require_once '../DatabaseConnection.php';
+    $path = $_SERVER['DOCUMENT_ROOT'];
+    $path .= "/Water-Supply-Management/Website Administrator with CSS/DatabaseConnection.php";
+	include_once ($path);
 
     class chemicalEntity
     {

@@ -31,7 +31,8 @@
 </head>
 <body>
 	<?php
-		include 'addStaffController.php';
+		$path = $_SERVER['DOCUMENT_ROOT'];
+		include_once $path . "/Water-Supply-Management/Website Administrator with CSS/Staff Accounts/Controllers/addStaffController.php";
 
 		if(isset($_POST["submit"]))
 		{
@@ -50,7 +51,9 @@
 			if($result)
 			{
 				print_r("success");
-				header("Location: staffAccountHomepage.php");
+				echo "<SCRIPT>
+				window.location.replace('staffAccountHomepage.php');
+				</SCRIPT>";
 			}else{
 				print_r("failed");
 			}

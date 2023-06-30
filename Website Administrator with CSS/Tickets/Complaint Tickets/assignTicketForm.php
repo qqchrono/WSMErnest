@@ -1,6 +1,10 @@
 <?php
-	include 'assignTicketController.php';
-    include '../../Staff Accounts/viewStaffController.php';
+    $path = $_SERVER['DOCUMENT_ROOT'];
+    $path2 = $_SERVER['DOCUMENT_ROOT'];
+
+    include_once $path . "/Water-Supply-Management/Website Administrator with CSS/Tickets/Complaint Tickets/Controllers/assignTicketController.php";
+    include_once $path2 . "/Water-Supply-Management/Website Administrator with CSS/Staff Accounts/Controllers/viewStaffController.php";
+
     session_start();
 	include '../../Account setting/AccountSettingController.php';
 	$staffController = new AccountSettingController;

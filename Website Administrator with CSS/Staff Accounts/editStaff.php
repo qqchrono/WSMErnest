@@ -34,7 +34,8 @@
 <body>
 
 <?php
-	include 'editStaffController.php';
+	$path = $_SERVER['DOCUMENT_ROOT'];
+	include_once $path . "/Water-Supply-Management/Website Administrator with CSS/Staff Accounts/Controllers/editStaffController.php";
 
 	$staffID = '';
 	$username = '';
@@ -77,7 +78,9 @@
 			
 		if($result)
 		{
-			header("Location: staffAccountHomepage.php");
+			echo "<SCRIPT>
+			window.location.replace('staffAccountHomepage.php');
+			</SCRIPT>";
 		}else{
 			print_r("failed");
 		}

@@ -67,7 +67,9 @@
                 
             if($result)
             {
-                header("Location: staffAccountHomepage.php");
+                echo "<SCRIPT>
+				window.location.replace('staffAccountHomepage.php');
+				</SCRIPT>";
             }else{
                 print_r("failed");
             }

@@ -33,8 +33,9 @@
 
 	<?php include 'chemicalNavbar.php'; ?>
 
-	<?php
-		include 'addChemicalController.php';
+	<?php	
+		$path = $_SERVER['DOCUMENT_ROOT'];
+		include_once $path . "/Water-Supply-Management/Website Administrator with CSS/Chemicals/Controllers/addChemicalController.php";
 
 		if(isset($_POST["submit"]))
 		{

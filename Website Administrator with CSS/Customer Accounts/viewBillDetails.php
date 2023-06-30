@@ -1,6 +1,7 @@
 <?php
     session_start();
-	include_once 'viewBillController.php';
+    $path = $_SERVER['DOCUMENT_ROOT'];
+    include_once $path . "/Water-Supply-Management/Website Administrator with CSS/Customer Accounts/Controllers/viewBillController.php";
 
 	include '../Account setting/AccountSettingController.php';
 	$staffController = new AccountSettingController;
