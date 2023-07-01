@@ -27,10 +27,10 @@ CREATE TABLE IF NOT EXISTS CompanyAccount (
   companyName varchar(20) DEFAULT NULL,
   companyAddress varchar(100) DEFAULT NULL,
   companyPhoneNumber varchar(100) DEFAULT NULL,
-  companyAccountStatus bit(1) DEFAULT NULL, #Active or not
-  companyPaymentStatus bit(1) DEFAULT NULL, #Paid for the sub or not
+  companyAccountStatus bit(1) DEFAULT 0, #Active or not
+  companyPaymentStatus bit(1) DEFAULT 0, #Paid for the sub or not
   companySubscriptionType bit(3) DEFAULT NULL, #How long are they subbed for
-  companyTrialStatus bit(1) DEFAULT NULL, #Have they applied for free trial already
+  companyTrialStatus bit(1) DEFAULT 0, #Have they applied for free trial already
   companyExpiryDate DATETIME DEFAULT NULL,
   PRIMARY KEY (companyUEN)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -65,6 +65,7 @@ CREATE TABLE IF NOT EXISTS Equipments (
   companyUEN int(50) NOT NULL,
   equipmentName varchar(100) DEFAULT NULL,
   quantity int(50) NOT NULL,
+  technicalParameters varchar(100) DEFAULT NULL,
   installationDate DATE DEFAULT NULL,
   expiryDate DATE DEFAULT NULL,
   warrantyDate DATE DEFAULT NULL,
