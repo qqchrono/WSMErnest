@@ -119,36 +119,52 @@ CREATE TABLE IF NOT EXISTS ComplaintTicket (
   PRIMARY KEY (complaintTicketID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+INSERT INTO `CompanyAccount` (`companyUEN`, `companyName`, `companyAddress`, `companyPhoneNumber`, `companyAccountStatus`
+, `companyPaymentStatus`, `companySubscriptionType`, `companyTrialStatus`, `companyExpiryDate`) VALUES
+(111111, 'Water Company A', 'Ang Mo Kio', '44445555', 1, 1, 1, 0, '2023-12-01');
+
 #YYYY-MM-DD
-INSERT INTO `Equipments` (`equipmentName`, `quantity`, `installationDate`, `expiryDate`, `warrantyDate`) VALUES
-('Equipment1', '2', now(),  now(), 2024-05-21); 
+INSERT INTO `Equipments` (`companyUEN`, `equipmentName`, `quantity`, `technicalParameters`, `installationDate`, `expiryDate`, `warrantyDate`) VALUES
+(111111, 'Pipe', 5, '2" threaded brass pipe and fittings', now(), '2023-10-02', '2026-07-02');
 
-INSERT INTO `Chemicals` (`chemicalName`, `useTime`, `quantity`, `expiryDate`) VALUES
-('Chemical1', '123', '3', now());
+INSERT INTO `Equipments` (`companyUEN`, `equipmentName`, `quantity`, `technicalParameters`, `installationDate`, `expiryDate`, `warrantyDate`) VALUES
+(111111, 'Valve', 10, '2" Pressure relief valve', now(), '2023-10-02', '2026-07-02'); 
 
-INSERT INTO `StaffAccount` (`username`, `staffName`, `email`, `password`, `role`) VALUES
-('staff', 'Ernest', 'abc@gmail.com', 'password', 'Staff');
+INSERT INTO `Equipments` (`companyUEN`, `equipmentName`, `quantity`, `technicalParameters`, `installationDate`, `expiryDate`, `warrantyDate`) VALUES
+(111111, 'Pump', 25, '6"x"12" end pump vault w/ solid walls', now(), '2023-10-02', '2026-07-02'); 
 
-INSERT INTO `StaffAccount` (`username`, `staffName`, `email`, `password`, `role`) VALUES
-('admin', 'Ernest', 'abc@gmail.com', 'password', 'Admin');
+INSERT INTO `Equipments` (`companyUEN`, `equipmentName`, `quantity`, `technicalParameters`, `installationDate`, `expiryDate`, `warrantyDate`) VALUES
+(111111, 'Spool', 13, '6" FL x PE SPOOL', now(), '2023-10-02', '2026-07-02'); 
 
-INSERT INTO `StaffAccount` (`username`, `staffName`, `email`, `password`, `role`) VALUES
-('staff', 'Ernest', 'abc@gmail.com', 'password', 'Staff');
+INSERT INTO `Chemicals` (`companyUEN`, `chemicalName`, `useTime`, `quantity`, `expiryDate`) VALUES
+(111111, 'Chlorine', '4', '10', '2026-07-02');
 
-INSERT INTO `CustomerAccount` (`customerName`, `email`, `address`, `password`, `phoneNumber`, `bankAccount`) VALUES
-('Bob', 'c@gmail.com', 'ang mo kio','password', 12345678, '12312312312312312312');
+INSERT INTO `Chemicals` (`companyUEN`, `chemicalName`, `useTime`, `quantity`, `expiryDate`) VALUES
+(111111, 'Chloramine', '3', '15', '2026-10-2');
 
-INSERT INTO `CustomerAccount` (`customerName`, `email`, `address`, `password`, `phoneNumber`, `bankAccount`) VALUES
-('Tom', 'tom@gmail.com', 'bishan','password', 87654321, '12312312312312312312');
+INSERT INTO `Chemicals` (`companyUEN`, `chemicalName`, `useTime`, `quantity`, `expiryDate`) VALUES
+(111111, 'Chlorine Dioxide', '8', '10', '2026-06-02');
 
-INSERT INTO `SupportTicket` (`customerID`, `ticketStatus`, `details`, `time_of_issue`, `time_of_resolution`) VALUES
-('1', 0, 'asdasdasdasd', now(), now());
+INSERT INTO `StaffAccount` (`companyUEN`, `username`, `staffName`, `email`, `password`, `role`) VALUES
+(111111 ,'staff', 'Tom', 'tom@gmail.com', 'password', 'Staff');
 
-INSERT INTO `ComplaintTicket` (`customerID`, `ticketStatus`, `details`, `time_of_issue`, `time_of_resolution`) VALUES
-('1', 0, 'test1', now(), now());
+INSERT INTO `StaffAccount` (`companyUEN`, `username`, `staffName`, `email`, `password`, `role`) VALUES
+(111111, 'admin', 'John', 'john@gmail.com', 'password', 'Admin');
 
-INSERT INTO `ComplaintTicket` (`customerID`, `ticketStatus`, `details`, `time_of_issue`, `time_of_resolution`) VALUES
-('1', 0, 'test2', now(), now());
+INSERT INTO `CustomerAccount` (`companyUEN`, `customerName`, `email`, `address`, `password`, `phoneNumber`, `bankAccount`) VALUES
+(111111, 'Bob', 'bob@gmail.com', 'ang mo kio','password', 12345678, '12312312312312312312');
+
+INSERT INTO `CustomerAccount` (`companyUEN`, `customerName`, `email`, `address`, `password`, `phoneNumber`, `bankAccount`) VALUES
+(111111, 'Tom', 'tom@gmail.com', 'bishan','password', 87654321, '12312312312312312312');
+
+INSERT INTO `SupportTicket` (`companyUEN`, `customerID`, `ticketStatus`, `details`, `time_of_issue`, `time_of_resolution`) VALUES
+(111111, '1', 0, 'Change in address', now(), now());
+
+INSERT INTO `ComplaintTicket` (`companyUEN`, `customerID`, `ticketStatus`, `details`, `time_of_issue`, `time_of_resolution`) VALUES
+(111111, '1', 0, 'Water from tap dirty', now(), now());
+
+INSERT INTO `ComplaintTicket` (`companyUEN`, `customerID`, `ticketStatus`, `details`, `time_of_issue`, `time_of_resolution`) VALUES
+(111111, '1', 0, 'No water supply', now(), now());
 
 INSERT INTO `priceRate` (`priceDate`, `waterPriceRate`) VALUES
 (now(), 0.5);

@@ -91,6 +91,7 @@
 								<option value="Admin">Admin</option>
 								<option value="Staff">Staff</option>
 							</select>
+						</td>
 					</tr>
 					<tr>
 						<td class="button-container">
