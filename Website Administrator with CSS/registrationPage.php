@@ -12,13 +12,13 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="LoginBoundary.css"> <!-- need css for registration form -->
+<link rel="stylesheet" href="registrationPage.css"> <!-- need css for registration form -->
 </head>
 <body>
 <form action="registrationPage.php" method="POST">
 	<h2>Welcome to<br>Water Supply Management System</h2>
-	<div class="rectangle-box">
-		<h3 align = 'center'>Register your<br>company account here</h3>
+
+		<h3 align = 'center'>Register your company account here</h3>
 		<table align="center">
 		<tr>
 						<td><label for="username"> Username : </label>
@@ -59,12 +59,12 @@
 					</tr>
 					<tr>
 						<td class="button-container">
-							<input type="submit" name="submit" value="Add Equipment" style="border-radius: 5px;">
-							<a href="equipmentHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a>
+							<input type="submit" name="submit" value="Register" style="border-radius: 5px;">
+							<a href="equipmentHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a>	
 						</td>
 					</tr>
 		</table>
-	</div>
+
 </form>
 </body>
 </html>
