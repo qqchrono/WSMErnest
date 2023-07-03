@@ -34,7 +34,36 @@ class Customer {
             return "$conn->error";
         
     }
+    #get price rate
+    public function fetch_price_rate(){
+        global $conn;
+        $SQL = "SELECT * FROM pricerate ";
+        $exeSQL =  mysqli_query($conn, $SQL);
+        $array = mysqli_fetch_all($exeSQL, MYSQLI_ASSOC);
+        return $array ;
+    }
 
-   
+   #update bill status
+   public function update_bill($id){
+        global $conn;
+        $SQL = "UPDATE waterusagebill SET billStatus = 1 WHERE waterUsageID ='$id'";
+        $exeSQL = mysqli_query($conn,$SQL);
+        if ($exeSQL === TRUE){
+            return " updated";
+        }
+        else 
+            return "$conn->error";
+   }
+   #reset password notification
+   public function reset_password($email){
+    global $conn;
+    $SQL = "INSERT INTO `notification` (`email`) VALUES ('$email')";
+    $exeSQL = mysqli_query($conn,$SQL);
+    if($exeSQL ===TRUE){
+        return "Submited";
+    }
+    else return "$conn->error";
+
+}
 }
 ?>

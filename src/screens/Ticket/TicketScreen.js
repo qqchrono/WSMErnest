@@ -72,13 +72,13 @@ export default function TicketScreen() {
 
 
  <View style={styles.userInfoSection}>
-    <Text>Support (PW reset)</Text>
+    <Text>Support (General Support)</Text>
       <RadioButton
         value="Support" 
         status={ checked === 'Support' ? 'checked' : 'unchecked' } //if the value of checked is Servicing, then select this button
         onPress={() => setChecked('Support')} //when pressed, set the value of the checked Hook to 'Servicing'
       />
-      <Text>Technical Support (Complaint) </Text>
+      <Text>Technical Support (Complaint/Complex issue) </Text>
       <RadioButton
         value="Technical"
         status={ checked === 'Technical' ? 'checked' : 'unchecked' }

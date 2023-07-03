@@ -21,9 +21,11 @@ const navigation =useNavigation();
 var user_id = require('../HomeScreen/HomeScreen');
 const [ticket,setticket]=useState([]);
 const supportTicket =[]
+const resolveTicket=[]
 const [isLoading, setIsLoading] = useState(true);
 const isFocused = useIsFocused()
 var tic_id=0
+var tic_res=0
 
 
 
@@ -68,23 +70,56 @@ const fetch_ticket= async()=>{
 
 //only run render after fetch is completed
 if(!isLoading){
-  
-  //validate if there a ticket fetch 
-  if(ticket[1][0].length >0|| ticket[0][0].length>0 ){
+  //validate if there a ticket fetch for support
+  if( ticket[0][0].length>0 ){
   for (i =0; i <ticket[0][0].length ;i++){
-
+    if(ticket[0][0][i]["ticketStatus"]=="0"){
     supportTicket.push(
       {suppTicid: ticket[0][0][i]["supportTicketID"],
-      details: ticket[0][0][i]["details"],key: tic_id},
+      details: ticket[0][0][i]["details"],
+      key: tic_id,
+      time:  ticket[0][0][i]["time_of_issue"],
+
+    },
     )
     tic_id=tic_id+1;
+    }
+    else{
+      resolveTicket.push(
+        {suppTicid: ticket[0][0][i]["supportTicketID"],
+      details: ticket[0][0][i]["details"],
+      key: tic_res,
+      time_res: ticket[0][0][i]["time_of_resolution"],
+    },
+      )
+      tic_res=tic_res+1;
+    }
+    
   }
+}
+//validate if there a ticket fetch for technical
+if(ticket[1][0].length >0){
   for (i =0; i <ticket[1][0].length ;i++){
+    if(ticket[1][0][i]["ticketStatus"]=="0"){
     supportTicket.push(
       {suppTicid: ticket[1][0][i]["complaintTicketID"],
-      details: ticket[1][0][i]["details"],key: tic_id},
+      details: ticket[1][0][i]["details"],
+      key: tic_id,
+      time:  ticket[1][0][i]["time_of_issue"],
+    },
     )
     tic_id=tic_id+1;
+    }
+    else{
+      resolveTicket.push(
+        {suppTicid: ticket[1][0][i]["supportTicketID"],
+      details: ticket[1][0][i]["details"],key: tic_res,
+      time_res: ticket[1][0][i]["time_of_resolution"],
+    },
+      )
+      tic_res=tic_res+1;
+    }
+   
   }
 }
   return (
@@ -110,17 +145,48 @@ return (
     <Text style={styles.cardDetails}>Id:
       {supportTicket.suppTicid}
     </Text>
-    
+    <Text style={styles.cardDetails}>Time of creation:
+      {supportTicket.time}
+    </Text>
     <Text style={styles.cardDetails}>Detail:
       {supportTicket.details}
+    </Text>
+
+
+  </View>
+   </View>
+
+); //End of loop below
+})} 
+<Title style={[styles.title, {
+      marginTop:15,
+      marginBottom: 5,
+      marginLeft: 125,
+      fontSize:20,
+      fontWeight:'700',
+//Show resolved Ticket
+ }]}>Resolved Ticket</Title>
+{resolveTicket.map((resolveTicket) => { 
+return (
+<View key={resolveTicket.key} style={styles.card}>
+  <View style={styles.cardInfo}>
+    <Text style={styles.cardTitle}>No.
+    {resolveTicket.key}
+    </Text>
+    <Text style={styles.cardDetails}>Id:
+      {resolveTicket.suppTicid}
+    </Text>
+    <Text style={styles.cardDetails}>Time of resolved:
+      {resolveTicket.time_res}
+    </Text>
+    <Text style={styles.cardDetails}>Detail:
+      {resolveTicket.details}
     </Text>
   </View>
    </View>
 
 ); //End of loop below
 })} 
-
-
 <Button
 title="Submit a New Ticket"
 onPress={() => navigation.navigate("SubmitTicket")} />

@@ -161,7 +161,7 @@ const HomeScreen = () => {
                  marginTop:15,
                  marginBottom: 5,
                }]}>{name}</Title>
-               <Caption style={styles.caption}>Name: {name}</Caption>
+               <Caption style={styles.caption}>Name:{name}</Caption>
              </View>
            </View>
          </View>

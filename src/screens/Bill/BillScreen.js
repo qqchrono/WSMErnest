@@ -14,25 +14,64 @@ import {
   TouchableRipple,
 } from 'react-native-paper';
 import { useNavigation ,useIsFocused} from "@react-navigation/native";
-
+  
 export default function BillScreen()  {
+  const [refreshIndicator, setRefreshIndicator] = useState(false);
    var user_id = require('../HomeScreen/HomeScreen');
+   const navigation =useNavigation();
    const [waterusagebill,setwaterusagebill] = useState([]);
-   const [userinform,setuserinform] = useState([]);
+   const [name,setname] = useState([]);
+   const [phone,setphone] = useState([]);
+   const [address,setaddress] = useState([]);
+   const [accountnumber,setaccountnumber] = useState([]);
    const [isLoading, setIsLoading] = useState(true);
    const [rate, setrate] = useState([]);
-    const isFocused = useIsFocused()
+  const isFocused = useIsFocused()
    var billinformation=[];
-   const k="55"
-   const billid= 0;
-   const name="";
-   const accountnumber="";
-   const billdate="";
-   const address ="";
-   const usage = "";
-   const duedate="";
-   
+   var billid= 5;
+   var billdate="";
+   var duedate="";
+   var usage = "";
+   var price_rate="";
+   var htmlTemplate="";
+   var total_price="";
+   //this this variable are for discounted plan 
+   var offpeakrate="";
+   var peakrate=""
+   //
+  //user email
+   var Email = require('../SignIn/Signin.js');
+    //fetching user detail from database 
 
+    const fetch_user_detail=()=>{
+      var APIURL = "http://10.0.2.2/mobile/fetch_user_detail.php";
+      var headers = {
+        'Accept' : 'application/json',
+        'Content-Type' : 'application/json'
+      };
+      var Data ={
+        Email: Email,
+      };
+      fetch(APIURL,{
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(Data)
+      })
+      .then((Response)=>Response.json())
+      .then((Response)=>{
+       setphone(Response[0]['phoneNumber'])
+       setaddress(Response[0]['address'])
+       setname(Response[0]['customerName'])
+       setaccountnumber(Response[0]['bankAccount'])
+       
+       
+      })
+      .catch((error)=>{
+        console.error("ERROR FOUND" + error);
+      })
+    
+  }
+  //fectch user usage
    const fetch_current_usage=()=>{
       var APIURL = "http://10.0.2.2/mobile/fetch_user_usage.php";
       var headers = {
@@ -58,8 +97,95 @@ export default function BillScreen()  {
       })
     }
 
-   //template for pdf 
-   const htmlTemplate = `
+    //fetch price rate based on the month/year
+    const fetch_price_rate=()=>{
+      var APIURL = "http://10.0.2.2/mobile/fetch_price_rate.php";
+      var headers = {
+        'Accept' : 'application/json',
+        'Content-Type' : 'application/json'
+      };
+      
+      fetch(APIURL,{
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify()
+      })
+  
+      .then((Response)=>Response.json())
+      .then((Response)=>{
+        setrate(Response)
+
+      })
+      .catch((error)=>{
+        console.error("ERROR FOUND" + error);
+      })
+    }
+//connecting with the bank to verify payment
+const verify_bank=()=>{
+  var APIURL = "http://10.0.2.2/mobile/validate_bank.php";
+  var headers = {
+    'Accept' : 'application/json',
+    'Content-Type' : 'application/json'
+  };
+  var Data ={
+    total_price:total_price,
+    bankAccount:accountnumber,
+    billid:billid,
+  };
+  fetch(APIURL,{
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify(Data)
+  })
+
+  .then((Response)=>Response.json())
+  .then((Response)=>{
+    alert(Response)
+    console.log(Response)
+  })
+  .catch((error)=>{
+    console.error("ERROR FOUND" + error);
+  })
+}
+
+//verify payment after use click on paybill
+const payment_verify=(id)=>{
+  setdata(id)
+  verify_bank();
+  setRefreshIndicator(true);
+
+}
+
+//set data that are use for the pdf after user select the bill he/she which to review 
+async function setdata(id){
+  
+  for(i=0 ; i<waterusagebill.length;i++){
+    if(waterusagebill[i]["waterUsageID"]==id){
+        billid=id
+        billdate=waterusagebill[i]['billDate']
+        duedate=waterusagebill[i]['dueDate']
+        usage = waterusagebill[i]['waterUsage']
+        //assign price rate by filtering the date 
+        for(i=0;i<rate.length;i++){
+          filterPriceDate=(rate[i]['priceDate']).slice(0,7).replace('-','');
+          filterBillDate=billdate.slice(0,7).replace('-','');
+          if(filterPriceDate==filterBillDate){
+            price_rate=rate[i]['waterPriceRate']
+            total_price=price_rate*usage
+          }
+        }
+    }
+  }
+
+}
+
+
+   //generate pdf 
+   async function generatePDF(id){
+      
+      setdata(id)
+      //set pdf html template with data selected
+      htmlTemplate = `
    <!DOCTYPE html>
 <html>
 <head>
@@ -122,14 +248,14 @@ export default function BillScreen()  {
   <h1>            </h1>
 
   <div class="top-right">
-    <h2>February 2023 Tax Invoice</h2>
+    <h2>${billdate} Tax Invoice</h2>
   </div>
 
   <table style="width: 30%" align="right" >
     <thead>
       <tr>
         <th bgcolor="grey">Total Amount Payable</th>
-        <th bgcolor="grey">$999.0</th>
+        <th bgcolor="grey">$${total_price}</th>
       </tr>
     </thead>
     <br>
@@ -138,7 +264,7 @@ export default function BillScreen()  {
     <tbody>
       <tr>
         <td>Payment Due date</td>
-        <td>19 apir 2022</td>
+        <td>${duedate}</td>
       </tr>
       <tr>
         <td>Payment Mode</td>
@@ -149,11 +275,11 @@ export default function BillScreen()  {
 <br>
   <div class="bill-details">
   <br>
-    <span>Customer Name:</span> John Doe<br>
-    <span>Account Number:</span> ${k}<br>
-    <span>Bill Number:</span> 987654321<br>
-    <span>Bill Date:</span> 2023-06-11<br>
-    <span>Address:</span> BLK KKK <br>
+    <span>Customer Name:</span> ${name}<br>
+    <span>Account Number:</span> ${accountnumber}<br>
+    <span>Bill Number:</span> ${billid}<br>
+    <span>Bill Date:</span> ${billdate}<br>
+    <span>Address:</span> ${address} <br>
   </div>
 
   <table class="tt" >
@@ -169,16 +295,16 @@ export default function BillScreen()  {
     <tbody>
       <tr>
         <td>10-04-2023 - 10-05-2023</td>
-        <td>500</td>
-        <td>$10/unit</td>
-        <td>$500.00</td>
+        <td>${usage}</td>
+        <td>${price_rate}¢/unit</td>
+        <td>$${total_price}</td>
       </tr>
         <tr>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
-            <td>$500.00</td>
+            <td>$${total_price}</td>
         </tr>
     </tbody>
   </table>
@@ -186,33 +312,17 @@ export default function BillScreen()  {
   <p>Thank you for your payment.</p>
 </body>
 </html>
-
-   
 `;
 
-
-async function setdata(id){
-  
-  for(i=0 ; waterusagebill.length;i++){
-    if(waterusagebill[i]['waterUsageID']==id){
-
-    }
-  }
-
-}
-
-
-   //generate pdf 
-   async function generatePDF(id){
-      //setdata(id)
-      
+        
       alert("Bill Has been downloaded")
       const htmlContent = htmlTemplate;
-   
-      const options = {
+    
+      let options = {
          html: htmlContent,
-         filename: "example",
-         directory:"",
+         fileName: billdate,
+         directory:"Downloads",
+         base64: true,
       };
       const file = await RNHTMLtoPDF.convert(options);
       console.log(file.filePath);
@@ -220,15 +330,21 @@ async function setdata(id){
    }
 
 
-   
-
    //fetch ticket when it is forced deal with navigation error
  useEffect(() => {
   if(isFocused){
     fetch_current_usage()
-    
+    fetch_user_detail()
+    fetch_price_rate()
   }
-}, [isFocused])
+  if(refreshIndicator){
+    fetch_current_usage()
+    fetch_user_detail()
+    fetch_price_rate()
+    setRefreshIndicator(false);
+  }
+ 
+}, [isFocused,refreshIndicator])
 
 
    
@@ -236,11 +352,19 @@ async function setdata(id){
       
       //validate if there a ticket fetch 
       if(waterusagebill.length>0 ){
+        var billstates=""
       for (i =0; i <waterusagebill.length ;i++){
-        billinformation.push(
-          {waterbillid:waterusagebill[i]["waterUsageID"],
-          billStatus:waterusagebill[i]["billStatus"]},
-        )
+        if (waterusagebill[i]["billStatus"]==0){
+          billstates="Unpaid"
+        }
+        else{
+          billstates="Paid"
+        }
+          billinformation.push(
+            {waterbillid:waterusagebill[i]["waterUsageID"],
+            billStatus:billstates,
+            billdate:waterusagebill[i]["billDate"]},
+          )
       }
     }
    
@@ -266,19 +390,24 @@ async function setdata(id){
     <View key={billinformation.waterbillid}style={styles.card}>
       <View style={styles.cardInfo}>
         <Text style={styles.cardTitle}>
+          Bill Id:
         {billinformation.waterbillid}
         </Text>
-        
         <Text style={styles.cardDetails}>
-          {billinformation.billStatus}
+          Date:
+          {billinformation.billdate}
+        {}
+        </Text>
+        <Text style={styles.cardDetails}>
+          Bill Status:{billinformation.billStatus}
         </Text>
       </View>
            <View style={styles.button}>
                  <Button
                  title="       Pay Bill        "
                  color="#1666BE"
-                 disabled={billinformation.billStatus === "Paid"}
-                 onPress={() => Alert.alert('Bill has been paid!')} //insert  pay function here
+                 disabled={(billinformation.billStatus=="Paid")}
+                 onPress={() => payment_verify(billinformation.waterbillid)} //insert  pay function here
                  //Pay function will update the SQL billStatus, and it will then disable the button after it has been paid
                  
               />

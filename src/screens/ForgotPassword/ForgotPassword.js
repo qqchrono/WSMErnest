@@ -1,25 +1,64 @@
-import React, {useState} from'react';
-import { View,Text,ScrollView,StyleSheet} from 'react-native';
+import React, {useEffect, useState} from'react';
+import { TextInput,View,Text,ScrollView,StyleSheet} from 'react-native';
 import CustomInput from '../comp/CustomInput/CustomInput';
 import CustomButton from '../comp/CustomButton/CustomButton';
 import { useNavigation } from "@react-navigation/native";
+
 const ForgotPassword = () => {
-    const[username,setUsername] =  useState('')
+    const [email,setemail] = useState([]);
     const navigation =useNavigation();
     const onReturn =() =>{
         
         navigation.navigate('SignIn');
     }
+    
+
+    const reset_password=()=>{
+        console.log(email)
+       if(email!=""){
+        var APIURL = "http://10.0.2.2/mobile/reset_password.php";
+         var headers = {
+        'Accept' : 'application/json',
+        'Content-Type' : 'application/json'
+      };
+      var Data ={
+        Email: email,
+      };
+      fetch(APIURL,{
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(Data)
+      })
+      .then((Response)=>Response.json())
+      .then((Response)=>{
+        alert(Response[0].Message)
+       
+       
+      })
+      .catch((error)=>{
+        console.error("ERROR FOUND" + error);
+      })
+       }
+       
+    }
+
+
     return (
+        
         <ScrollView showsHorizontalScrollIndicator={false}>
             <View>
-                <Text style={styles.title}>Forgot Password</Text>
-                <CustomInput 
-                placeholder="Username"
-                value={username}
-                setValue={setUsername}
+                <Text style={styles.title}>Forgot Password{"\n"}</Text>
+                <TextInput
+                placeholderTextColor="#666666"
+                defaultValue=""
+                placeholder="Email"
+                onChangeText={(value) => setemail(value)}
+                style={[
+                    styles.textInput,
+                   
+                  ]}
                 />
-                <CustomButton text="Submit"  />
+                <CustomButton text="Submit" onPress={reset_password} />
                 <CustomButton text="return to Sign in page" onPress={onReturn} type='sec'/>
                 
             </View>
@@ -39,6 +78,18 @@ const styles= StyleSheet.create({
     },
     title:{
         fontSize :24 ,
-    }
+    },
+    textInput: {
+        flex: 1,
+        marginBottom:2,
+        marginTop: Platform.OS === 'ios' ? 0 : -12,
+        paddingLeft: 10,
+        color: '#05375a',
+         borderColor: "gray",
+        width: "100%",
+        borderWidth: 2,
+        borderRadius: 20,
+        padding: 20,
+      },
 })
 export default ForgotPassword
