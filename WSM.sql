@@ -119,6 +119,18 @@ CREATE TABLE IF NOT EXISTS ComplaintTicket (
   PRIMARY KEY (complaintTicketID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE IF NOT EXISTS bankAccount (
+	BankAccountID int(50) NOT NULL AUTO_INCREMENT,
+  AccountNumber varchar(200),
+  Balance double(10,2),
+  PRIMARY KEY (BankAccountID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS notification (
+	notificationID int(50) NOT NULL AUTO_INCREMENT,
+  email varchar(200),
+  PRIMARY KEY (notificationID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 INSERT INTO `CompanyAccount` (`companyUEN`, `companyName`, `companyAddress`, `companyPhoneNumber`, `companyAccountStatus`
 , `companyPaymentStatus`, `companySubscriptionType`, `companyTrialStatus`, `companyExpiryDate`) VALUES
 (111111, 'Water Company A', 'Ang Mo Kio', '44445555', 1, 1, 1, 0, '2023-12-01');
