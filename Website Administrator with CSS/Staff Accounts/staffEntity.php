@@ -36,7 +36,6 @@
 
         public function getData($companyUEN)
         {
-            echo $companyUEN;
             $userQuery = "SELECT * FROM StaffAccount
             INNER JOIN CompanyDetails ON StaffAccount.companyUEN = CompanyDetails.companyUEN
             WHERE StaffAccount.companyUEN = '$companyUEN'";

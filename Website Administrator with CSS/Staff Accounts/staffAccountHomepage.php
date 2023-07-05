@@ -109,6 +109,7 @@
         </tr>
 
         <?php 
+        echo $_SESSION['companyUEN'];
             $staff = new staffView;
             $result = $staff -> getData($_SESSION['companyUEN']);
             if($result)
