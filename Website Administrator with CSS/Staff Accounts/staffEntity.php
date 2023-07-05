@@ -34,9 +34,13 @@
 			return null; 
 		}
 
-        public function getData()
+        public function getData($companyUEN)
         {
-            $userQuery = "SELECT * FROM StaffAccount";
+            echo $companyUEN;
+            $userQuery = "SELECT * FROM StaffAccount
+            INNER JOIN CompanyDetails ON StaffAccount.companyUEN = CompanyDetails.companyUEN
+            WHERE StaffAccount.companyUEN = '$companyUEN'";
+            ;
             $result = $this->conn->query($userQuery);
             if($result->num_rows > 0){
                 return $result;

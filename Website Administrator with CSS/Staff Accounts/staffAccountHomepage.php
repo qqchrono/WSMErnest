@@ -110,7 +110,7 @@
 
         <?php 
             $staff = new staffView;
-            $result = $staff -> getData();
+            $result = $staff -> getData($_SESSION['companyUEN']);
             if($result)
             {
                 foreach($result as $row)

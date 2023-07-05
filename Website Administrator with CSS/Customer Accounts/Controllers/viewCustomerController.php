@@ -4,10 +4,10 @@ include_once $path . "/Water-Supply-Management/Website Administrator with CSS/Cu
 
 class customerView
 	{
-		public function getData()
+		public function getData($companyUEN)
 		{	
 			$customerEntity = new customerEntity;
-			$result = $customerEntity -> getData();	
+			$result = $customerEntity -> getData($companyUEN);	
 			
 			if($result)
             {
