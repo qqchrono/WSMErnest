@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS CustomerAccount (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 #Table structure for Companies
-CREATE TABLE IF NOT EXISTS CompanyAccount (
+CREATE TABLE IF NOT EXISTS CompanyDetails (
   companyUEN int(50) NOT NULL,
   companyName varchar(20) DEFAULT NULL,
   companyAddress varchar(100) DEFAULT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS StaffAccount (
   staffName varchar(100) DEFAULT NULL,
   email varchar(100) DEFAULT NULL,
   password varchar(100) NOT NULL,
-  role varchar (10) DEFAULT NULL,
+  role varchar (15) DEFAULT NULL,
   imageName varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (staffID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -119,9 +119,30 @@ CREATE TABLE IF NOT EXISTS ComplaintTicket (
   PRIMARY KEY (complaintTicketID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `CompanyAccount` (`companyUEN`, `companyName`, `companyAddress`, `companyPhoneNumber`, `companyAccountStatus`
+INSERT INTO `CompanyDetails` (`companyUEN`, `companyName`, `companyAddress`, `companyPhoneNumber`, `companyAccountStatus`
 , `companyPaymentStatus`, `companySubscriptionType`, `companyTrialStatus`, `companyExpiryDate`) VALUES
-(111111, 'Water Company A', 'Ang Mo Kio', '44445555', 1, 1, 1, 0, '2023-12-01');
+(000000, 'Hydrogrid', 'Woodlands', '00001111', 1, 1, 1, 0, '2023-12-01');
+
+INSERT INTO `CompanyDetails` (`companyUEN`, `companyName`, `companyAddress`, `companyPhoneNumber`, `companyAccountStatus`
+, `companyPaymentStatus`, `companySubscriptionType`, `companyTrialStatus`, `companyExpiryDate`) VALUES
+(111111, 'Water Company A', 'Woodlands', '11112222', 1, 1, 1, 0, '2023-12-01');
+
+INSERT INTO `CompanyDetails` (`companyUEN`, `companyName`, `companyAddress`, `companyPhoneNumber`, `companyAccountStatus`
+, `companyPaymentStatus`, `companySubscriptionType`, `companyTrialStatus`, `companyExpiryDate`) VALUES
+(222222, 'Water Company B', 'Admiralty', '22223333', 1, 1, 1, 0, '2023-12-01');
+
+INSERT INTO `CompanyDetails` (`companyUEN`, `companyName`, `companyAddress`, `companyPhoneNumber`, `companyAccountStatus`
+, `companyPaymentStatus`, `companySubscriptionType`, `companyTrialStatus`, `companyExpiryDate`) VALUES
+(333333, 'Water Company C', 'Khatib', '33334444', 1, 1, 1, 0, '2023-12-01');
+
+INSERT INTO `CompanyDetails` (`companyUEN`, `companyName`, `companyAddress`, `companyPhoneNumber`, `companyAccountStatus`
+, `companyPaymentStatus`, `companySubscriptionType`, `companyTrialStatus`, `companyExpiryDate`) VALUES
+(444444, 'Water Company D', 'Yio Chu Kang', '44445555', 1, 1, 1, 0, '2023-12-01');
+
+INSERT INTO `CompanyDetails` (`companyUEN`, `companyName`, `companyAddress`, `companyPhoneNumber`, `companyAccountStatus`
+, `companyPaymentStatus`, `companySubscriptionType`, `companyTrialStatus`, `companyExpiryDate`) VALUES
+(555555, 'Water Company E', 'Bishan', '55556666', 1, 1, 1, 0, '2023-12-01');
+
 
 #YYYY-MM-DD
 INSERT INTO `Equipments` (`companyUEN`, `equipmentName`, `quantity`, `technicalParameters`, `installationDate`, `expiryDate`, `warrantyDate`) VALUES
@@ -136,6 +157,7 @@ INSERT INTO `Equipments` (`companyUEN`, `equipmentName`, `quantity`, `technicalP
 INSERT INTO `Equipments` (`companyUEN`, `equipmentName`, `quantity`, `technicalParameters`, `installationDate`, `expiryDate`, `warrantyDate`) VALUES
 (111111, 'Spool', 13, '6" FL x PE SPOOL', now(), '2023-10-02', '2026-07-02'); 
 
+
 INSERT INTO `Chemicals` (`companyUEN`, `chemicalName`, `useTime`, `quantity`, `expiryDate`) VALUES
 (111111, 'Chlorine', '4', '10', '2026-07-02');
 
@@ -145,17 +167,67 @@ INSERT INTO `Chemicals` (`companyUEN`, `chemicalName`, `useTime`, `quantity`, `e
 INSERT INTO `Chemicals` (`companyUEN`, `chemicalName`, `useTime`, `quantity`, `expiryDate`) VALUES
 (111111, 'Chlorine Dioxide', '8', '10', '2026-06-02');
 
-INSERT INTO `StaffAccount` (`companyUEN`, `username`, `staffName`, `email`, `password`, `role`) VALUES
-(111111 ,'staff', 'Tom', 'tom@gmail.com', 'password', 'Staff');
 
 INSERT INTO `StaffAccount` (`companyUEN`, `username`, `staffName`, `email`, `password`, `role`) VALUES
-(111111, 'admin', 'John', 'john@gmail.com', 'password', 'Admin');
+(000000 ,'superadmin', 'superadmin', 'superadmin@gmail.com', 'password', 'Super Admin');
+
+
+INSERT INTO `StaffAccount` (`companyUEN`, `username`, `staffName`, `email`, `password`, `role`) VALUES
+(111111, 'admin1', 'John', 'john@gmail.com', 'password', 'Admin');
+
+INSERT INTO `StaffAccount` (`companyUEN`, `username`, `staffName`, `email`, `password`, `role`) VALUES
+(222222, 'admin2', 'Megan', 'megan@gmail.com', 'password', 'Admin');
+
+INSERT INTO `StaffAccount` (`companyUEN`, `username`, `staffName`, `email`, `password`, `role`) VALUES
+(333333, 'admin3', 'Robin', 'robin@gmail.com', 'password', 'Admin');
+
+INSERT INTO `StaffAccount` (`companyUEN`, `username`, `staffName`, `email`, `password`, `role`) VALUES
+(444444, 'admin4', 'Candice', 'candice@gmail.com', 'password', 'Admin');
+
+INSERT INTO `StaffAccount` (`companyUEN`, `username`, `staffName`, `email`, `password`, `role`) VALUES
+(555555, 'admin5', 'Steve', 'steve@gmail.com', 'password', 'Admin');
+
+
+INSERT INTO `StaffAccount` (`companyUEN`, `username`, `staffName`, `email`, `password`, `role`) VALUES
+(111111 ,'staff1', 'Tom', 'tom@gmail.com', 'password', 'Staff');
+
+INSERT INTO `StaffAccount` (`companyUEN`, `username`, `staffName`, `email`, `password`, `role`) VALUES
+(111111 ,'staff2', 'Billy', 'billy@gmail.com', 'password', 'Staff');
+
+INSERT INTO `StaffAccount` (`companyUEN`, `username`, `staffName`, `email`, `password`, `role`) VALUES
+(222222 ,'staff3', 'Perry', 'perry@gmail.com', 'password', 'Staff');
+
+INSERT INTO `StaffAccount` (`companyUEN`, `username`, `staffName`, `email`, `password`, `role`) VALUES
+(222222 ,'staff4', 'Jenny', 'jenny@gmail.com', 'password', 'Staff');
+
+INSERT INTO `StaffAccount` (`companyUEN`, `username`, `staffName`, `email`, `password`, `role`) VALUES
+(333333 ,'staff5', 'George', 'george@gmail.com', 'password', 'Staff');
+
+INSERT INTO `StaffAccount` (`companyUEN`, `username`, `staffName`, `email`, `password`, `role`) VALUES
+(444444 ,'staff6', 'Alicia', 'alicia@gmail.com', 'password', 'Staff');
+
+INSERT INTO `StaffAccount` (`companyUEN`, `username`, `staffName`, `email`, `password`, `role`) VALUES
+(555555 ,'staff7', 'Joshua', 'joshua@gmail.com', 'password', 'Staff');
+
+INSERT INTO `StaffAccount` (`companyUEN`, `username`, `staffName`, `email`, `password`, `role`) VALUES
+(555555 ,'staff8', 'Timmy', 'timmy@gmail.com', 'password', 'Staff');
+
 
 INSERT INTO `CustomerAccount` (`companyUEN`, `customerName`, `email`, `address`, `password`, `phoneNumber`, `bankAccount`) VALUES
 (111111, 'Bob', 'bob@gmail.com', 'ang mo kio','password', 12345678, '12312312312312312312');
 
 INSERT INTO `CustomerAccount` (`companyUEN`, `customerName`, `email`, `address`, `password`, `phoneNumber`, `bankAccount`) VALUES
-(111111, 'Tom', 'tom@gmail.com', 'bishan','password', 87654321, '12312312312312312312');
+(222222, 'Tom', 'tom@gmail.com', 'bishan','password', 87654321, '12312312312312312312');
+
+INSERT INTO `CustomerAccount` (`companyUEN`, `customerName`, `email`, `address`, `password`, `phoneNumber`, `bankAccount`) VALUES
+(333333, 'Karen', 'karen@gmail.com', 'Pasir Ris','password', 78994521, '12312312312312312312');
+
+INSERT INTO `CustomerAccount` (`companyUEN`, `customerName`, `email`, `address`, `password`, `phoneNumber`, `bankAccount`) VALUES
+(444444, 'Clive', 'clive@gmail.com', 'Tampines','password', 21346527, '12312312312312312312');
+
+INSERT INTO `CustomerAccount` (`companyUEN`, `customerName`, `email`, `address`, `password`, `phoneNumber`, `bankAccount`) VALUES
+(555555, 'Torgal', 'torgal@gmail.com', 'Clementi','password', 74185296, '12312312312312312312');
+
 
 INSERT INTO `SupportTicket` (`companyUEN`, `customerID`, `ticketStatus`, `details`, `time_of_issue`, `time_of_resolution`) VALUES
 (111111, '1', 0, 'Change in address', now(), now());

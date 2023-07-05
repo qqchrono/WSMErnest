@@ -36,12 +36,16 @@
 			$_SESSION['staffName'] = $Row['staffName'];
 			$_SESSION['staffID'] = $Row['staffID'];
 			$_SESSION['accountRole'] = $Row['role'];
+			$_SESSION['companyUEN'] = $Row['companyUEN'];
 
 			if ($_SESSION['accountRole'] == "Admin") {
-				header("Location:  Admin homepage/adminHomePage.php");
+				header("Location: Admin homepage/adminHomePage.php");
 			} else if ($_SESSION['accountRole'] == "Staff") {
 				#header("Location: Technical Staff Homepage/technicalStaffHomePage.php");
-				header("Location:  Admin homepage/adminHomePage.php?id={$Row['staffID']}");
+				header("Location: Admin homepage/adminHomePage.php");
+			} else if ($_SESSION['accountRole'] == "Super Admin") {
+				#header("Location: Technical Staff Homepage/technicalStaffHomePage.php");
+				header("Location: Super Admin/superadminHomePage.php");
 			}
 		}
 	} else {
