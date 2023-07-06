@@ -1,0 +1,115 @@
+body {background-color:white;font-family: sans-serif;}
+h2 {
+    text-align:center;
+    font-size: 26px;
+}
+
+input{
+  width: 100%;
+  padding: 10px 16px;
+  margin: 6px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  flex: 1;
+}
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+input[type=submit] {
+	border-radius: 8px;
+	font-family:sans-serif;
+	cursor: pointer;
+    padding: 6px 12px;
+    margin: 4px 0;
+    font-size: 12px;
+    max-width: 100px;
+    margin-right: 10px;
+    border: 2px solid #B9BBB6;
+    background-color: #B9BBB6;
+}
+.button-container button {
+	border-radius: 8px;
+	font-family:sans-serif;
+	cursor: pointer;
+    padding: 6px 12px;
+    margin: 4px 0;
+    font-size: 12px;
+    max-width: 100px;
+    border-color: #B9BBB6;
+    background-color: #B9BBB6;
+}
+.button-container a {
+    text-decoration: none;
+}
+label {
+    width: 130px;
+    font-size: 14px;
+    margin-right: 10px;
+}
+table {
+    margin: 0 auto;
+    width: 35%;
+}
+
+td {
+    display: flex;
+    align-items: center;
+}
+.details {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 5px;
+    font-family:sans-serif;
+    border-radius: 4px;
+}
+.eq-fieldset {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 435px;
+    padding: 10px;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+.eq-fieldset .input-field {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+}
+.eq-fieldset .btn-add-input {
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+.eq-fieldset .btn-del-input{
+    border: 1px solid #ccc;
+    cursor: pointer;
+    margin-left: 5px;
+}
+.chem-fieldset {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 435px;
+    padding: 10px;
+    border-radius: 4px;
+}
+.chem-fieldset .input-field {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+}
+.chem-fieldset .btn-add-input {
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+.chem-fieldset .btn-del-input{
+    border: 1px solid #ccc;
+    cursor: pointer;
+    margin-left: 5px;
+}
