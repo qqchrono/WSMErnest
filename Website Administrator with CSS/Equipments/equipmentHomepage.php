@@ -102,6 +102,7 @@
             <th>Equipment ID</th>
             <th>Equipment Name</th>
             <th>Quantity</th>
+            <th>Technical Parameters</th>
             <th>Date installed</th>
             <th>Expiry Date</th>
             <th>Warranty Date</th>
@@ -119,6 +120,7 @@
             <td><?php echo $row['equipmentID'] ?></td>
             <td><?=$row['equipmentName'] ?></td>
             <td><?=$row['quantity'] ?></td>
+            <td><?=$row['technicalParameters'] ?></td>
             <td><?=$row['installationDate'] ?></td>
             <td><?=$row['expiryDate'] ?></td>
             <td><?=$row['warrantyDate'] ?></td>

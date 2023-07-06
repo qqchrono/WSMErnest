@@ -22,7 +22,9 @@
 			$username = $inputdata["user"];
 			$password = $inputdata["pass"];
 
-			$userQuery = "SELECT * FROM staffAccount WHERE `username` = '$username' AND `password` = '$password'";
+			$userQuery = "SELECT * FROM staffAccount 
+            INNER JOIN CompanyDetails ON StaffAccount.companyUEN = CompanyDetails.companyUEN
+            WHERE `username` = '$username' AND `password` = '$password'";
 			$result = $this->conn->query($userQuery);
 
 			if ($result && $result->num_rows > 0) {
@@ -32,9 +34,12 @@
 			return null; 
 		}
 
-        public function getData()
+        public function getData($companyUEN)
         {
-            $userQuery = "SELECT * FROM StaffAccount";
+            $userQuery = "SELECT * FROM StaffAccount
+            INNER JOIN CompanyDetails ON StaffAccount.companyUEN = CompanyDetails.companyUEN
+            WHERE StaffAccount.companyUEN = '$companyUEN'";
+            ;
             $result = $this->conn->query($userQuery);
             if($result->num_rows > 0){
                 return $result;

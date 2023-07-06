@@ -70,6 +70,7 @@
 		<div class="rectangle-box">
 				<table align="center">
 					<tr>
+					<?php echo $_SESSION['companyUEN']; ?>
 						<td><label for="username">Username : </label>
 						<input type="text" id="username" placeholder="username" name="username" value=""></td>
 					</tr>
@@ -95,6 +96,7 @@
 					</tr>
 					<tr>
 						<td class="button-container">
+							<input type="text" id="companyUEN" name="companyUEN" value="<?php $_SESSION['companyUEN'];?>" readonly></td>
 							<input type="submit" name="submit" value="Add Staff" style="border-radius: 5px;">
 							<a href="staffAccountHomepage.php"><button type="button" style="border-radius: 5px">Back</button></a>
 						</td>

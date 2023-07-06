@@ -186,7 +186,7 @@
         <?php         
             #For retrieving customer data
             $customer = new customerView;
-            $result = $customer -> getData();
+            $result = $customer -> getData($_SESSION['companyUEN']);
             if($result)
             {
                 foreach($result as $row)
