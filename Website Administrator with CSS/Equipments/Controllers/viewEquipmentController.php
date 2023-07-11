@@ -4,10 +4,10 @@ include_once $path . "/Water-Supply-Management/Website Administrator with CSS/Eq
 
 class equipmentView
 	{
-		public function getData()
+		public function getData($companyUEN)
 		{	
 			$equipmentEntity = new equipmentEntity;
-			$result = $equipmentEntity -> getData();	
+			$result = $equipmentEntity -> getData($companyUEN);	
 			
 			if($result)
             {

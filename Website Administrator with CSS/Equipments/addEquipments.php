@@ -39,8 +39,12 @@
 	{
 		$inputdata = 
 		[
+		$equipmentSKU = $_POST["equipmentSKU"],
+		$companyUEN = $_POST["companyUEN"],
 		$equipmentName = $_POST["equipmentName"],
 		$quantity= $_POST["quantity"],
+		$minimumQty = $_POST["minimumQty"],
+		$technicalParameters = $_POST["technicalParameters"],
 		$installationDate = $_POST["installationDate"],
 		$expiryDate = $_POST["expiryDate"],
 		$warrantyDate = $_POST["warrantyDate"]
@@ -72,12 +76,28 @@
 		<div class="rectangle-box">
 				<table align="center">
 					<tr>
+						<td><label for="equipmentSKU">Equipment SKU : </label>
+						<input type="text" id="equipmentSKU" placeholder="Equipment SKU" name="equipmentSKU" value=""></td>
+					</tr>
+					<tr>
+						<td><label for="companyUEN">Company UEN : </label>
+						<input type="text" id="companyUEN" name="companyUEN" value="<?php echo $_SESSION['companyUEN'];?>" readonly></td>
+					</tr>
+					<tr>
 						<td><label for="equipmentName">Equipment Name : </label>
 						<input type="text" id="equipmentName" placeholder="Equipment Name" name="equipmentName" value=""></td>
 					</tr>
 					<tr>
 						<td><label for="quantity">Quantity : </label>
 						<input type="text" id="quantity" placeholder="Quantity" name="quantity" value=""></td>
+					</tr>
+					<tr>
+						<td><label for="minimumQty">Minimum Quantity : </label>
+						<input type="text" id="minimumQty" placeholder="Minimum Quantity" name="minimumQty" value=""></td>
+					</tr>
+					<tr>
+						<td><label for="technicalParameters">Technical Parameters : </label>
+						<input type="text" id="technicalParameters" placeholder="Technical Parameters" name="technicalParameters" value=""></td>
 					</tr>
 					<tr>
 						<td><label for="installationDate">Installation Date : </label>

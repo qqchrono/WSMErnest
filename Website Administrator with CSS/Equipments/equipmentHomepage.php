@@ -101,9 +101,11 @@
     <div class = "tableScroll">
       <table>
         <tr>
-            <th>Equipment ID</th>
+            <th>Equipment SKU</th>
+            <th>Company UEN</th>
             <th>Equipment Name</th>
             <th>Quantity</th>
+            <th>Minimum Quantity</th>
             <th>Technical Parameters</th>
             <th>Date installed</th>
             <th>Expiry Date</th>
@@ -112,7 +114,7 @@
         </tr>
   <?php 
     $equipment = new equipmentView;
-    $result = $equipment -> getData();
+    $result = $equipment -> getData($_SESSION['companyUEN']);
     if($result)
     {
         foreach($result as $row)
