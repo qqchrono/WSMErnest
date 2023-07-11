@@ -19,6 +19,7 @@
 			<a href="../Tickets/Complaint Tickets/complaintTicketHomepage.php" class="w3-bar-item w3-button w3-padding-large">Assigned Tickets</a>
 			<a href="../Chemicals/chemicalHomepage.php" class="w3-bar-item w3-button w3-padding-large">Chemicals</a>
 			<a href="../Equipments/equipmentHomepage.php" class="w3-bar-item w3-button w3-padding-large active">Equipments</a>
+			<a href="../Tickets/Complaint Tickets/waterusage.php" class="w3-bar-item w3-button w3-padding-large">Water usage</a>
 		</div>
 		<div class="w3-dropdown-hover w3-hide-small">
 			<img src="../Account setting/upload/<?php echo $img_name; ?>" width="40" height="40" title="<?php echo $img_name; ?>" style="border-radius: 50%; cursor:pointer; margin-left:6px;">

@@ -80,10 +80,13 @@ td {
     width: 100%;
     padding: 10px;
     border-radius: 4px;
+    margin-bottom: 2px;
 }
 .eq-fieldset .btn-add-input {
     border: 1px solid #ccc;
     cursor: pointer;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 .eq-fieldset .btn-del-input{
     border: 1px solid #ccc;
@@ -103,10 +106,13 @@ td {
     width: 100%;
     padding: 10px;
     border-radius: 4px;
+    margin-bottom: 2px;
 }
 .chem-fieldset .btn-add-input {
     border: 1px solid #ccc;
     cursor: pointer;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 .chem-fieldset .btn-del-input{
     border: 1px solid #ccc;

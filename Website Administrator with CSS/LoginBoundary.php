@@ -42,7 +42,7 @@
 				header("Location: Staff Accounts/staffAccountHomepage.php");
 			} else if ($_SESSION['accountRole'] == "Staff") {
 				#header("Location: Technical Staff Homepage/technicalStaffHomePage.php");
-				header("Location: Staff Accounts/staffAccountHomepage.php");
+				header("Location: Tickets/Complaint Tickets/complaintTicketHomepage.php");
 			} else if ($_SESSION['accountRole'] == "Super Admin") {
 				#header("Location: Technical Staff Homepage/technicalStaffHomePage.php");
 				header("Location: Super Admin/superadminHomePage.php");
