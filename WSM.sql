@@ -23,38 +23,44 @@ CREATE TABLE IF NOT EXISTS CustomerAccount (
 
 #Table structure for Companies
 CREATE TABLE IF NOT EXISTS CompanyDetails (
-  companyUEN int(50) NOT NULL,
-  companyName varchar(20) DEFAULT NULL,
-  companyAddress varchar(100) DEFAULT NULL,
-  companyPhoneNumber varchar(100) DEFAULT NULL,
-  companyAccountStatus bit(1) DEFAULT 0, #Active or not
-  companyPaymentStatus bit(1) DEFAULT 0, #Paid for the sub or not
-  companySubscriptionType bit(3) DEFAULT NULL, #How long are they subbed for
-  companyTrialStatus bit(1) DEFAULT 0, #Have they applied for free trial already
-  companyExpiryDate DATETIME DEFAULT NULL,
-  PRIMARY KEY (companyUEN)
+    companyUEN int(50) NOT NULL,
+    companyName varchar(20) DEFAULT NULL,
+    companyAddress varchar(100) DEFAULT NULL,
+    companyPhoneNumber varchar(100) DEFAULT NULL,
+    companyAccountStatus bit(1) DEFAULT 0, #Active or not
+    companyPaymentStatus bit(1) DEFAULT 0, #Paid for the sub or not
+    companySubscriptionType bit(3) DEFAULT NULL, #How long are they subbed for
+    companyTrialStatus bit(1) DEFAULT 0, #Have they applied for free trial already
+    companyExpiryDate DATETIME DEFAULT NULL,
+    maxTickets int(10) DEFAULT NULL,
+    PRIMARY KEY (companyUEN)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 #Table structure for staff
 CREATE TABLE IF NOT EXISTS StaffAccount (
-  staffID int(50) NOT NULL AUTO_INCREMENT,
-  companyUEN int(50) NOT NULL,
-  username varchar(20) DEFAULT NULL,
-  staffName varchar(100) DEFAULT NULL,
-  email varchar(100) DEFAULT NULL,
-  password varchar(100) NOT NULL,
-  role varchar (15) DEFAULT NULL,
-  imageName varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (staffID)
+    staffID int(50) NOT NULL AUTO_INCREMENT,
+    companyUEN int(50) NOT NULL,
+    username varchar(20) DEFAULT NULL,
+    staffName varchar(100) DEFAULT NULL,
+    email varchar(100) DEFAULT NULL,
+    password varchar(100) NOT NULL,
+    role varchar (15) DEFAULT NULL,
+    imageName varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+    PRIMARY KEY (staffID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 #Table structure for chemicals
 CREATE TABLE IF NOT EXISTS Chemicals (
   chemicalID int(50) NOT NULL AUTO_INCREMENT,
+  chemicalSKU int(10) NOT NULL,
   companyUEN int(50) NOT NULL,
   chemicalName varchar(100) DEFAULT NULL,
+  chemicalDescription varchar(100) DEFAULT NULL,
+  chemicalClass varchar(10) DEFAULT NULL,
   useTime int(5) DEFAULT NULL,
   quantity int(50) NOT NULL,
+  minimumQty int(3) NOT NULL,
+  chemicalPrice float(10,2) NOT NULL,
   expiryDate DATE DEFAULT NULL,
   PRIMARY KEY (chemicalID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -62,9 +68,12 @@ CREATE TABLE IF NOT EXISTS Chemicals (
 #Table structure for equipment
 CREATE TABLE IF NOT EXISTS Equipments (
   equipmentID int(50) NOT NULL AUTO_INCREMENT,
+  equipmentSKU int(10) NOT NULL,
   companyUEN int(50) NOT NULL,
   equipmentName varchar(100) DEFAULT NULL,
   quantity int(50) NOT NULL,
+  minimumQty int(3) NOT NULL,
+  equipmentPrice float(10,2) NOT NULL,
   technicalParameters varchar(100) DEFAULT NULL,
   installationDate DATE DEFAULT NULL,
   expiryDate DATE DEFAULT NULL,
@@ -81,7 +90,6 @@ CREATE TABLE IF NOT EXISTS WaterUsageBill (
   dueDate Date DEFAULT NULL,
   customerID int(50),
   billStatus bit(1) NOT NULL DEFAULT 0,
-  paymentStatus bit(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (waterUsageID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -127,9 +135,11 @@ CREATE TABLE IF NOT EXISTS bankAccount (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE IF NOT EXISTS notification (
-	notificationID int(50) NOT NULL AUTO_INCREMENT,
-  email varchar(200),
-  PRIMARY KEY (notificationID)
+    notificationID int(50) NOT NULL AUTO_INCREMENT,
+    companyUEN varchar(50) NOT NULL,
+    email varchar(200) NOT NULL,
+    notificationType varchar(50) NOT NULL, #either password reset or company change request
+    PRIMARY KEY (notificationID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `CompanyDetails` (`companyUEN`, `companyName`, `companyAddress`, `companyPhoneNumber`, `companyAccountStatus`
@@ -158,27 +168,27 @@ INSERT INTO `CompanyDetails` (`companyUEN`, `companyName`, `companyAddress`, `co
 
 
 #YYYY-MM-DD
-INSERT INTO `Equipments` (`companyUEN`, `equipmentName`, `quantity`, `technicalParameters`, `installationDate`, `expiryDate`, `warrantyDate`) VALUES
-(111111, 'Pipe', 5, '2" threaded brass pipe and fittings', now(), '2023-10-02', '2026-07-02');
+INSERT INTO `Equipments` (`equipmentSKU`, `companyUEN`, `equipmentName`, `quantity`, `minimumQty`, `technicalParameters`, `installationDate`, `expiryDate`, `warrantyDate`) VALUES
+(123456, 111111, 'Pipe', 6, 5, '2" threaded brass pipe and fittings', now(), '2023-10-02', '2026-07-02');
 
-INSERT INTO `Equipments` (`companyUEN`, `equipmentName`, `quantity`, `technicalParameters`, `installationDate`, `expiryDate`, `warrantyDate`) VALUES
-(111111, 'Valve', 10, '2" Pressure relief valve', now(), '2023-10-02', '2026-07-02'); 
+INSERT INTO `Equipments` (`equipmentSKU`, `companyUEN`, `equipmentName`, `quantity`, `minimumQty`, `technicalParameters`, `installationDate`, `expiryDate`, `warrantyDate`) VALUES
+(123233, 111111, 'Valve', 10, 5, '2" Pressure relief valve', now(), '2023-10-02', '2026-07-02'); 
 
-INSERT INTO `Equipments` (`companyUEN`, `equipmentName`, `quantity`, `technicalParameters`, `installationDate`, `expiryDate`, `warrantyDate`) VALUES
-(111111, 'Pump', 25, '6"x"12" end pump vault w/ solid walls', now(), '2023-10-02', '2026-07-02'); 
+INSERT INTO `Equipments` (`equipmentSKU`, `companyUEN`, `equipmentName`, `quantity`, `minimumQty`, `technicalParameters`, `installationDate`, `expiryDate`, `warrantyDate`) VALUES
+(122234, 111111, 'Pump', 25, 5, '6"x"12" end pump vault w/ solid walls', now(), '2023-10-02', '2026-07-02'); 
 
-INSERT INTO `Equipments` (`companyUEN`, `equipmentName`, `quantity`, `technicalParameters`, `installationDate`, `expiryDate`, `warrantyDate`) VALUES
-(111111, 'Spool', 13, '6" FL x PE SPOOL', now(), '2023-10-02', '2026-07-02'); 
+INSERT INTO `Equipments` (`equipmentSKU`, `companyUEN`, `equipmentName`, `quantity`, `minimumQty`, `technicalParameters`, `installationDate`, `expiryDate`, `warrantyDate`) VALUES
+(222333, 111111, 'Spool', 13, 5, '6" FL x PE SPOOL', now(), '2023-10-02', '2026-07-02'); 
 
 
-INSERT INTO `Chemicals` (`companyUEN`, `chemicalName`, `useTime`, `quantity`, `expiryDate`) VALUES
-(111111, 'Chlorine', '4', '10', '2026-07-02');
+INSERT INTO `Chemicals` (`chemicalSKU`, `companyUEN`, `chemicalName`, `useTime`, `quantity`, `minimumQty`, `expiryDate`) VALUES
+(987546, 111111, 'Chlorine', '4', 10, 5, '2026-07-02');
 
-INSERT INTO `Chemicals` (`companyUEN`, `chemicalName`, `useTime`, `quantity`, `expiryDate`) VALUES
-(111111, 'Chloramine', '3', '15', '2026-10-2');
+INSERT INTO `Chemicals` (`chemicalSKU`, `companyUEN`, `chemicalName`, `useTime`, `quantity`, `minimumQty`, `expiryDate`) VALUES
+(987545, 111111, 'Chloramine', '3', 15, 5, '2026-10-2');
 
-INSERT INTO `Chemicals` (`companyUEN`, `chemicalName`, `useTime`, `quantity`, `expiryDate`) VALUES
-(111111, 'Chlorine Dioxide', '8', '10', '2026-06-02');
+INSERT INTO `Chemicals` (`chemicalSKU`, `companyUEN`, `chemicalName`, `useTime`, `quantity`, `minimumQty`, `expiryDate`) VALUES
+(987544, 111111, 'Chlorine Dioxide', '8', 10, 5, '2026-06-02');
 
 
 INSERT INTO `StaffAccount` (`companyUEN`, `username`, `staffName`, `email`, `password`, `role`) VALUES

@@ -16,9 +16,9 @@
     
         }
 
-        public function getData()
+        public function getData($companyUEN)
         {
-            $userQuery = "SELECT * FROM equipments";
+            $userQuery = "SELECT * FROM equipments WHERE `companyUEN` = $companyUEN";
             $result = $this->conn->query($userQuery);
             if($result->num_rows > 0){
                 return $result;
@@ -44,7 +44,8 @@
         {   
             $data = "'" .implode ("','",$inputdata) . "'";
 
-            $equipmentQuery = "INSERT INTO `equipments` (equipmentName, quantity, installationDate, expiryDate, warrantyDate)
+            $equipmentQuery = "INSERT INTO `equipments` (equipmentSKU, companyUEN, equipmentName, quantity, minimumQty,
+            technicalParameters, installationDate, expiryDate, warrantyDate)
             VALUES ($data)";
             
             $result = $this->conn->query($equipmentQuery);
