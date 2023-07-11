@@ -1,5 +1,6 @@
 <?php
-	
+	session_start();
+    
 ?>
 
 <!DOCTYPE html>
@@ -18,6 +19,7 @@
 
 <form action="serviceForm.php" method="POST">
 	<h2>Service Form</h2>
+   
 		<table align="center">
                     <tr>
 						<td><label for="ticketId">Ticket ID : </label>
@@ -46,16 +48,41 @@
 					<tr>
 						<td><label for="equipmentUsed">Equipment Used : </label>
                         <fieldset class="input-set input-field eq-fieldset" id="equipmentUsed">
-						<input type="text" class="input-field" placeholder="Equipment Used" name="equipmentUsed" value="">
+                        <select name="equipmentUsed" class="input-field">
+                        <?php
+                         require_once 'Equipments/classes.php';
+                            $equipment = new equipmentView;
+                            $result = $equipment -> getData(111111);
+                            $equipment_array=[];
+                            if($result)
+                            {
+                                foreach($result as $row)
+                                {
+                                    echo "<option>".$row['equipmentName'] ."</option>";
+                                    array_push($equipment_array,$row['equipmentName']);
+                                }
+                            
+                            }
+                            $_SESSION['equiparray']= $equipment_array;
+
+                            
+                            
+                            ?>
+                    </select>
+                        <input type="text" class="input-field" placeholder="Equipment Used Quantity" name="equipmentQuantity" value="">
                         <button class="btn-add-input" onclick="addEquipmentField()" type="button">+</button></td>
                         </fieldset>
+                       
+                    
                     <script>
                         const myEquipment = document.getElementById("equipmentUsed");
 
                         function addEquipmentField() {
                             console.log("Add button is clicked");
                             const addEq_wrapper = document.createElement("div");
-                            const addEq = document.createElement("input");
+                            const addEq = document.createElement("select");
+                            
+                            const addEqQuantity = document.createElement("input");
                             const btnAdd = document.createElement("button");
                             const btnDel = document.createElement("button");
 
@@ -69,14 +96,40 @@
                             btnDel.type = "button";
                             btnDel.classList.add("btn-del-input");
                             btnDel.innerText = "-";
+                            <?php
+                                $array = $_SESSION['equiparray'];
+                
+                                foreach ($array as $row){
+                                    echo "const option".array_search($row,$array)." = document.createElement('option');\n";
 
-                            addEq.type = "text";
+                                    echo "option".array_search($row,$array).".innerText ='".($row)."';\n";
+                                
+                                }
+                                
+                            ?>
+                            
+            
                             addEq.name = "equipmentUsed";
                             addEq.setAttribute("required", "");
                             addEq.classList.add("input-field");
                             addEq.placeholder = "Equipment Used";
 
+                            addEqQuantity.type = "text";
+                            addEqQuantity.name = "equipmentQuantity";
+                            addEqQuantity.classList.add("input-field");
+                            addEqQuantity.placeholder = "Equipment Used Quantity";
+                            <?php
+                            $array = $_SESSION['equiparray'];
+                            foreach ($array as $row){
+                                ?>addEq.appendChild<?php echo "(option".array_search($row,$array).")\n";?> <?php
+                    
+                            }
+                            
+                            ?>
+                            
+
                             addEq_wrapper.appendChild(addEq);
+                            addEq_wrapper.appendChild(addEqQuantity);
                             addEq_wrapper.appendChild(btnAdd);
                             addEq_wrapper.appendChild(btnDel);
 
@@ -93,7 +146,29 @@
 					<tr>
 						<td><label for="chemicalUsed">Chemical Used : </label>
                         <fieldset class="input-set input-field chem-fieldset" id="chemicalUsed" >
-						<input type="text" id="chemicalUsed" placeholder="Chemical Used" name="chemicalUsed" value="">
+                        <select name="chemicalUsed" class="input-field">
+                        <?php
+                         require_once 'Chemicals/classes.php';
+                            $chemical = new chemicalView;
+                            $result = $chemical -> getData(111111);
+                            $chem_array=[];
+                            if($result)
+                            {
+                                foreach($result as $row)
+                                {
+                                    echo "<option>".$row['chemicalName'] ."</option>";
+                                    array_push($chem_array,$row['chemicalName']);
+                                }
+                            
+                            }
+                            $_SESSION['chemarray']= $chem_array;
+
+                            
+                            
+                            ?>
+                        </select>
+                        <input type="text" class="input-field" placeholder="Chemical Used Use Time" name="chemicalUseTime" value="">
+                        <input type="text" class="input-field" placeholder="Chemical Used Quantity" name="chemicalQuantity" value="">
                         <button class="btn-add-input" onclick="addChemicalField()" type="button">+</button></td>
                         </fieldset>
                         <script>
@@ -102,12 +177,16 @@
                         function addChemicalField() {
                             console.log("Add button is clicked");
                             const addChem_wrapper = document.createElement("div");
-                            const addChem = document.createElement("input");
+                            const addChem = document.createElement("select");
+                           
+                            const addChemQuantity = document.createElement("input");
+                            const addChemUseTime = document.createElement("input");
                             const btnAdd = document.createElement("button");
                             const btnDel = document.createElement("button");
 
                             addChem_wrapper.classList.add("chemical-input");
-
+                            
+                            
                             btnAdd.type = "button";
                             btnAdd.classList.add("btn-add-input");
                             btnAdd.innerText = "+";
@@ -117,13 +196,45 @@
                             btnDel.classList.add("btn-del-input");
                             btnDel.innerText = "-";
 
-                            addChem.type = "text";
-                            addChem.name = "equipmentUsed";
+                            <?php
+                                $array = $_SESSION['chemarray'];
+                
+                                foreach ($array as $row){
+                                    echo "const option".array_search($row,$array)." = document.createElement('option');\n";
+
+                                    echo "option".array_search($row,$array).".innerText ='".($row)."';\n";
+                                
+                                }
+                                
+                            ?>
+
+                            addChem.name = "chemicalUsed";
                             addChem.setAttribute("required", "");
                             addChem.classList.add("input-field");
                             addChem.placeholder = "Chemical Used";
 
+                            addChemUseTime.type = "text";
+                            addChemUseTime.name = "chemicalUseTime";
+                            addChemUseTime.classList.add("input-field");
+                            addChemUseTime.placeholder = "Chemical Used Use Time";
+
+                            addChemQuantity.type = "text";
+                            addChemQuantity.name = "chemicalQuantity";
+                            addChemQuantity.classList.add("input-field");
+                            addChemQuantity.placeholder = "Chemical Used Quantity";
+
+                            <?php
+                            $array = $_SESSION['chemarray'];
+                            foreach ($array as $row){
+                                ?>addChem.appendChild<?php echo "(option".array_search($row,$array).")\n";?> <?php
+                    
+                            }
+                            
+                            ?>
+
                             addChem_wrapper.appendChild(addChem);
+                            addChem_wrapper.appendChild(addChemUseTime);
+                            addChem_wrapper.appendChild(addChemQuantity);
                             addChem_wrapper.appendChild(btnAdd);
                             addChem_wrapper.appendChild(btnDel);
 
