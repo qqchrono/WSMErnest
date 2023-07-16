@@ -5,7 +5,8 @@ import { View,Text,Dimensions,StyleSheet} from 'react-native';
 import {Avatar,Title,Caption, Drawer} from 'react-native-paper';
 import { BarChart } from "react-native-chart-kit";
 import { useIsFocused} from "@react-navigation/native";
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+export const companyUEN ="123";
 const HomeScreen = () => {
     //usestate
     const isFocused = useIsFocused()
@@ -14,8 +15,8 @@ const HomeScreen = () => {
     const [address,setadd]= useState([]);
     const [phone,setphone]=useState([]);
     const [name,setname]= useState([]);
-    const [accountnumber,setaccountnumber]= useState([]);
-
+    const [bankAccount,setaccountnumber]= useState([]);
+   
     //variable use to store the current selected year , monthly usage 
     var jan=0;
     var feb=0;
@@ -34,7 +35,7 @@ const HomeScreen = () => {
     //fetching user detail from database 
 
     const fetch_user_detail=()=>{
-      var APIURL = "http://10.0.2.2/mobile/fetch_user_detail.php";
+      var APIURL = "http://159.223.83.53/mobile/fetch_user_detail.php";
       var headers = {
         'Accept' : 'application/json',
         'Content-Type' : 'application/json'
@@ -54,7 +55,9 @@ const HomeScreen = () => {
        setadd(Response[0]['address'])
        setname(Response[0]['customerName'])
        setaccountnumber(Response[0]['bankAccount'])
+       AsyncStorage.setItem('companyUEN', (Response[0]['companyUEN']).toString())
        module.exports = user_id;
+      
        
       })
       .catch((error)=>{
@@ -64,7 +67,7 @@ const HomeScreen = () => {
     }
     //function to retrive user usage 
     const fetch_current_usage=()=>{
-      var APIURL = "http://10.0.2.2/mobile/fetch_user_usage.php";
+      var APIURL = "http://159.223.83.53/mobile/fetch_user_usage.php";
       var headers = {
         'Accept' : 'application/json',
         'Content-Type' : 'application/json'

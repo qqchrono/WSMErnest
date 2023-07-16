@@ -29,7 +29,7 @@ const [phone,setphone] = useState([]);
 
 //fetch user data from database to editprofile page 
 const fetch_user_detail=()=>{
-    var APIURL = "http://10.0.2.2/mobile/fetch_user_detail.php";
+    var APIURL = "http://159.223.83.53/mobile/fetch_user_detail.php";
     var headers = {
       'Accept' : 'application/json',
       'Content-Type' : 'application/json'
@@ -56,7 +56,7 @@ const fetch_user_detail=()=>{
   }
 //update used data after submit 
 const update_detail=()=>{
-    var APIURL= "http://10.0.2.2/mobile/edit_user_profile.php"
+    var APIURL= "http://159.223.83.53/mobile/edit_user_profile.php"
     var headers ={
       'Accept' : 'application/json',
       'Content-Type' : 'application/json'

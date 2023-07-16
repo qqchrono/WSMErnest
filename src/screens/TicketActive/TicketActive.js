@@ -32,7 +32,7 @@ var tic_res=0
 
 
 const fetch_ticket= async()=>{
-  var APIURL = "http://10.0.2.2/mobile/fetch_ticket.php";
+  var APIURL = "http://159.223.83.53/mobile/fetch_ticket.php";
   var headers = {
     'Accept' : 'application/json',
     'Content-Type' : 'application/json'

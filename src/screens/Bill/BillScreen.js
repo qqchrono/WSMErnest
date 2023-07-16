@@ -44,7 +44,7 @@ export default function BillScreen()  {
     //fetching user detail from database 
 
     const fetch_user_detail=()=>{
-      var APIURL = "http://10.0.2.2/mobile/fetch_user_detail.php";
+      var APIURL = "http://159.223.83.53/mobile/fetch_user_detail.php";
       var headers = {
         'Accept' : 'application/json',
         'Content-Type' : 'application/json'
@@ -73,7 +73,7 @@ export default function BillScreen()  {
   }
   //fectch user usage
    const fetch_current_usage=()=>{
-      var APIURL = "http://10.0.2.2/mobile/fetch_user_usage.php";
+      var APIURL = "http://159.223.83.53/mobile/fetch_user_usage.php";
       var headers = {
         'Accept' : 'application/json',
         'Content-Type' : 'application/json'
@@ -99,7 +99,7 @@ export default function BillScreen()  {
 
     //fetch price rate based on the month/year
     const fetch_price_rate=()=>{
-      var APIURL = "http://10.0.2.2/mobile/fetch_price_rate.php";
+      var APIURL = "http://159.223.83.53/mobile/fetch_price_rate.php";
       var headers = {
         'Accept' : 'application/json',
         'Content-Type' : 'application/json'
@@ -122,7 +122,7 @@ export default function BillScreen()  {
     }
 //connecting with the bank to verify payment
 const verify_bank=()=>{
-  var APIURL = "http://10.0.2.2/mobile/validate_bank.php";
+  var APIURL = "http://159.223.83.53/mobile/validate_bank.php";
   var headers = {
     'Accept' : 'application/json',
     'Content-Type' : 'application/json'

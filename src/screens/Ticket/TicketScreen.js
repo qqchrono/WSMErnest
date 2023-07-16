@@ -25,18 +25,24 @@ import BottomSheet from 'reanimated-bottom-sheet';
 import Animated from 'react-native-reanimated';
 import { RadioButton } from 'react-native-paper';
 import { useNavigation } from "@react-navigation/native";
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function TicketScreen() {
   const {colors} = useTheme();
   const [checked, setChecked] = React.useState('');
   const [detail,setdetail]=useState([]);
+  const [companyUEN,setcompanyUEN]=useState([]);
   var user_id = require('../HomeScreen/HomeScreen');
   const navigation =useNavigation();
+  //fetch asyn store companyuen
+  AsyncStorage.getItem('companyUEN').then(value=>{
+    setcompanyUEN(value)
+   })
+   .catch(error => console.error(error));
   //submit ticket
   const submit=()=>{
    
-    var APIURL= "http://10.0.2.2/mobile/submit_support.php"
+    var APIURL= "http://159.223.83.53/mobile/submit_support.php"
     var headers ={
       'Accept' : 'application/json',
       'Content-Type' : 'application/json'
@@ -44,7 +50,8 @@ export default function TicketScreen() {
     var Data={
       user_id: user_id,
       detail: detail,
-      type : checked
+      type : checked,
+      companyUEN: companyUEN,
     };
     fetch(APIURL,{
       method: 'POST',

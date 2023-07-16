@@ -2,9 +2,9 @@ import React, {useEffect, useState} from'react';
 import { TextInput,View,Text,ScrollView,StyleSheet} from 'react-native';
 import CustomInput from '../comp/CustomInput/CustomInput';
 import CustomButton from '../comp/CustomButton/CustomButton';
-import { CommonActions, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
-const ForgotPassword = () => {
+const SwitchPlan = () => {
     const [email,setemail] = useState([]);
     const navigation =useNavigation();
     const onReturn =() =>{
@@ -12,43 +12,10 @@ const ForgotPassword = () => {
         navigation.navigate('SignIn');
     }
     
-    const validate_email=()=>{
-      if(email!=""){
-        var APIURL = "http://159.223.83.53/mobile/fetch_company.php";
-         var headers = {
-        'Accept' : 'application/json',
-        'Content-Type' : 'application/json'
-      };
-      var Data ={
-        Email: email,
-      };
-      fetch(APIURL,{
-        method: 'POST',
-        headers: headers,
-        body: JSON.stringify(Data)
-      })
-      .then((Response)=>Response.json())
-      .then((Response)=>{
-        if((Response[0].Message)!=""){
-          var comp = (Response[0].Message)
-          reset_password(comp['companyUEN']);
-        }
-        else{
-          alert("Email is not valid, Please enter a valid email!!");
-        }
-       
-       
-      })
-      .catch((error)=>{
-        console.error("ERROR FOUND" + error);
-      })
-       }
-       
-    }
-    
-    const reset_password=(comp)=>{
-      console.log(comp)
-       if(comp!=""){
+
+    const reset_password=()=>{
+        console.log(email)
+       if(email!=""){
         var APIURL = "http://159.223.83.53/mobile/reset_password.php";
          var headers = {
         'Accept' : 'application/json',
@@ -56,8 +23,6 @@ const ForgotPassword = () => {
       };
       var Data ={
         Email: email,
-        companyUEN: comp,
-        type : "passwordreset"
       };
       fetch(APIURL,{
         method: 'POST',
@@ -93,7 +58,7 @@ const ForgotPassword = () => {
                    
                   ]}
                 />
-                <CustomButton text="Submit" onPress={validate_email} />
+                <CustomButton text="Submit" onPress={reset_password} />
                 <CustomButton text="return to Sign in page" onPress={onReturn} type='sec'/>
                 
             </View>
@@ -127,4 +92,4 @@ const styles= StyleSheet.create({
         padding: 20,
       },
 })
-export default ForgotPassword
+export default SwitchPlan
