@@ -26,6 +26,9 @@ export default function BillScreen()  {
    const [accountnumber,setaccountnumber] = useState([]);
    const [isLoading, setIsLoading] = useState(true);
    const [rate, setrate] = useState([]);
+   const [eqbill, seteqbill] = useState([]);
+   const [selectedeq, setselectedeq] = useState([]);
+   const [plantype, setplantype] = useState([]);
   const isFocused = useIsFocused()
    var billinformation=[];
    var billid= 5;
@@ -34,10 +37,14 @@ export default function BillScreen()  {
    var usage = "";
    var price_rate="";
    var htmlTemplate="";
-   var total_price="";
+   var total_price=0;
+   var producthtml="";
+   var usagehtml="";
    //this this variable are for discounted plan 
-   var offpeakrate="";
-   var peakrate=""
+   var offpeakrate=0;
+   var peakrate=0;
+   var peakusage=0;
+   var offpeakusage=0;
    //
   //user email
    var Email = require('../SignIn/Signin.js');
@@ -63,6 +70,7 @@ export default function BillScreen()  {
        setaddress(Response[0]['address'])
        setname(Response[0]['customerName'])
        setaccountnumber(Response[0]['bankAccount'])
+       setplantype(Response[0]['customerPlanType'])
        
        
       })
@@ -89,6 +97,11 @@ export default function BillScreen()  {
   
       .then((Response)=>Response.json())
       .then((Response)=>{
+        
+          setwaterusagebill(Response)
+          setIsLoading(false)
+      
+        
         setwaterusagebill(Response)
        setIsLoading(false)
       })
@@ -114,6 +127,32 @@ export default function BillScreen()  {
       .then((Response)=>Response.json())
       .then((Response)=>{
         setrate(Response)
+
+      })
+      .catch((error)=>{
+        console.error("ERROR FOUND" + error);
+      })
+    }
+    //fetch equipment/chemicals used for service bill 
+    const fetch_eqbill=()=>{
+      var APIURL = "http://159.223.83.53/mobile/fetch_eqbill.php";
+      var headers = {
+        'Accept' : 'application/json',
+        'Content-Type' : 'application/json'
+      };
+      var Data ={
+        user_id: user_id,
+      };
+      
+      fetch(APIURL,{
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(Data)
+      })
+  
+      .then((Response)=>Response.json())
+      .then((Response)=>{
+        seteqbill(Response)
 
       })
       .catch((error)=>{
@@ -158,33 +197,83 @@ const payment_verify=(id)=>{
 
 //set data that are use for the pdf after user select the bill he/she which to review 
 async function setdata(id){
-  
-  for(i=0 ; i<waterusagebill.length;i++){
+ 
+  for(let i=0 ; i<waterusagebill.length;i++){
+    //console.log(id);
+    
+    //check bill belong to the usage , show different company too , but pricerate will based on the company 
+
     if(waterusagebill[i]["waterUsageID"]==id){
-        billid=id
+        total_price=0;
+        billid=id;
+        htmlTemplate="";
+        usagehtml="";
         billdate=waterusagebill[i]['billDate']
         duedate=waterusagebill[i]['dueDate']
         usage = waterusagebill[i]['waterUsage']
-        //assign price rate by filtering the date 
-        for(i=0;i<rate.length;i++){
-          filterPriceDate=(rate[i]['priceDate']).slice(0,7).replace('-','');
-          filterBillDate=billdate.slice(0,7).replace('-','');
-          if(filterPriceDate==filterBillDate){
-            price_rate=rate[i]['waterPriceRate']
-            total_price=price_rate*usage
+        peakusage=waterusagebill[i]['peakusage']
+        offpeakusage=waterusagebill[i]['offpeakusage']
+        billcompanyUEN=waterusagebill[i]['companyUEN']
+        filterBillDate=billdate.slice(0,7).replace('-','');
+        //check if any previous month service bill incur, if it does , add the usage into the current month
+        if(eqbill!=null){
+        for(let j=0;j<eqbill.length;j++){
+          //change the billdate year month by 1month behind
+          eqbillDate= eqbill[j]['date']
+          filtereqbillDate=(eqbillDate.slice(0,7).replace('-',''));
+          productprice=0;
+          filterdate=getPreviousMonth(billdate)
+          filterdate=filterdate.slice(0,7).replace('-','');
+          //getPreviousMonth(filterBillDate)
+          //if the year and month match , charge the service bill into this month
+          if(filtereqbillDate==filterdate){
+            //eqbillarray.push(eqbill[i]);
+            //check if the eqbill type is chemical or equipment , then assign the price
+            productprice=eqbill[j]["priceRate"];
+            total_price=total_price+(productprice*eqbill[j]["quantity"]);
+            producthtml += "<tr><td>"+eqbill[j]["date"]+"</td><td>"+eqbill[j]["productName"]+"</td><td>"+eqbill[j]["quantity"]+"</td><td>$"+productprice+"/unit</td><td>$"+(productprice*eqbill[j]["quantity"])+"</td></tr>";
           }
         }
+        }
+        //assign price rate by filtering the date 
+        if(rate!=null){
+        for(let k=0;k<rate.length;k++){
+          filterPriceDate=(rate[k]['priceDate']).slice(0,7).replace('-','');
+          //check which price rate does this bill assign to and from the company 
+          if(filterPriceDate==filterBillDate && rate[k]['companyUEN']==billcompanyUEN){
+            //check customer plan type regular/offregular
+            if(plantype=="regular"){
+              price_rate=rate[k]['waterPriceRate']
+              console.log(price_rate);
+              total_price=total_price+(price_rate*usage);
+              usagehtml += "<tr><td>"+billdate+"</td><td>regular Traffic rate</td><td>"+usage+"</td><td>$"+(price_rate)+"/mL</td><td>$"+(price_rate*usage)+"</td></tr>";
+            }
+            else{
+              offpeakrate=rate[k]['offPeakwaterPriceRate'];
+              peakrate=rate[k]['peakWaterPriceRate'];
+              console.log(offpeakrate);
+              console.log(peakrate);
+              total_price=total_price+(offpeakrate*offpeakusage);
+              total_price=total_price+(peakrate*peakusage);
+              usagehtml += "<tr><td>"+billdate+"</td><td>Off Peak Traffic rate</td><td>"+offpeakusage+"</td><td>$"+(offpeakrate)+"/mL</td><td>$"+(offpeakrate*offpeakusage)+"</td></tr>";
+              usagehtml += "<tr><td>"+billdate+"</td><td>Peak Traffic rate</td><td>"+peakusage+"</td><td>$"+(peakrate)+"/mL</td><td>$"+(peakrate*peakusage)+"</td></tr>";
+            }
+          }
+        }
+      }
     }
   }
 
 }
 
 
+
    //generate pdf 
    async function generatePDF(id){
       
-      setdata(id)
+      const check =await setdata(id)
       //set pdf html template with data selected
+      //console.log(producthtml);
       htmlTemplate = `
    <!DOCTYPE html>
 <html>
@@ -242,7 +331,7 @@ async function setdata(id){
 </head>
 <body>
   <div class="logo">
-    <img src="http://10.0.2.2/mobile/water.jpg" alt="Company Logo" width="100">
+    <img src="" alt="Company Logo" width="100">
   </div>
 
   <h1>            </h1>
@@ -267,6 +356,10 @@ async function setdata(id){
         <td>${duedate}</td>
       </tr>
       <tr>
+        <td>Subcription Plan Type</td>
+        <td>${plantype}</td>
+      </tr>
+      <tr>
         <td>Payment Mode</td>
         <td>BankPayment</td>
       </tr>
@@ -286,6 +379,7 @@ async function setdata(id){
     <thead>
       <tr bgcolor="grey">
         <th>Break of current Charges</th>
+        <th>Product Name/Traffic type</th>
         <th>Usage</th>
         <th>Rate</th>
         <th>Amount($)</th>
@@ -293,13 +387,10 @@ async function setdata(id){
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>10-04-2023 - 10-05-2023</td>
-        <td>${usage}</td>
-        <td>${price_rate}¢/unit</td>
-        <td>$${total_price}</td>
-      </tr>
+    ${usagehtml}
+      ${producthtml}
         <tr>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -316,41 +407,65 @@ async function setdata(id){
 
         
       alert("Bill Has been downloaded")
-      const htmlContent = htmlTemplate;
+      const htmlContent =  htmlTemplate;
     
       let options = {
          html: htmlContent,
-         fileName: billdate,
+         fileName: billdate+name,
          directory:"Downloads",
          base64: true,
       };
       const file = await RNHTMLtoPDF.convert(options);
       console.log(file.filePath);
-      
+      total_price=0;
+      producthtml="";
+      price_rate=0;
    }
 
-
+   
    //fetch ticket when it is forced deal with navigation error
  useEffect(() => {
   if(isFocused){
     fetch_current_usage()
     fetch_user_detail()
     fetch_price_rate()
+    fetch_eqbill()
   }
   if(refreshIndicator){
     fetch_current_usage()
     fetch_user_detail()
     fetch_price_rate()
+    fetch_eqbill()
     setRefreshIndicator(false);
   }
  
 }, [isFocused,refreshIndicator])
 
+// this help to fetch previous month
+function getPreviousMonth(dateString) {
+  var currentDate = new Date(dateString);
+  var year = currentDate.getFullYear();
+  let month = currentDate.getMonth();
 
-   
+  // Handle January (month 0) separately
+  if (month === 0) {
+    month = 11; // December (month 11)
+    year -= 1; // Go back to the previous year
+  } else {
+    month -= 1; // Go back to the previous month
+  }
+
+  // Pad month with leading zero if necessary
+  const formattedMonth = String(month + 1).padStart(2, '0');
+
+  // Construct the previous month's date string
+  const previousMonth = `${year}-${formattedMonth}-${currentDate.getDate()}`;
+  return previousMonth;
+}
+
     if(!isLoading){
       
-      //validate if there a ticket fetch 
+      //validate if there a bill
       if(waterusagebill.length>0 ){
         var billstates=""
       for (i =0; i <waterusagebill.length ;i++){

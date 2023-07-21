@@ -41,8 +41,13 @@ export default function TicketScreen() {
    .catch(error => console.error(error));
   //submit ticket
   const submit=()=>{
-   
-    var APIURL= "http://159.223.83.53/mobile/submit_support.php"
+    var APIURL="";
+    if(checked=="Support"){
+      APIURL= "http://159.223.83.53/mobile/submit_support.php"
+    }
+    else{
+      APIURL= "http://159.223.83.53/Tickets/Complaint%20Tickets/assignTicketForm.php"
+    }
     var headers ={
       'Accept' : 'application/json',
       'Content-Type' : 'application/json'
@@ -50,7 +55,7 @@ export default function TicketScreen() {
     var Data={
       user_id: user_id,
       detail: detail,
-      type : checked,
+      type: checked,
       companyUEN: companyUEN,
     };
     fetch(APIURL,{
