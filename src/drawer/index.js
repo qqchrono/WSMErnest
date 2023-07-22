@@ -7,6 +7,7 @@ import CustomDrawer from '../screens/comp/CustomDrawer/CustomDrawer';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import TicketScreen from '../screens/TicketActive/TicketActive';
 import BillScreen from '../screens/Bill/BillScreen';
+import SwitchPlan from '../screens/Switch/SwitchPlan';
 //drawer for home screen
 const Drawer=()=>{
     const Drawer = createDrawerNavigator();
@@ -29,6 +30,11 @@ const Drawer=()=>{
                 )
             }}/>
             <Drawer.Screen name="Ticket" component={TicketScreen} options={{
+                drawerIcon:(color)=>(
+                    <Ionicons name="help-circle-outline" size={22} color={color}/>
+                )
+            }}/>
+            <Drawer.Screen name="Switch Water Provider" component={SwitchPlan} options={{
                 drawerIcon:(color)=>(
                     <Ionicons name="help-circle-outline" size={22} color={color}/>
                 )

@@ -6,7 +6,7 @@ import { Button, Text, View, Image, StyleSheet,ActivityIndicator,ScrollView,Safe
 import CustomInput from '../comp/CustomInput/CustomInput';
 import CustomButton from '../comp/CustomButton/CustomButton';
 import { useNavigation ,useIsFocused} from "@react-navigation/native";
-
+import { Card } from 'react-native-paper';
 
 import {
   Avatar,
@@ -122,85 +122,96 @@ if(ticket[1][0].length >0){
    
   }
 }
+return (
+
+
+  <ScrollView style={styles.container}>
+  
+  <Title style={[styles.title, {
+        marginTop:15,
+        marginBottom: 5,
+        marginLeft: 125,
+        fontSize:20,
+        fontWeight:'700',
+      }]}>Active Tickets</Title>
+  
+    {supportTicket.map((supportTicket) => { //This loop calls all the data in the array supportTicket and prints it out 
   return (
-
-
-<ScrollView style={styles.container}>
-
-<Title style={[styles.title, {
-      marginTop:15,
-      marginBottom: 5,
-      marginLeft: 125,
-      fontSize:20,
-      fontWeight:'700',
-    }]}>Active Tickets</Title>
-
-  {supportTicket.map((supportTicket) => { //This loop calls all the data in the array supportTicket and prints it out 
-return (
-<View key={supportTicket.key} style={styles.card}>
-  <View style={styles.cardInfo}>
-    <Text style={styles.cardTitle}>No.
-    {supportTicket.key}
-    </Text>
-    <Text style={styles.cardDetails}>Id:
-      {supportTicket.suppTicid}
-    </Text>
-    <Text style={styles.cardDetails}>Time of creation:
-      {supportTicket.time}
-    </Text>
-    <Text style={styles.cardDetails}>Detail:
-      {supportTicket.details}
-    </Text>
-
-
+  <View key={supportTicket.key}>
+    <View>
+      <Card key={supportTicket.key} style={styles.container}>
+              <Card.Cover source={{ uri: 'https://www.shutterstock.com/image-vector/support-ticket-icon-thin-outline-260nw-1481721884.jpg' }} />
+              <Card.Content style={styles.cardTitle} >
+          <Text style={styles.cardTitle}>No. {supportTicket.key}</Text> 
+          </Card.Content>
+              <Card.Content>
+          <Text style={styles.cardDetails}>Ticket ID: {supportTicket.suppTicid}</Text> 
+          </Card.Content>
+          <Card.Content >
+          <Text style={styles.cardDetails}>Ticket Time: {supportTicket.time}</Text> 
+          </Card.Content>
+          <Card.Content>
+            <Text style={styles.cardDetails}>Details: {supportTicket.details}</Text> 
+          </Card.Content>
+        </Card>
+  
+    </View>
+     </View>
+  
+  ); //End of loop below
+  })} 
+  <Title style={[styles.title, {
+        marginTop:15,
+        marginBottom: 5,
+        marginLeft: 125,
+        fontSize:20,
+        fontWeight:'700',
+  //Show resolved Ticket
+   }]}>Resolved Ticket</Title>
+  {resolveTicket.map((resolveTicket) => { 
+  return (
+  
+  
+  <View key={resolveTicket.key}>
+  <View>
+    <Card key={resolveTicket.key} style={styles.container}>
+            <Card.Cover source={{ uri: 'https://www.shutterstock.com/image-vector/green-tick-icon-vector-symbol-260nw-1357457969.jpg' }} />
+            <Card.Content style={styles.cardTitle} >
+        <Text style={styles.cardTitle}>No. {resolveTicket.key}</Text> 
+        </Card.Content>
+            <Card.Content>
+        <Text style={styles.cardDetails}>Ticket ID: {resolveTicket.suppTicid}</Text> 
+        </Card.Content>
+        <Card.Content >
+        <Text style={styles.cardDetails}>Resolved Time: {resolveTicket.time_res}</Text> 
+        </Card.Content>
+        <Card.Content>
+          <Text style={styles.cardDetails}>Details: {resolveTicket.details}</Text> 
+        </Card.Content>
+      </Card>
+  
   </View>
    </View>
-
-); //End of loop below
-})} 
-<Title style={[styles.title, {
-      marginTop:15,
-      marginBottom: 5,
-      marginLeft: 125,
-      fontSize:20,
-      fontWeight:'700',
-//Show resolved Ticket
- }]}>Resolved Ticket</Title>
-{resolveTicket.map((resolveTicket) => { 
-return (
-<View key={resolveTicket.key} style={styles.card}>
-  <View style={styles.cardInfo}>
-    <Text style={styles.cardTitle}>No.
-    {resolveTicket.key}
-    </Text>
-    <Text style={styles.cardDetails}>Id:
-      {resolveTicket.suppTicid}
-    </Text>
-    <Text style={styles.cardDetails}>Time of resolved:
-      {resolveTicket.time_res}
-    </Text>
-    <Text style={styles.cardDetails}>Detail:
-      {resolveTicket.details}
-    </Text>
-  </View>
-   </View>
-
-); //End of loop below
-})} 
-<Button
-title="Submit a New Ticket"
-onPress={() => navigation.navigate("SubmitTicket")} />
-
-
-</ScrollView>
-);
+  
+  ); //End of loop below
+  })} 
+  
+  
+  <Button
+  title="Submit a New Ticket"
+  onPress={() => navigation.navigate("SubmitTicket")} />
+  
+  
+  </ScrollView>
+  );
 }}
 
 const styles = StyleSheet.create({
 
-  container: {
-    flex: 1,
-  },
+  container :{
+    alignContent:'center',
+    margin:15
+},
 
   sliderContainer: {
     height: 200,
@@ -292,12 +303,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   cardTitle: {
+    fontSize: 24,
     fontWeight: 'bold',
+    marginTop: 8,
   },
   cardDetails: {
-    fontSize: 12,
+    fontSize: 16,
     color: '#444',
+    marginTop: 3,
   },
 });
-
 

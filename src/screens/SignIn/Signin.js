@@ -8,7 +8,7 @@ const Signin =() =>{
     const [username, setUsername]=useState('');
     const [password, setPassword]=useState('');
     const navigation =useNavigation();
-
+  
     const onSignInPressed =() =>{
         var Email = username;
         var Password = password;
@@ -77,8 +77,8 @@ const styles= StyleSheet.create({
         padding : 20,
     },
     logo:{
-        width:'80%',
-        height:100,
+        width:'100%',
+      
     },
 })
 export default Signin

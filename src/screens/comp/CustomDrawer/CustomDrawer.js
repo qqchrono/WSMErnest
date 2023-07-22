@@ -4,9 +4,18 @@ import { DrawerContentScrollView,DrawerItemList } from '@react-navigation/drawer
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useNavigation } from "@react-navigation/native";
-import Logo from '../../../../asset/water.jpg';
+import Logo from '../../../../asset/blue.jpg';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useState, useEffect} from'react';
+
 //custom drawer 
 const CustomDrawer = (props)=>{
+    const [username,setUsername]=useState();
+    //fetch asyn store companyuen
+  AsyncStorage.getItem('username').then(value=>{
+    setUsername(value)
+   })
+   .catch(error => console.error(error));
     const navigation =useNavigation();
     return(
         <View style={{flex:1}}>
@@ -14,7 +23,7 @@ const CustomDrawer = (props)=>{
         {...props}
         contentContainerStyle={{backgroundColor:'#ADD8E6'}}>
         <ImageBackground source={Logo} style={{padding:20}}>
-            <Text style={{color:'#fff'}}>WELCOME! name</Text>
+            <Text style={{color:'#fff'}}>Welcome {username}</Text>
         </ImageBackground>
             <View style={{flex:1, backgroundColor:'#fff',padding:10}}>
             <DrawerItemList {...props}/>

@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   TextInput,
+  Dimensions,
 } from 'react-native';
 
 import {useTheme} from 'react-native-paper';
@@ -16,6 +17,8 @@ import {
   Title,
   Caption,
 } from 'react-native-paper';
+
+
 
 
 
@@ -109,7 +112,7 @@ useEffect(()=>{
                     </View>
                   </View>
 
-        <View style={{marginLeft: 20}}>
+        <View style={styles.title}>
                         <Title style={[styles.title, {
                           marginTop:15,
                           marginBottom: 5,
@@ -117,7 +120,7 @@ useEffect(()=>{
                       </View>
          
         <View style={styles.action}>
-         <Text>Phone:</Text>
+         <Text style={styles.caption}>Phone:               </Text>
           <TextInput
             defaultValue={String(phone)}
             placeholder="Phone"
@@ -133,7 +136,7 @@ useEffect(()=>{
           />
         </View>
          <View style={styles.action}>
-         <Text>Bank Account : </Text>
+         <Text style={styles.caption}>Bank Account : </Text>
           <TextInput
             defaultValue={String(bankaccount)}
             placeholder="Bank Account Number"
@@ -151,7 +154,7 @@ useEffect(()=>{
       
        
         <View style={styles.action}>
-        <Text>Password: </Text>
+        <Text style={styles.caption}>Password:         </Text>
           <TextInput
           secureTextEntry={true}
           defaultValue={String(password)}
@@ -167,6 +170,11 @@ useEffect(()=>{
             ]}
           />
         </View>
+
+
+
+
+
        <TouchableOpacity style={styles.commandButton} onPress={() => update_detail()}> 
           <Text style={styles.panelButtonTitle}>
           Submit
@@ -185,6 +193,11 @@ useEffect(()=>{
    const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 10,
+    backgroundColor: '#ecf0f1',
+    padding: 8,
   },
   userInfoSection: {
     paddingHorizontal: 30,
@@ -195,8 +208,8 @@ useEffect(()=>{
     fontWeight: 'bold',
   },
   caption: {
-    fontSize: 14,
-    lineHeight: 14,
+    fontSize: 16,
+    lineHeight: 24,
     fontWeight: '500',
   },
   row: {
@@ -233,15 +246,30 @@ useEffect(()=>{
   },
 
     commandButton: {
+      width:"100%",
     padding: 15,
     borderRadius: 10,
     backgroundColor: '#1372C2',
     alignItems: 'center',
-    width: "100%",
+   
     borderWidth: 0,
     borderRadius: 10,
     padding: 10
     
+  },
+  Btn:
+  { width:"100%",
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: 'white',
+    borderRadius: 4,
+    height: 55,
+    raiseLevel: 6,
+    backgroundColor: '#1775c8',
+    backgroundDarker: '#125a9a',
+    backgroundProgress: '#125a9a',
+    textColor: '#FFF',
+    activityColor: '#b3e5e1',
   },
   panel: {
     padding: 20,
@@ -297,14 +325,15 @@ useEffect(()=>{
     fontSize: 17,
     fontWeight: 'bold',
     color: 'white',
+    
   },
   action: {
     flexDirection: 'row',
     marginTop: 1,
     marginBottom: 1,
-    borderBottomWidth: 1,
+    borderBottomWidth: 0,
     borderBottomColor: '#f2f2f2',
-    paddingBottom: 5,
+    paddingBottom: 10,
      borderColor: "gray",
     width: "100%",
     borderWidth: 0,
@@ -330,5 +359,6 @@ useEffect(()=>{
     borderRadius: 10,
     padding: 10,
   },
+  
 });
 

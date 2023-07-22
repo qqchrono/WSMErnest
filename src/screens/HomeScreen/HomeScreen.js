@@ -7,6 +7,9 @@ import { BarChart } from "react-native-chart-kit";
 import { useIsFocused} from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 export const companyUEN ="123";
+import SelectDropdown from 'react-native-select-dropdown';
+import { VictoryChart, VictoryBar, VictoryTheme, VictoryAxis } from 'victory-native';
+
 const HomeScreen = () => {
     //usestate
     const isFocused = useIsFocused()
@@ -30,6 +33,18 @@ const HomeScreen = () => {
     var oct=0;
     var nov=0;
     var dec=0;
+    const [January, setJanuary]= useState(0);
+    const [Febuary, setFebuary]= useState(0);
+    const [March, setMarch]= useState(0);
+    const [April, setApril]= useState(0);
+    const [May, setMay]= useState(0);
+    const [June, setJune]= useState(0);
+    const [July, setJuly]= useState(0);
+    const [August, setAugust]= useState(0);
+    const [September, setSeptember]= useState(0);
+    const [October, setOctober]= useState(0);
+    const [November, setNovember]= useState(0);
+    const [December, setDecember]= useState(0);
     //import user email from signin.js
     var Email = require('../SignIn/Signin.js');
     //fetching user detail from database 
@@ -56,6 +71,7 @@ const HomeScreen = () => {
        setname(Response[0]['customerName'])
        setaccountnumber(Response[0]['bankAccount'])
        AsyncStorage.setItem('companyUEN', (Response[0]['companyUEN']).toString())
+       AsyncStorage.setItem('username', (Response[0]['customerName']).toString())
        module.exports = user_id;
       
        
@@ -85,6 +101,7 @@ const HomeScreen = () => {
       .then((Response)=>Response.json())
       .then((Response)=>{
        setitem(Response)
+      
       })
       .catch((error)=>{
         console.error("ERROR FOUND" + error);
@@ -141,14 +158,96 @@ const HomeScreen = () => {
     fetch_user_detail()
     if(user_id!=""){
       fetch_current_usage()
+      
     }
     
   }
 }, [isFocused,user_id])
+
+const waterData = {
+  2021: [
+    { month: 'Jan', usage: January },
+    { month: 'Feb', usage: Febuary },
+    { month: 'Mar', usage: March },
+    { month: 'Apr', usage: April },
+    { month: 'May', usage: May },
+    { month: 'Jun', usage: June },
+    { month: 'Jul', usage: July },
+    { month: 'Aug', usage: August },
+    { month: 'Sep', usage: September },
+    { month: 'Oct', usage: October },
+    { month: 'Nov', usage: November },
+    { month: 'Dec', usage: December },
+    // ... rest of the months
+  ],
+  2022: [
+    { month: 'Jan', usage: January },
+    { month: 'Feb', usage: Febuary },
+    { month: 'Mar', usage: March },
+    { month: 'Apr', usage: April },
+    { month: 'May', usage: May },
+    { month: 'Jun', usage: June },
+    { month: 'Jul', usage: July },
+    { month: 'Aug', usage: August },
+    { month: 'Sep', usage: September },
+    { month: 'Oct', usage: October },
+    { month: 'Nov', usage: November },
+    { month: 'Dec', usage: December },
+    // ... rest of the months
+  ],
+
+  2023: [
+    { month: 'Jan', usage: January },
+    { month: 'Feb', usage: Febuary },
+    { month: 'Mar', usage: March },
+    { month: 'Apr', usage: April },
+    { month: 'May', usage: May },
+    { month: 'Jun', usage: June },
+    { month: 'Jul', usage: July },
+    { month: 'Aug', usage: August },
+    { month: 'Sep', usage: September },
+    { month: 'Oct', usage: October },
+    { month: 'Nov', usage: November },
+    { month: 'Dec', usage: December },
+    // ... rest of the months
+  ],
+  // ... rest of the years
+};
+
+const years = Object.keys(waterData);
+
+  const [selectedYear, setSelectedYear] = useState(years[0]);
+
+  const data = waterData[selectedYear];
+
+  const handleYearChange = (year) => {
+    setSelectedYear(year);
+    
+    filter_data(year);
+    
+    setJanuary(parseInt(jan));
+    setFebuary(parseInt(feb));
+    setMarch(parseInt(mar));
+    setApril(parseInt(apr));
+    setMay(parseInt(may));
+    setJune(parseInt(jun));
+    setJuly(parseInt(jul));
+    setAugust(parseInt(aug));
+    setSeptember(parseInt(sep));
+    setOctober(parseInt(oct));
+    setNovember(parseInt(nov));
+    setDecember(parseInt(dec));
+
+  
+  
+  };
+
+
+
     return (
       
       <View style={styleSheet.MainContainer}>
-        {filter_data('2023')}
+    
        
       <View style={styles.userInfoSection}>
         
@@ -188,8 +287,20 @@ const HomeScreen = () => {
                borderRightColor: '#dddddd',
                borderRightWidth: 1
              }]}>
-               <Title>$140.50</Title>
-               <Caption>Wallet</Caption>
+               <SelectDropdown
+        data={years}
+        defaultValue={selectedYear}
+        onSelect={handleYearChange}
+        buttonTextAfterSelection={(selectedItem) => {
+          // Display the selected year in the dropdown button
+          return selectedItem;
+        }}
+        rowTextForSelection={(item) => {
+          // Display each year in the dropdown options
+          return item;
+        }}
+      />
+               <Caption>Select Year</Caption>
              </View>
              <View style={styles.infoBox}>
                <Title>12</Title>
@@ -200,46 +311,45 @@ const HomeScreen = () => {
    
    
                <Text style={styles.title}> Water Usage</Text>
-                 <BarChart
-                   data={{
-                     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                     datasets: [{ data: [jan, feb, mar, apr, may, jun] }],
-                     //data {[ "id" : 1 , "month": "jan, "usage": "50 " ]} // 
-                   }}
-                   width={Dimensions.get('window').width - 10}
-                   height={180}
-                   yAxisLabel={''}
-                   chartConfig={{
-                     backgroundColor: '#FFFFFF',
-                     backgroundGradientFrom: '#EAD9A4',
-                     backgroundGradientTo: '#C9EFF7',
-                     decimalPlaces: 2,
-                     color: (opacity = 255) => '#000000',
-                     style: {
-                       borderRadius: 12, padding: 10
-                     },
-                   }}
-                 />
-                 <BarChart
-                   data={{
-                     labels: ['Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
-                     datasets: [{ data: [jul,aug,sep,oct, nov, dec, ] }],
-                     //data {[ "id" : 1 , "month": "jan, "usage": "50 " ]} // 
-                   }}
-                   width={Dimensions.get('window').width - 10}
-                   height={180}
-                   yAxisLabel={''}
-                   chartConfig={{
-                     backgroundColor: '#FFFFFF',
-                     backgroundGradientFrom: '#EAD9A4',
-                     backgroundGradientTo: '#C9EFF7',
-                     decimalPlaces: 2,
-                     color: (opacity = 255) => '#000000',
-                     style: {
-                       borderRadius: 12, padding: 10
-                     },
-                   }}
-                 />
+               <VictoryChart
+            animate={{
+              duration: 800,
+              onLoad: { duration: 800 }
+            }}
+        theme={VictoryTheme.material}
+        domainPadding={{ x: 15 }}
+      >
+
+        
+        <VictoryAxis
+          tickValues={data.map((item) => item.month)}
+          style={{
+            tickLabels: { angle: -45, fontSize: 8 },
+          }}
+        />
+        <VictoryAxis
+          dependentAxis
+          tickFormat={(x) => `${x}L`}
+        />
+        <VictoryBar
+          data={data}
+          x="month"
+          y="usage"
+          alignment="start"
+          cornerRadius={3}
+          style={{
+            data: {
+              fill: '#82c6c4',
+              stroke: '#549c9c',
+              strokeWidth: 2
+            },
+            labels: {
+              fontSize: 12,
+              fill: '#333'
+            }
+          }}
+        />
+      </VictoryChart>
                  </View>
                
       );
