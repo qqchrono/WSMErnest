@@ -14,7 +14,8 @@ import {
   TouchableRipple,
 } from 'react-native-paper';
 import { useNavigation ,useIsFocused} from "@react-navigation/native";
-  
+import Logo from '../../../asset/water.jpg';
+
 export default function BillScreen()  {
   const [refreshIndicator, setRefreshIndicator] = useState(false);
    var user_id = require('../HomeScreen/HomeScreen');
@@ -29,6 +30,7 @@ export default function BillScreen()  {
    const [eqbill, seteqbill] = useState([]);
    const [selectedeq, setselectedeq] = useState([]);
    const [plantype, setplantype] = useState([]);
+  
   const isFocused = useIsFocused()
    var billinformation=[];
    var billid= 5;
@@ -45,7 +47,8 @@ export default function BillScreen()  {
    var peakrate=0;
    var peakusage=0;
    var offpeakusage=0;
-   //
+   var gst=0;
+  
   //user email
    var Email = require('../SignIn/Signin.js');
     //fetching user detail from database 
@@ -167,7 +170,7 @@ const verify_bank=()=>{
     'Content-Type' : 'application/json'
   };
   var Data ={
-    total_price:total_price,
+    total_price:(total_price+(total_price*(gst/100))).toFixed(2),
     bankAccount:accountnumber,
     billid:billid,
   };
@@ -195,9 +198,10 @@ const payment_verify=(id)=>{
 
 }
 
+
 //set data that are use for the pdf after user select the bill he/she which to review 
 async function setdata(id){
- 
+  
   for(let i=0 ; i<waterusagebill.length;i++){
     //console.log(id);
     
@@ -237,26 +241,29 @@ async function setdata(id){
         }
         //assign price rate by filtering the date 
         if(rate!=null){
+          
         for(let k=0;k<rate.length;k++){
           filterPriceDate=(rate[k]['priceDate']).slice(0,7).replace('-','');
           //check which price rate does this bill assign to and from the company 
+          
           if(filterPriceDate==filterBillDate && rate[k]['companyUEN']==billcompanyUEN){
+            gst=rate[k]['gst']
             //check customer plan type regular/offregular
+            
             if(plantype=="regular"){
               price_rate=rate[k]['waterPriceRate']
-              console.log(price_rate);
               total_price=total_price+(price_rate*usage);
-              usagehtml += "<tr><td>"+billdate+"</td><td>regular Traffic rate</td><td>"+usage+"</td><td>$"+(price_rate)+"/mL</td><td>$"+(price_rate*usage)+"</td></tr>";
+              usagehtml += "<tr><td>"+billdate+"</td><td>regular Traffic rate</td><td>"+usage+"</td><td>$"+(price_rate)+"/mL</td><td>$"+(price_rate*usage).toFixed(2)+"</td></tr>";
             }
             else{
+             
               offpeakrate=rate[k]['offPeakwaterPriceRate'];
               peakrate=rate[k]['peakWaterPriceRate'];
-              console.log(offpeakrate);
-              console.log(peakrate);
+            
               total_price=total_price+(offpeakrate*offpeakusage);
               total_price=total_price+(peakrate*peakusage);
-              usagehtml += "<tr><td>"+billdate+"</td><td>Off Peak Traffic rate</td><td>"+offpeakusage+"</td><td>$"+(offpeakrate)+"/mL</td><td>$"+(offpeakrate*offpeakusage)+"</td></tr>";
-              usagehtml += "<tr><td>"+billdate+"</td><td>Peak Traffic rate</td><td>"+peakusage+"</td><td>$"+(peakrate)+"/mL</td><td>$"+(peakrate*peakusage)+"</td></tr>";
+              usagehtml += "<tr><td>"+billdate+"</td><td>Off Peak Traffic rate</td><td>"+offpeakusage+"</td><td>$"+(offpeakrate)+"/mL</td><td>$"+(offpeakrate*offpeakusage).toFixed(2)+"</td></tr>";
+              usagehtml += "<tr><td>"+billdate+"</td><td>Peak Traffic rate</td><td>"+peakusage+"</td><td>$"+(peakrate)+"/mL</td><td>$"+(peakrate*peakusage).toFixed(2)+"</td></tr>";
             }
           }
         }
@@ -303,7 +310,10 @@ async function setdata(id){
       border-bottom: 1px solid #ddd;
       border: 1px solid black;
     }
-
+    .tt tr.horizontal-line-row td {
+      border-bottom: 1px solid black;
+  }
+  
     .bill-details {
       margin-bottom: 20px;
     }
@@ -325,13 +335,14 @@ async function setdata(id){
     }
     .tt th, .tt td {
         border: hidden;
+        
     }
     
   </style>
 </head>
 <body>
   <div class="logo">
-    <img src="" alt="Company Logo" width="100">
+    <img src="http://159.223.83.53/mobile/12water.jpg" alt="Company Logo" width="100">
   </div>
 
   <h1>            </h1>
@@ -344,7 +355,7 @@ async function setdata(id){
     <thead>
       <tr>
         <th bgcolor="grey">Total Amount Payable</th>
-        <th bgcolor="grey">$${total_price}</th>
+        <th bgcolor="grey">$${((total_price*(gst/100))+total_price).toFixed(2)}</th>
       </tr>
     </thead>
     <br>
@@ -389,14 +400,45 @@ async function setdata(id){
     <tbody>
     ${usagehtml}
       ${producthtml}
-        <tr>
+        <tr >
             <td></td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
-            <td>$${total_price}</td>
+            <td >$${(total_price).toFixed(2)}</td>
+          
+          
         </tr>
+     
+        <tr>
+            <td>Total Current Charges(Taxable)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>$${(total_price).toFixed(2)}</td>
+            <td></td>
+        </tr>
+       
+        <tr>
+            <td>GST ${gst}%</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>$${(total_price*(gst/100)).toFixed(2)}</td>
+            <td></td>
+        </tr>
+       
+        <tr>
+            <td>Total Current Charges (incl. of GST)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>$${((total_price*(gst/100))+total_price).toFixed(2)}</td>
+        </tr>
+        
+
     </tbody>
   </table>
 
@@ -430,12 +472,14 @@ async function setdata(id){
     fetch_user_detail()
     fetch_price_rate()
     fetch_eqbill()
+   
   }
   if(refreshIndicator){
     fetch_current_usage()
     fetch_user_detail()
     fetch_price_rate()
     fetch_eqbill()
+  
     setRefreshIndicator(false);
   }
  
@@ -488,13 +532,7 @@ function getPreviousMonth(dateString) {
       
     <ScrollView style={styles.container}>
 
-    <Title style={[styles.title, {
-          marginTop:15,
-          marginBottom: 5,
-          marginLeft: 90,
-          fontSize:20,
-          fontWeight:'700',
-        }]}>Download and View Bills</Title>
+    <Title style={[styles.title]}>Download and View Bills</Title>
  
         
       
@@ -548,123 +586,136 @@ function getPreviousMonth(dateString) {
 }
 }
  
-   const styles = StyleSheet.create({
+const styles = StyleSheet.create({
 
-    container: {
-      flex: 1,
-    },
+  container: {
+    flex: 1,
+  },
+
+  sliderContainer: {
+    height: 200,
+    width: '90%',
+    marginTop: 10,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    borderRadius: 8,
+  },
+
+  wrapper: {},
+
+  slide: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+    borderRadius: 8,
+  },
+  sliderImage: {
+    height: '100%',
+    width: '100%',
+    alignSelf: 'center',
+    borderRadius: 8,
+  },
+  categoryContainer: {
+    flexDirection: 'row',
+    width: '90%',
+    alignSelf: 'center',
+    marginTop: 25,
+    marginBottom: 10,
+  },
+  categoryBtn: {
+    flex: 1,
+    width: '30%',
+    marginHorizontal: 0,
+    alignSelf: 'center',
+  },
+  categoryIcon: {
+    borderWidth: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    width: 70,
+    height: 70,
+    backgroundColor: '#fdeae7' /* '#FF6347' */,
+    borderRadius: 50,
+  },
+  categoryBtnTxt: {
+    alignSelf: 'center',
+    marginTop: 5,
+    color: '#de4f35',
+  },
+  cardsWrapper: {
+    marginTop: 20,
+    width: '90%',
+    alignSelf: 'center',
+  },
+  card: {
+    height: 90,
+    marginVertical: 10,
+    flexDirection: 'row',
+    shadowColor: '#999',
+    shadowOffset: {width: 0, height: 0},
+    shadowOpacity: 0,
+    shadowRadius: 0,
+    elevation: 0,
+  },
+  cardImgWrapper: {
+    flex: 1,
+  },
+  cardImg: {
+    height: '100%',
+    width: '100%',
+    alignSelf: 'center',
+    borderRadius: 8,
+    borderBottomRightRadius: 0,
+    borderTopRightRadius: 0,
+    //borderTopLeftRadius: 15,
+
+  },
+  cardInfo: {
+    
+    flex: 2,
+    padding: 0,
+    alignItems: 'center',
+   justifyContent: 'center',
+    borderColor: '#fff',
+    borderWidth: 0,
+    borderLeftWidth: 0,
+    borderBottomLeftRadius: 25,
+    borderTopLeftRadius: 25,
+    backgroundColor: '#7796cb',
+    marginLeft: 20,
+  },
+  cardTitle: {
+    fontWeight: 'bold',
+    color: 'black',
+  },
+  cardDetails: {
+    fontSize: 12,
+    color: 'black',
+    paddingVertical: 0.5,
+  },
+  button: {
+
+   alignItems: 'center',
+   justifyContent: 'center',
+   marginRight: 20,
+   
+   paddingVertical: 20,
+   paddingHorizontal: 32,
+   backgroundColor: '#7796cb',
+   borderBottomRightRadius: 25,
+   borderTopRightRadius: 25,
   
-    sliderContainer: {
-      height: 200,
-      width: '90%',
-      marginTop: 10,
-      justifyContent: 'center',
-      alignSelf: 'center',
-      borderRadius: 8,
-    },
+   
+ },
+ title: {
+  textAlign: 'center',
+  fontWeight: 'bold',
+  marginTop:15,
+  marginBottom: 5,
+  fontSize:20,
+  fontWeight:'700',
   
-    wrapper: {},
-  
-    slide: {
-      flex: 1,
-      justifyContent: 'center',
-      backgroundColor: 'transparent',
-      borderRadius: 8,
-    },
-    sliderImage: {
-      height: '100%',
-      width: '100%',
-      alignSelf: 'center',
-      borderRadius: 8,
-    },
-    categoryContainer: {
-      flexDirection: 'row',
-      width: '90%',
-      alignSelf: 'center',
-      marginTop: 25,
-      marginBottom: 10,
-    },
-    categoryBtn: {
-      flex: 1,
-      width: '30%',
-      marginHorizontal: 0,
-      alignSelf: 'center',
-    },
-    categoryIcon: {
-      borderWidth: 0,
-      alignItems: 'center',
-      justifyContent: 'center',
-      alignSelf: 'center',
-      width: 70,
-      height: 70,
-      backgroundColor: '#fdeae7' /* '#FF6347' */,
-      borderRadius: 50,
-    },
-    categoryBtnTxt: {
-      alignSelf: 'center',
-      marginTop: 5,
-      color: '#de4f35',
-    },
-    cardsWrapper: {
-      marginTop: 20,
-      width: '90%',
-      alignSelf: 'center',
-    },
-    card: {
-      height: 80,
-      marginVertical: 10,
-      flexDirection: 'row',
-      shadowColor: '#999',
-      shadowOffset: {width: 0, height: 0},
-      shadowOpacity: 0,
-      shadowRadius: 0,
-      elevation: 0,
-    },
-    cardImgWrapper: {
-      flex: 1,
-    },
-    cardImg: {
-      height: '100%',
-      width: '100%',
-      alignSelf: 'center',
-      borderRadius: 8,
-      borderBottomRightRadius: 0,
-      borderTopRightRadius: 0,
-      //borderTopLeftRadius: 15,
-  
-    },
-    cardInfo: {
-      flex: 2,
-      padding: 10,
-      borderColor: '#ccc',
-      borderWidth: 0,
-      borderLeftWidth: 0,
-      borderBottomRightRadius: 8,
-      borderTopRightRadius: 8,
-      backgroundColor: '#fff',
-    },
-    cardTitle: {
-      fontWeight: 'bold',
-      color: '#444',
-    },
-    cardDetails: {
-      fontSize: 12,
-      color: '#444',
-    },
-    button: {
-  
-     alignItems: 'center',
-     justifyContent: 'center',
-     paddingVertical: 12,
-     paddingHorizontal: 32,
-     borderRadius: 4,
-     elevation: 3,
-     backgroundColor: 'white',
-     borderColor: 'black',
-     borderWidth: 0,
-     borderLeftWidth: 0,
-     borderBottomRightRadius: 8,
-     borderTopRightRadius: 8,
-     
-   },
+
+ },
   });

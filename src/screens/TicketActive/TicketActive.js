@@ -1,12 +1,14 @@
 ﻿import 'react-native-gesture-handler';
 import * as React from 'react';
 import  {useState,useEffect} from 'react';
-import { Button, Text, View, Image, StyleSheet,ActivityIndicator,ScrollView,SafeAreaView} from 'react-native';
-//import Logo from '../../../asset/water.jpg';
+import { Button, Text, View, Image, StyleSheet,
+  ActivityIndicator,ScrollView,SafeAreaView, TouchableOpacity} from 'react-native';
+import TicketPic from '../../../asset/ticket.jpg';
 import CustomInput from '../comp/CustomInput/CustomInput';
 import CustomButton from '../comp/CustomButton/CustomButton';
 import { useNavigation ,useIsFocused} from "@react-navigation/native";
 import { Card } from 'react-native-paper';
+import LinearGradient from 'react-native-linear-gradient';
 
 import {
   Avatar,
@@ -127,20 +129,16 @@ return (
 
   <ScrollView style={styles.container}>
   
-  <Title style={[styles.title, {
-        marginTop:15,
-        marginBottom: 5,
-        marginLeft: 125,
-        fontSize:20,
-        fontWeight:'700',
-      }]}>Active Tickets</Title>
+  <Title style={[styles.title]}>
+    Active Tickets
+    </Title>
   
     {supportTicket.map((supportTicket) => { //This loop calls all the data in the array supportTicket and prints it out 
   return (
   <View key={supportTicket.key}>
     <View>
       <Card key={supportTicket.key} style={styles.container}>
-              <Card.Cover source={{ uri: 'https://www.shutterstock.com/image-vector/support-ticket-icon-thin-outline-260nw-1481721884.jpg' }} />
+              <Card.Cover source={TicketPic} />
               <Card.Content style={styles.cardTitle} >
           <Text style={styles.cardTitle}>No. {supportTicket.key}</Text> 
           </Card.Content>
@@ -160,14 +158,9 @@ return (
   
   ); //End of loop below
   })} 
-  <Title style={[styles.title, {
-        marginTop:15,
-        marginBottom: 5,
-        marginLeft: 125,
-        fontSize:20,
-        fontWeight:'700',
-  //Show resolved Ticket
-   }]}>Resolved Ticket</Title>
+  <Title style={[styles.title]}>
+    Resolved Tickets
+    </Title>
   {resolveTicket.map((resolveTicket) => { 
   return (
   
@@ -196,10 +189,25 @@ return (
   ); //End of loop below
   })} 
   
-  
-  <Button
-  title="Submit a New Ticket"
-  onPress={() => navigation.navigate("SubmitTicket")} />
+        <View style={styles.button}>
+
+
+            <TouchableOpacity onPress={() => navigation.navigate("SubmitTicket")}
+                style={styles.signIn}
+
+            >
+            <LinearGradient
+                colors={['#364d88', '#7796cb']}
+                style={styles.signIn}
+            >
+                <Text style={[styles.textSign, {
+                    color:'#fff'
+                }]}>Submit a new ticket</Text>
+            </LinearGradient>
+            </TouchableOpacity>
+
+            
+        </View>
   
   
   </ScrollView>
@@ -312,5 +320,31 @@ const styles = StyleSheet.create({
     color: '#444',
     marginTop: 3,
   },
+  title: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    marginTop:15,
+    marginBottom: 5,
+    fontSize:20,
+    fontWeight:'700',
+    
+
+   },
+   button: {
+    alignItems: 'center',
+    marginTop: 50
+},
+signIn: {
+    width: '100%',
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10
+},
+textSign: {
+    fontSize: 18,
+    fontWeight: 'bold'
+}
+
 });
 

@@ -10,7 +10,10 @@ import {
   TextInput,
   Dimensions,
 } from 'react-native';
-
+import Logo from '../../../asset/water.jpg';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { ScrollView } from 'react-native-gesture-handler';
+import LinearGradient from 'react-native-linear-gradient';
 import {useTheme} from 'react-native-paper';
 import {
   Avatar,
@@ -93,31 +96,35 @@ useEffect(()=>{
    return (
    
 
-   <View>
+   <ScrollView>
+
+
+
+
+
                <View style={styles.userInfoSection}>
-                    <View style={{flexDirection: 'row', marginTop: 15}}>
+                
+                    <View style={{alignItems: 'center'}}>
                       <Avatar.Image 
                         source={{
-                          uri: 'https://www.freeiconspng.com/images/profile-icon-png',
+                          uri: 'https://image.shutterstock.com/image-photo/portrait-smiling-red-haired-millennial-260nw-1194497251.jpg',
                         }}
-                        size={80}
+                        size={90}
                       />
-                      <View style={{marginLeft: 20}}>
+                      
+                    </View>
+                    <View style={{alignItems: 'center'}}>
                         <Title style={[styles.title, {
                           marginTop:15,
                           marginBottom: 5,
                         }]}>{name}</Title>
                         <Caption style={styles.caption}>{Email}</Caption>
                       </View>
-                    </View>
                   </View>
 
-        <View style={styles.title}>
-                        <Title style={[styles.title, {
-                          marginTop:15,
-                          marginBottom: 5,
-                        }]}>Edit your particulars:</Title>
-                      </View>
+                  <View >
+                    <Title style={[styles.title]}>  Edit your particulars:</Title>             
+                  </View>
          
         <View style={styles.action}>
          <Text style={styles.caption}>Phone:               </Text>
@@ -171,19 +178,25 @@ useEffect(()=>{
           />
         </View>
 
+        <View style={styles.button}>
+            <TouchableOpacity onPress={() => update_detail()}
+                style={styles.signIn}
 
+            >
+            <LinearGradient
+                colors={['#364d88', '#7796cb']}
+                style={styles.signIn}
+            >
+                <Text style={[styles.textSign, {
+                    color:'#fff'
+                }]}>Submit</Text>
+            </LinearGradient>
+            </TouchableOpacity>
 
+            
+        </View>
 
-
-       <TouchableOpacity style={styles.commandButton} onPress={() => update_detail()}> 
-          <Text style={styles.panelButtonTitle}>
-          Submit
-          </Text>
-        </TouchableOpacity>
-        
-        
-
-      </View>
+      </ScrollView>
    );
  }
 
@@ -200,17 +213,26 @@ useEffect(()=>{
     padding: 8,
   },
   userInfoSection: {
+    paddingTop: 30,
     paddingHorizontal: 30,
     marginBottom: 25,
   },
   title: {
-    fontSize: 24,
     fontWeight: 'bold',
-  },
+    fontSize:20,
+    fontWeight:'700',
+      marginTop:15,
+      marginBottom: 10,
+
+      fontSize:20,
+      textAlign: "left"
+
+   },
   caption: {
     fontSize: 16,
     lineHeight: 24,
     fontWeight: '500',
+    
   },
   row: {
     flexDirection: 'row',
@@ -229,6 +251,10 @@ useEffect(()=>{
     alignItems: 'center',
     justifyContent: 'center',
   },
+  textSign: {
+    fontSize: 18,
+    fontWeight: 'bold'
+},
   menuWrapper: {
     marginTop: 10,
   },
@@ -359,6 +385,19 @@ useEffect(()=>{
     borderRadius: 10,
     padding: 10,
   },
+  button: {
+    alignItems: 'center',
+    marginTop: 50
+},
+signIn: {
+    width: '95%',
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10
+},
+  
+  
   
 });
 

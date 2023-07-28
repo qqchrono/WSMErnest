@@ -6,9 +6,9 @@ import {Avatar,Title,Caption, Drawer} from 'react-native-paper';
 import { BarChart } from "react-native-chart-kit";
 import { useIsFocused} from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-export const companyUEN ="123";
 import SelectDropdown from 'react-native-select-dropdown';
 import { VictoryChart, VictoryBar, VictoryTheme, VictoryAxis } from 'victory-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const HomeScreen = () => {
     //usestate
@@ -19,7 +19,7 @@ const HomeScreen = () => {
     const [phone,setphone]=useState([]);
     const [name,setname]= useState([]);
     const [bankAccount,setaccountnumber]= useState([]);
-   
+    const [counter,setcounter]= useState(0);
     //variable use to store the current selected year , monthly usage 
     var jan=0;
     var feb=0;
@@ -33,6 +33,7 @@ const HomeScreen = () => {
     var oct=0;
     var nov=0;
     var dec=0;
+    
     const [January, setJanuary]= useState(0);
     const [Febuary, setFebuary]= useState(0);
     const [March, setMarch]= useState(0);
@@ -160,9 +161,20 @@ const HomeScreen = () => {
       fetch_current_usage()
       
     }
+    //check for number of unpaid bill
+    if(item!=null){
+      var count=0;
+      for (let i = 0 ; i <item.length ; i++){
+        
+        if(item[i]['billStatus']==0){
+          count=count+1;
+        }
+      }
+      setcounter(count)
+    }
     
   }
-}, [isFocused,user_id])
+}, [isFocused,user_id,item])
 
 const waterData = {
   2021: [
@@ -245,7 +257,7 @@ const years = Object.keys(waterData);
 
 
     return (
-      
+      <ScrollView>
       <View style={styleSheet.MainContainer}>
     
        
@@ -254,18 +266,18 @@ const years = Object.keys(waterData);
            <View style={{flexDirection: 'row', marginTop: 15}}>
              <Avatar.Image 
                source={{
-                 uri: 'https://www.freeiconspng.com/images/profile-icon-png',
+                uri: 'https://image.shutterstock.com/image-photo/portrait-smiling-red-haired-millennial-260nw-1194497251.jpg',
                }}
                size={80}
              />
+             </View>
              <View style={{marginLeft: 20}}>
                <Title style={[styles.title, {
-                 marginTop:15,
-                 marginBottom: 5,
+                 marginTop:10,
+                 marginBottom: 0,
                }]}>{name}</Title>
-               <Caption style={styles.caption}>Name:{name}</Caption>
              </View>
-           </View>
+          
          </View>
          <View style={styles.userInfoSection}>
            <View style={styles.row}>
@@ -303,7 +315,7 @@ const years = Object.keys(waterData);
                <Caption>Select Year</Caption>
              </View>
              <View style={styles.infoBox}>
-               <Title>12</Title>
+               <Title>{counter}</Title>
                <Caption>Bills Unpaid</Caption>
              </View>
          </View>
@@ -351,7 +363,7 @@ const years = Object.keys(waterData);
         />
       </VictoryChart>
                  </View>
-               
+                 </ScrollView>
       );
     
     
@@ -368,75 +380,75 @@ renderHeader = () => (
 
 const styleSheet = StyleSheet.create({
 
-    MainContainer: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center'
-    },
-     appButtonContainer: {
-      elevation: 8,
-      backgroundColor: "#red",
-      borderRadius: 10,
-      paddingVertical: 30,
-      paddingHorizontal: 10
-    },
-    dropdown: {
-    margin: 16,
-    height: 50,
-    borderBottomColor: 'gray',
-    borderBottomWidth: 0.5,
+  MainContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
-  
+   appButtonContainer: {
+    elevation: 8,
+    backgroundColor: "#red",
+    borderRadius: 10,
+    paddingVertical: 30,
+    paddingHorizontal: 10
+  },
+  dropdown: {
+  margin: 16,
+  height: 50,
+  borderBottomColor: 'gray',
+  borderBottomWidth: 0.5,
+},
+
 }); 
 
 const styles = StyleSheet.create({
 container: {
-  flex: 1,
+flex: 1,
 },
 userInfoSection: {
-  paddingHorizontal: 30,
-  marginBottom: 25,
+paddingHorizontal: 30,
+marginBottom: 25,
 },
 title: {
-  fontSize: 24,
-  fontWeight: 'bold',
+fontSize: 24,
+fontWeight: 'bold',
 },
 caption: {
-  fontSize: 14,
-  lineHeight: 14,
-  fontWeight: '500',
+fontSize: 14,
+lineHeight: 14,
+fontWeight: '500',
 },
 row: {
-  flexDirection: 'row',
-  marginBottom: 10,
+flexDirection: 'row',
+marginBottom: 10,
 },
 infoBoxWrapper: {
-  borderBottomColor: '#dddddd',
-  borderBottomWidth: 1,
-  borderTopColor: '#dddddd',
-  borderTopWidth: 1,
-  flexDirection: 'row',
-  height: 100,
+borderBottomColor: '#dddddd',
+borderBottomWidth: 1,
+borderTopColor: '#dddddd',
+borderTopWidth: 1,
+flexDirection: 'row',
+height: 100,
 },
 infoBox: {
-  width: '50%',
-  alignItems: 'center',
-  justifyContent: 'center',
+width: '50%',
+alignItems: 'center',
+justifyContent: 'center',
 },
 menuWrapper: {
-  marginTop: 10,
+marginTop: 10,
 },
 menuItem: {
-  flexDirection: 'row',
-  paddingVertical: 15,
-  paddingHorizontal: 30,
+flexDirection: 'row',
+paddingVertical: 15,
+paddingHorizontal: 30,
 },
 menuItemText: {
-  color: '#777777',
-  marginLeft: 20,
-  fontWeight: '600',
-  fontSize: 16,
-  lineHeight: 26,
+color: '#777777',
+marginLeft: 20,
+fontWeight: '600',
+fontSize: 16,
+lineHeight: 26,
 },
 });
 export default HomeScreen

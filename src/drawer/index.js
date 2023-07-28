@@ -8,12 +8,15 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import TicketScreen from '../screens/TicketActive/TicketActive';
 import BillScreen from '../screens/Bill/BillScreen';
 import SwitchPlan from '../screens/Switch/SwitchPlan';
+
 //drawer for home screen
 const Drawer=()=>{
     const Drawer = createDrawerNavigator();
     return(
         <Drawer.Navigator drawerContent={props => <CustomDrawer {...props}/>} 
-        screenOptions={{ headerShown:true,drawerLabelStyle:{marginLeft: -25,fontSize:15,fontFamily:'Roboto-Medium',},}}>
+        screenOptions={{ headerShown:true,
+                        drawerLabelStyle:{marginLeft: -25,fontSize:15,fontFamily:'Roboto-Medium',},
+                        headerStyle:{backgroundColor: '#7796cb'},}}>
             <Drawer.Screen name="HomeScreen" component={HomeScreen} options={{
                 drawerIcon:(color) =>(
                     <Ionicons name="home-outline" size={22} color={color}/>
@@ -34,11 +37,7 @@ const Drawer=()=>{
                     <Ionicons name="help-circle-outline" size={22} color={color}/>
                 )
             }}/>
-            <Drawer.Screen name="Switch Water Provider" component={SwitchPlan} options={{
-                drawerIcon:(color)=>(
-                    <Ionicons name="help-circle-outline" size={22} color={color}/>
-                )
-            }}/>
+           
         </Drawer.Navigator>
     )
 }
